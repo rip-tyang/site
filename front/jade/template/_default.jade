@@ -1,0 +1,18 @@
+include _mixins
+
+- var meta_title = 'title'
+- var img_favicon = 'assets/images/favicon.png'
+
+doctype html
+html(lang='en')
+  head
+    title= meta_title
+    link(href=img_favicon, rel='shortcut icon', type='image/vnd.microsoft.icon')
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(charset="utf-8")
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    block css
+  body
+    block contents
+    block js
+    block html_templates
