@@ -59,6 +59,10 @@ sources.lib =
   path: 'bower_components/**/'
   files: '*.min.js'
   prefix: '/lib'
+sources.libcss =
+  path: 'bower_components/**/'
+  files: '*.css'
+  prefix: '/lib'
 
 for type, config of sources
   config.files = "front/#{config.path}#{config.files}"
@@ -163,6 +167,8 @@ gulp.task 'copy_dev', ->
 ## copy assets
 # do revision on itself
 gulp.task 'copy_dist', ->
+  gulp.src sources.miscellaneous.files
+    .pipe gulp.dest(sources.miscellaneous.dist_dest)
   gulp.src sources.assets.files
     # do revision
     .pipe $.rev()
@@ -172,20 +178,25 @@ gulp.task 'copy_dist', ->
       path: sources.manifest_assets.files
       merge: true
     .pipe gulp.dest('./')
-  gulp.src sources.miscellaneous.files
-    .pipe gulp.dest(sources.miscellaneous.dist_dest)
 
 ## move bower libs into a folder in a flatten structure
 gulp.task 'move_bower_dev', ->
   gulp.src sources.lib.files
     .pipe $.flatten()
     .pipe gulp.dest(sources.lib.dev_dest)
+  gulp.src sources.libcss.files
+    .pipe $.flatten()
+    .pipe gulp.dest(sources.libcss.dev_dest)
+
 
 ## the same as dev
 gulp.task 'move_bower_dist', ->
   gulp.src sources.lib.files
     .pipe $.flatten()
     .pipe gulp.dest(sources.lib.dist_dest)
+  gulp.src sources.libcss.files
+    .pipe $.flatten()
+    .pipe gulp.dest(sources.libcss.dist_dest)
 
 gulp.task 'clean', del.bind(null, ['front/rev-manifest*', dev_dir, dist_dir])
 

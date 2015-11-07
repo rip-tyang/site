@@ -1,14 +1,17 @@
 mixin ex_js(url)
-  script(src=url, type='text/javascript')
+  script(src=url, type='text/javascript' charset='utf-8')
 
 mixin js(url)
-  script(src="js/#{url}.js", type='text/javascript')
+  script(src="js/#{url}.js", type='text/javascript' charset='utf-8')
 
 mixin lib(url)
-  script(src="lib/#{url}.min.js", type='text/javascript')
+  script(src="lib/#{url}.min.js", type='text/javascript' charset='utf-8')
 
 mixin css(url)
-  link(type='text/css',href="css/#{url}.css",rel="stylesheet")
+  link(type='text/css',href="css/#{url}.css",rel='stylesheet')
 
 mixin ex_css(url)
-  link(type='text/css',href=url,rel="stylesheet")
+  link(type='text/css',href=url,rel='stylesheet')
+    
+mixin libcss(url)
+  link(type='text/css',href="lib/#{url}.css",rel='stylesheet')

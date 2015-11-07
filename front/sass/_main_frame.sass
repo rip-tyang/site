@@ -1,0 +1,59 @@
+@import compass/css3
+
+html, body
+  height: 100%
+  width: 100%
+  font-family: 'Lato', 'Helvetica Neue', helvetica, sans-serif
+  ::selection
+    background: #333
+    color: white
+body
+  background: url('../assets/images/square_bg.png') repeat
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)
+    background: url('../assets/images/square_bg_@2X.png') repeat
+
+#container
+  height: 100%
+  width: 100%
+  text-align: center
+  color: #333
+
+#sort
+  height: 40%
+  width: 100%
+
+h1
+  padding-top: 10%
+  font-size: 80px
+  font-variant: small-caps
+
+h2
+  padding: 20px
+  font-size: 32px
+  transition: color 1s cubic-bezier(0.4, 0, 0.2, 1)
+
+sub
+  display: block
+  padding-top: 20px
+  font-size: 24px
+
+foot
+  text-align: center
+
+  a
+    display: block
+    margin: 0 auto
+    padding-top: 20px
+    line-height: 32px
+    font-size: 16px
+    text-transform: uppercase
+    text-decoration: none
+    font-style: italic
+    color: #333
+
+    &:hover,
+    &:visited,
+    &:active
+      text-decoration: none
+      color: #333

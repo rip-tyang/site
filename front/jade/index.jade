@@ -2,7 +2,17 @@ include template/_mixins.jade
 extends template/_default.jade
 
 block append css
+  +ex_css('http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext')
   +css('main')
 block contents
+  #container
+    h1 Thomas Yang
+    h2#subtitle &lt; I walk through stacks /&gt;
+    svg#sort
+    sub Sorry! For now, Thomas is reworking on this website. Please come back later.
+    foot
+      a(href='../assets/data/resume.pdf') see my resume
 block append js
+  +ex_js('//d3js.org/d3.v3.min.js')
+  +js('_sorting')
   +js('index')
