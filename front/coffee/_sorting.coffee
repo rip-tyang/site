@@ -83,7 +83,7 @@ class Sort
     @actionLoopId = null
     @shuffledValue = shuffle([0..numCircles])
     @circles = @shuffledValue.map (e) ->
-      {color: colorPalette(e/numCircles), id: e}
+      {color: colorPalette(e/numCircles), id: e, pivot: false}
     @svgOnResize()
 
     @swap = swap.bind(null, @actions)
@@ -106,7 +106,7 @@ class Sort
       e.cy = circlePosHeight
       e.cx = circlePosWidth
       e.w = circlePosWidth/3
-      e.h = circlePosWidth/3
+      e.h = if e.pivot then circlePosWidth/3*4 else circlePosWidth/3
     @$svg.selectAll 'rect'
       .attr 'width', (v) -> v.w*2
       .attr 'height', (v) -> v.h*2
@@ -147,6 +147,7 @@ class Sort
     else if action.type is 'pivot'
       fireColorChangeEvent @circles[action.val].color
       @circles[action.val].h *= 4
+      @circles[action.val].pivot = true
       @$svg.selectAll 'rect'
         .data @circles, (v) -> v.id
         .attr 'y', (v) -> v.cy - v.h
