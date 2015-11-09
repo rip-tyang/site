@@ -21,6 +21,58 @@ class Sort
       type: 'pivot'
       val: i
 
+  insertSort = (swap, pivot, arr) ->
+    for i in [1...arr.length]
+      t = -1
+      for j in [i-1..0]
+        if arr[i] > arr[j]
+          t = j
+          break
+      for k in [i-1...j]
+        swap arr, k, k+1
+    for i in [0...arr.length]
+      pivot i
+
+  heapSort = (swap, pivot, arr) ->
+    # build maximum heap
+    maxify = (i, len) ->
+      largest = i
+      return if i*2 >= len
+
+      if i*2 is len-1
+        if arr[i*2] > arr[i]
+          swap arr, i, i*2
+        return
+      if arr[i*2] > arr[largest]
+        largest = i*2
+      if arr[i*2+1] > arr[largest]
+        largest = i*2+1
+
+      return if largest is i
+      swap arr, i, largest
+      maxify largest, len
+
+    for i in [~~(arr.length/2)..0]
+      maxify i, arr.length
+
+    for i in [arr.length-1...0]
+      swap arr, 0, i
+      pivot i
+      maxify 0, i
+    pivot 0
+
+
+  selectionSort = (swap, pivot, arr) ->
+    for i in [0...arr.length]
+      min = Math.min()
+      p = 0
+      for j in [i...arr.length]
+        if arr[j] < min
+          min = arr[j]
+          p = j
+      swap arr, i, p
+      pivot i
+
   bubbleSort = (swap, pivot, arr) ->
     for i in [arr.length-1..0]
       for j in [0...i]
@@ -90,6 +142,9 @@ class Sort
     @pivot = pivot.bind(null, @actions)
 
     # different sorting functions
+    @sortingFunc.push insertSort.bind(@, @swap, @pivot, @shuffledValue)
+    @sortingFunc.push heapSort.bind(@, @swap, @pivot, @shuffledValue)
+    @sortingFunc.push selectionSort.bind(@, @swap, @pivot, @shuffledValue)
     @sortingFunc.push bubbleSort.bind(@, @swap, @pivot, @shuffledValue)
     @sortingFunc.push quickSort.bind(@,
         @swap,
@@ -132,7 +187,7 @@ class Sort
       .attr 'x', (v, i) -> v.cx*(i+1) - v.w
       .attr 'y', (v) -> v.cy - v.h
       .attr 'fill', (v) -> v.color
-    @actionLoopId = loopFunc 100, @executeAction
+    @actionLoopId = loopFunc 60, @executeAction
 
   executeAction: () =>
     if 0 is @actions.length
@@ -146,7 +201,7 @@ class Sort
       @$svg.selectAll 'rect'
         .data @circles, (v) -> v.id
         .transition()
-        .duration 400
+        .duration 300
         .ease 'easeInOutCubic'
         .attr 'x', (v, i) -> v.cx*(i+1) - v.w
     else if action.type is 'pivot'
