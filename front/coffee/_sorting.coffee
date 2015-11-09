@@ -90,8 +90,13 @@ class Sort
     @pivot = pivot.bind(null, @actions)
 
     # different sorting functions
-    @sortingFunc.push(bubbleSort.bind @, @swap, @pivot, @shuffledValue)
-    @sortingFunc.push(quickSort.bind @, @swap, @pivot, @shuffledValue, 0, @shuffledValue.length-1)
+    @sortingFunc.push bubbleSort.bind(@, @swap, @pivot, @shuffledValue)
+    @sortingFunc.push quickSort.bind(@,
+        @swap,
+        @pivot,
+        @shuffledValue,
+        0,
+        @shuffledValue.length-1)
 
     # random sort
     @sortingFunc[~~(@sortingFunc.length*Math.random())]()
