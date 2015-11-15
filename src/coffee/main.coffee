@@ -1,3 +1,6 @@
+require '../stylus/main'
+Sort = require './_sorting'
+
 svg = document.getElementById 'sort'
 subtitle = document.getElementById 'subtitle'
 

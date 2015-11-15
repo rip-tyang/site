@@ -1,3 +1,5 @@
+d3 = require 'd3'
+
 class Sort
   # static methods and variables
   numCircles = 60
@@ -128,7 +130,7 @@ class Sort
 
   constructor: (@svg) ->
     addEvent window, 'resize', @svgOnResize
-    @$svg = d3.select(svg)
+    @$svg = d3.select(@svg)
     @sortingFunc = []
     @actions = []
     @circles = []
@@ -212,3 +214,5 @@ class Sort
         .data @circles, (v) -> v.id
         .attr 'y', (v) -> v.cy - v.h
         .attr 'height', (v) -> v.h*2
+
+exports = module.exports = Sort

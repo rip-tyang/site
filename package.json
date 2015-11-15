@@ -1,26 +1,25 @@
 {
-  "name": "simple-gulp-express-project",
+  "name": "personal-site",
   "version": "1.0.0",
-  "description": "frontend scaffold for express, using gulp",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "express",
-    "scaffold"
+    "webpack",
+    "personal site"
   ],
-  "author": "Thomas Yang",
+  "author": "Thomas Yang <jscnm1993@gmail.com",
   "license": "MIT",
-  "devDependencies": {
-    "body-parser": "^1.13.3",
-    "bower": "^1.5.2",
-    "browser-sync": "^2.9.1",
+  "dependencies": {
+    "webpack-dev-server": "^1.12.1",
+    "coffee-loader": "^0.7.2",
     "coffee-script": "^1.10.0",
-    "cookie-parser": "^1.3.5",
+    "css-loader": "^0.22.0",
+    "d3": "^3.5.6",
     "debug": "^2.2.0",
     "del": "^2.0.2",
-    "express": "^4.13.3",
+    "file-loader": "^0.8.4",
     "gulp": "^3.9.0",
     "gulp-changed": "^1.3.0",
     "gulp-coffee": "^2.3.1",
@@ -37,10 +36,13 @@
     "gulp-uglify": "^1.4.0",
     "gulp-util": "^3.0.6",
     "jade": "^1.11.0",
-    "merge-stream": "^1.0.0",
-    "morgan": "^1.6.1",
+    "nib": "^1.1.0",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.2",
-    "serve-favicon": "^2.3.0"
+    "style-loader": "^0.13.0",
+    "stylus": "^0.52.4",
+    "stylus-loader": "^1.4.2",
+    "url-loader": "^0.5.6",
+    "webpack": "^1.12.3"
   }
 }

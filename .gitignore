@@ -19,14 +19,4 @@ Icon?
 ehthumbs.db
 Thumbs.db
 
-front/dist/
-front/dev/
-front/rev-manifest*
-
-# bower
-bower_components
-**/bower_components
-
-#sass
-.sass-cache
-**/.sass-cache
+dist/
