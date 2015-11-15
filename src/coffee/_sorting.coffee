@@ -23,6 +23,16 @@ class Sort
       type: 'pivot'
       val: i
 
+  # only for 0 - n sorting
+  permutationSort = (swap, pivot, arr) ->
+    for i in [0...arr.length]
+      continue if arr[i] is i
+      while arr[i] isnt i
+        t = arr[i]
+        swap arr, i, t
+        pivot t
+      pivot i
+
   insertSort = (swap, pivot, arr) ->
     for i in [1...arr.length]
       t = -1
@@ -144,7 +154,10 @@ class Sort
     @pivot = pivot.bind(null, @actions)
 
     # different sorting functions
-    @sortingFunc.push insertSort.bind(@, @swap, @pivot, @shuffledValue)
+    # TODO not every sorting looks good, any enhancement?
+    
+    # @sortingFunc.push permutationSort.bind(@, @swap, @pivot, @shuffledValue)
+    # @sortingFunc.push insertSort.bind(@, @swap, @pivot, @shuffledValue)
     @sortingFunc.push heapSort.bind(@, @swap, @pivot, @shuffledValue)
     @sortingFunc.push selectionSort.bind(@, @swap, @pivot, @shuffledValue)
     @sortingFunc.push bubbleSort.bind(@, @swap, @pivot, @shuffledValue)
