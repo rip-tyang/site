@@ -9,3 +9,7 @@ window.addEventListener 'pivotColorChange', (e) ->
 
 sort = new Sort(svg)
 sort.show()
+console.log 'test'
+console.log 'test1'
+console.log 'test2'
+console.log 'test3'

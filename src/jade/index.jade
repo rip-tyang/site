@@ -12,4 +12,7 @@ block contents
     foot
       a(href='assets/data/resume.pdf') see my resume
 block append js
-  +js('main')
+  if manifest
+    +script(manifest['main.js'])
+  else
+    +js('main')

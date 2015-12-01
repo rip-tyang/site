@@ -1,6 +1,9 @@
 mixin ex_js(url)
   script(src=url, type='text/javascript' charset='utf-8')
 
+mixin script(url)
+  script(src='#{url}', type='text/javascript' charset='utf-8')
+    
 mixin js(url)
   script(src="#{url}.js", type='text/javascript' charset='utf-8')
 

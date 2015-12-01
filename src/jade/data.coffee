@@ -1,2 +1,2 @@
-module.exports = exports =
+exports = module.exports =
   test: 'hello world'
