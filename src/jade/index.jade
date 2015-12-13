@@ -3,6 +3,8 @@ extends template/_default.jade
 
 block append css
   +ex_css('http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext')
+block append hjs
+  +jsF('main.js')
 block contents
   #container
     h1 Thomas Yang
@@ -11,5 +13,3 @@ block contents
     sub Sorry! For now, Thomas is reworking on this website. Please come back later....
     foot
       a(href='assets/data/resume.pdf') see my resume
-block append js
-  +jsF('main.js')

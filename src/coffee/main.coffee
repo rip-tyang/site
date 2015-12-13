@@ -1,15 +1,11 @@
 require '../stylus/main'
+domready = require 'domready'
 Sort = require './_sorting'
 
-svg = document.getElementById 'sort'
-subtitle = document.getElementById 'subtitle'
-
-window.addEventListener 'pivotColorChange', (e) ->
-  subtitle.style.color = e.detail
-
-sort = new Sort(svg)
-sort.show()
-console.log 'test'
-console.log 'test1'
-console.log 'test2'
-console.log 'test3'
+domready () ->
+  window.addEventListener 'pivotColorChange', (e) ->
+    subtitle.style.color = e.detail
+  svg = document.getElementById 'sort'
+  subtitle = document.getElementById 'subtitle'
+  sort = new Sort(svg)
+  sort.show()
