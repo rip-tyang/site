@@ -8,11 +8,8 @@ block contents
     h1 Thomas Yang
     h2#subtitle &lt; I walk through stacks /&gt;
     svg#sort
-    sub Sorry! For now, Thomas is reworking on this website. Please come back later.
+    sub Sorry! For now, Thomas is reworking on this website. Please come back later....
     foot
       a(href='assets/data/resume.pdf') see my resume
 block append js
-  if manifest
-    +script(manifest['main.js'])
-  else
-    +js('main')
+  +jsF('main.js')

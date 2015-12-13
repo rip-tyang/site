@@ -1,8 +1,11 @@
 mixin ex_js(url)
   script(src=url, type='text/javascript' charset='utf-8')
 
-mixin script(url)
-  script(src='#{url}', type='text/javascript' charset='utf-8')
+mixin jsF(url)
+  if manifest
+    script(src="#{manifest[url]}", type='text/javascript' charset='utf-8')
+  else
+    script(src="#{url}", type='text/javascript' charset='utf-8')
     
 mixin js(url)
   script(src="#{url}.js", type='text/javascript' charset='utf-8')

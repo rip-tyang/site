@@ -4,11 +4,15 @@ $ = require('gulp-load-plugins')()
 del = require 'del'
 runSequence = require 'run-sequence'
 webpack = require 'webpack'
-WebpackDevServer = require("webpack-dev-server")
+WebpackDevServer = require 'webpack-dev-server'
 webpack_dev_config = require './webpack.config'
 webpack_dev_runner = webpack webpack_dev_config
 webpack_dist_config = require './webpack.config.dist'
 webpack_stream = require 'webpack-stream'
+http = require 'http'
+
+# web server handle
+wds = null
 
 paths =
   src: './src'
@@ -49,7 +53,7 @@ gulp.task 'copy', ['copy:assets', 'copy:miscellaneous']
 gulp.task 'clean', del.bind(null, [paths.dist])
 
 gulp.task 'server', () ->
-  new WebpackDevServer webpack_dev_runner,
+  config =
     contentBase: paths.dist
     stats:
       colors: true
@@ -57,8 +61,21 @@ gulp.task 'server', () ->
       assets: true
       hash: true
       chunks: false
-  .listen 5000, 'localhost', (err) ->
+  wds = new WebpackDevServer webpack_dev_runner, config
+
+  # reload browser when changes detected
+  wds.app.get '/reload', (req, res) ->
+    wds.io.sockets.emit('ok')
+    res.sendStatus(200)
+  wds.listen 5000, 'localhost', (err) ->
     throw new $.util.PluginError('webpack-dev-server', err) if err
+
+  reload = () ->
+    http.get 'http://localhost:5000/reload', () ->
+      $.util.log 'Reloading...'
+
+  gulp.watch ['src/jade/**/*'], ['jade', reload]
+  gulp.watch ['src/assets/**/*'], ['copy', reload]
 
 gulp.task 'build', () ->
   runSequence 'clean', ['jade', 'copy', 'webpack']
