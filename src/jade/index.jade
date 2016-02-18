@@ -2,14 +2,42 @@ include template/_mixins.jade
 extends template/_default.jade
 
 block append css
-  +ex_css('http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext')
 block append hjs
   +jsF('main.js')
 block contents
-  #container
-    h1 Thomas Yang
-    h2#subtitle &lt; I walk through stacks /&gt;
-    svg#sort
-    sub Sorry! For now, Thomas is reworking on this website. Please come back later....
-    foot
-      a(href='assets/data/resume.pdf') see my resume
+  aside.colorBg
+    #asideContainer
+      section#logo.color
+        include svg/logo.svg
+        include svg/blank.svg
+      section#title
+        h1= title
+        h2= subtitle
+      section#social
+        each so in social
+          a(class=so.link_class, href=so.link)
+            i.fa(class=so.icon_class)
+      section#description
+        each line in description
+          p= line
+      footer
+        a.colorHover#resume(href="assets/data/resume.pdf") Resume
+        p#copyright= copyright
+      i#refresh.fa.fa-refresh.fa-spin
+          
+  main.colorScroll
+    #mainContainer
+      each project in projects
+        section.project
+          header
+            span.projectTitle.color= project.title
+            span.projectDesc= project.description
+          .showcase.colorLight
+            .projectYear= project.year
+            .imageFrame
+              a(href='#{project.link}')
+                .imageWrapper
+                  img(src='assets/images/#{project.img}.png', alt='#{project.title}')
+              include svg/frame.svg
+         
+       

@@ -32,6 +32,9 @@ gulp.task 'webpack', () ->
       timings: true
 
 gulp.task 'jade', () ->
+  # uncache data.coffee from require cache
+  delete require.cache[require.resolve("#{paths.src}/jade/data")]
+  
   gulp.src("#{paths.src}/jade/index.jade")
     .pipe $.plumber()
     .pipe $.jade
@@ -75,6 +78,7 @@ gulp.task 'server', () ->
       $.util.log 'Reloading...'
 
   gulp.watch ['src/jade/**/*'], ['jade', reload]
+  gulp.watch ['src/jade/data.coffee'], ['jade', reload]
   gulp.watch ['src/assets/**/*'], ['copy', reload]
 
 gulp.task 'build', () ->

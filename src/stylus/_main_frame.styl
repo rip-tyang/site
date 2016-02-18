@@ -1,60 +1,65 @@
-html, body
+main
   height: 100%
-  width: 100%
-  font-family: 'Lato', 'Helvetica Neue', helvetica, sans-serif
-  ::selection
-    background: #333
-    color: white
-body
-  background: url('/assets/images/square_bg.png') repeat
+  width: 69.44%
+  float: left
+  overflow-y: scroll
+  &::after
+    clear: both
 
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)
-    background: url('/assets/images/square_bg_@2X.png') repeat
+#mainContainer
+  width: 860px
+  margin-top: 72px
+  margin-left: 20px
 
-#container
-  height: 100%
-  width: 100%
-  text-align: center
-  color: #333
+header
+  margin-bottom: 96px
+  position: relative
 
-#sort
-  height: 40%
-  width: 100%
-
-h1
-  padding-top: 10%
-  font-size: 80px
-  font-variant: small-caps
-  ::selection
-    background: #333
-    color: white
-
-h2
-  padding: 20px
+.projectTitle
   font-size: 32px
-  transition: color 1s cubic-bezier(0.4, 0, 0.2, 1)
+  line-height: 40px
+  font-weight: bold
+  text-transform: uppercase
 
-sub
-  display: block
-  padding-top: 20px
+  &::after
+    content: ' '
+    position: absolute
+    height: 34px
+    width: 2px
+    margin-left: 16px
+    margin-right: 16px
+
+.projectDesc
+  margin-left: 34px
+  font-size: 16px
+
+.showcase
+  position: relative
+  height: 469px
+
+.projectYear
   font-size: 24px
+  font-weight: bold
+  opacity: 0.5
+  position: absolute
 
-foot
-  text-align: center
+.imageFrame
+  float: right
+  margin-bottom: 96px
 
-  a
-    display: block
-    margin: 0 auto
-    padding-top: 20px
-    line-height: 32px
-    font-size: 16px
-    text-transform: uppercase
-    text-decoration: none
-    font-style: italic
-    color: #333
+.imageWrapper
+  position: absolute
+  margin-top: 33px
+  width: 720px
+  height: 400px
+  overflow: hidden
+  background-color: #333
 
-    &:hover,
-    &:visited,
-    &:active
-      text-decoration: none
-      color: #333
+.imageWrapper > img
+  width: 720px
+  position: relative
+  transition: transform .4s cubic-bezier(0.4, 0, 0.2, 1), opacity .4s cubic-bezier(0.4, 0, 0.2, 1)
+
+  &:hover
+    transform: scale(1.05)
+    opacity: .6

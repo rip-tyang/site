@@ -1,0 +1,61 @@
+@import 'nib'
+
+$main-color = #FFB400
+
+makeColor(alpha)
+  rgba(red($main-color), green($main-color), blue($main-color), alpha)
+
+$secondary-color = makeColor(0.8)
+
+global-reset()
+
+html, body
+  height: 100%
+  width: 100%
+  min-width: 1280px
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+*::selection
+  background: #333
+  color: $main-color
+
+a:link,
+a:active,
+a:visited,
+a:hover
+  text-decoration: none
+  color: inherit
+
+.color
+  color: $main-color
+  fill: currentColor
+
+  &::before,
+  &::after
+    background-color: currentColor
+
+.colorLight
+  color: $secondary-color
+  fill: currentColor
+
+  &::before,
+  &::after
+    background-color: currentColor
+
+.colorBg
+  background-color: $main-color
+
+.colorHover
+  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s
+
+  &:hover
+    color: $main-color
+    background-color: white
+
+.colorScroll
+  &::-webkit-scrollbar
+    width: 12px
+    background-color: $secondary-color
+
+  &::-webkit-scrollbar-thumb
+    background-color: #FFFFFF80

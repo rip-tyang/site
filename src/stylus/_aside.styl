@@ -1,0 +1,122 @@
+aside
+  height: calc(100% - 30px)
+  width: calc(30.56% - 90px)
+  float: left
+  padding: 30px 90px 0 0
+
+#asideContainer
+  width: 230px
+  float: right
+
+  &::after
+    clear: both
+
+  & > section:not(:first-child)
+    margin-top: 32px
+
+  & > section:not(:last-child)
+    margin-bottom: 32px
+
+section#logo
+  line-height: 0
+  font-size: 0
+  padding-bottom: 16px
+  & > svg
+    padding-right: 6px
+
+section#title
+  color: white
+  white-space: nowrap
+  h1
+    font-size: 24px
+    line-height: 33px
+    font-weight: bold
+  h2
+    font-size: 18px
+    line-height: 24px
+    font-weight: lighter
+
+section#social
+  white-space: nowrap
+
+section#social > a
+  font-size: 24px
+  line-height: 32px
+  text-align: center
+  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
+
+  & > i
+    width: 32px
+    height: 32px
+
+  &:not(:first-child)
+    margin-left: 5px
+
+  &:hover
+    background-color: white !important
+
+  &:link,
+  &:visited
+    color: white
+
+  &.facebook
+    background-color: #3C5A98
+    &:hover
+      color: @background-color
+
+  &.github
+    background-color: #333
+    &:hover
+      color: @background-color
+
+  &.linkedin
+    background-color: #007AB5
+    &:hover
+      color: @background-color
+
+  &.pinterest
+    background-color: #CB1F27
+    &:hover
+      color: @background-color
+
+  &.instagram
+    background-color: #2E5E86
+    &:hover
+      color: @background-color
+
+  &.stackoverflow
+    background-color: #F48024
+    &:hover
+      color: @background-color
+
+  &.email
+    background-color: #007AB5
+    &:hover
+      color: @background-color
+
+footer
+  position: absolute
+  bottom: 32px
+  color: white
+
+  & > p
+    font-size: 16px
+    margin-top: 20px
+
+#resume
+  display: block
+  height: 42px
+  width: 120px
+  border: 3px solid white
+  line-height: 42px
+  font-size: 24px
+  font-weight: bold
+  text-align: center
+
+#refresh
+  position: fixed
+  left: 32px
+  bottom: 32px
+  font-size: 24px
+  cursor: pointer
+  color: white
