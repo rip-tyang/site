@@ -34,7 +34,7 @@ gulp.task 'webpack', () ->
 gulp.task 'jade', () ->
   # uncache data.coffee from require cache
   delete require.cache[require.resolve("#{paths.src}/jade/data")]
-  
+
   gulp.src("#{paths.src}/jade/index.jade")
     .pipe $.plumber()
     .pipe $.jade
@@ -79,7 +79,8 @@ gulp.task 'server', () ->
 
   gulp.watch ['src/jade/**/*'], ['jade', reload]
   gulp.watch ['src/jade/data.coffee'], ['jade', reload]
-  gulp.watch ['src/assets/**/*'], ['copy', reload]
+  gulp.watch ['src/assets/**/*'], ['copy:assets', reload]
+  gulp.watch ['src/miscellaneous/**'], ['copy:miscellaneous', reload]
 
 gulp.task 'build', () ->
   runSequence 'clean', ['jade', 'copy', 'webpack']

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <!-- Site Properities -->
+  <title>The Isla del Sueño Migrant Boats</title>
+  <!--link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'-->
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" type="text/css" href="semantic/css/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="css/report.css">
+  <script src="js/jquery-2.0.3.min.js"></script>
+  <script src="semantic/javascript/semantic.min.js"></script>
+  <script src="js/jquery.scrollTo.min.js"></script>
+  <script src="js/waypoints.min.js"></script>
+</head>
+<body>
+  <div class='ui fixed transparent inverted main menu'>
+    <div class="container">
+      <div class="title item">
+        <b>Visualization:</b> The Isla del Sueño Migrant Boats
+      </div>
+      <a class="icon item"  href="index.html">
+        <i class="left arrow icon"></i>
+      </a>
+      <div class="navi section ui dropdown link item">
+        <span class="count">2 of 2</span>
+        <div class="menu ui transition inverted hidden">
+            <div class="item">
+              <a href="index.html">Project</a>
+            </div>
+            <div class="active item">
+              <a href="report.html">Report</a>
+            </div>
+        </div>
+      </div>
+      <div class="disabled icon item"><i class="right arrow icon"></i></div>
+      <div class="right menu">
+        <a class="popup icon github item" contentPopout="View project on Github" href="https://github.com/Hacker-YHJ/visWorks/tree/master/vis_course_assignment_3">
+          <i class="icon github"></i>
+        </a>
+        <a class="popup icon weibo item" contentPopout="View project on Github" href="javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f='http://v.t.sina.com.cn/share/share.php?appkey=2526586157',u=z||d.location,p=['&url=',e(u),'&title=',e(t||d.title),'&source=',e(r),'&sourceUrl=',e(l),'&content=',c||'gb2312','&pic=',e(p||'')].join('');function%20a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=440,height=430,left=',(s.width-440)/2,',top=',(s.height-430)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,'','','','','http://hacker-yhj.github.io/works/vis_course_assignment_3/',''));">
+          <i class="icon weibo"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="ui segment">
+    <div class="container">
+      <div class="instruction">
+        <h1 class = 'ui dividing header'>Instruction</h1>
+        <p>This is the second part of the third assignment of visualization course, using dataset from VAST Challenge 2008. VAST is short for IEEE Visual Analytics Science and Technology. Challenge for designing and analyzing visualization tools and tasks is held every year.</p>
+      </div>
+      <div class="ui vertical large buttons">
+        <div class="ui top attached black label">You may like to view:</div>
+        <a class="ui basic button d3" href='http://d3js.org/'>D3 Library</a>
+        <a class="ui basic button semantic" href='http://semantic-ui.com/'>Semantic UI</a>
+        <a class="ui basic button blog" href='http://hacker-yhj.github.io'>My Blog</a>
+      </div>
+    </div>
+  </div>
+  <div class="main container">
+    <div class="sticky-wrapper">
+      <div class="peek">
+        <div class="ui vertical pointing secondary menu">
+          <a class="description item active">Description</a>
+          <a class="function item">Function</a>
+          <a class="result item">Result</a>
+        </div>
+      </div>
+    </div>
+    <h2 class="ui dividing header" id='description'>
+      Description
+    </h2>
+    <p>
+      Data is comprised of records concerning the mass movement of persons departing Isla Del Sueño for the United States during 2005 - 2007. This activity was precipitated by the Isla Del Sueño government crackdown on the Paraiso social and religious movement which had been gaining popularity there. The dataset includes not only interdiction records collected by the United States Coast Guard, but information from other sources about illegal landings.
+    </p>
+    <p>
+      Note that the U.S. has the same “wet foot, dry foot” policy for Isla Del Sueño migrants as it does for Cubans: If a person is able to make it to U.S. soil, he/she may qualify for expedited “legal permanent resident” status. If caught between the waters of the two nations and attempting to enter the US, he/she will be summarily sent back to the island.
+    </p>
+    <div class='ui list'>
+      <div class="description">The migrant boat records include the following fields:</div>
+      <div class='list'>
+        <div class='item'>
+          <i class="map icon"></i>
+          <div class="content">
+            <div class='header'>EncounterCoords:</div>
+            <div class='description'>Where the migrant boat was intercepted or where it landed, in LONG-LAT Format.</div>
+          </div>
+        </div>
+        <div class='item'>
+          <i class="reorder icon"></i>
+          <div class="content">
+            <div class='header'>RecordType:</div>
+            <div class='description'>Interdiction (the Coast Guard intercepted them) or Landing (the boat made it ashore).</div>
+          </div>
+        </div>
+        <div class='item'>
+          <i class="user icon"></i>
+          <div class="content">
+            <div class="header">RecordNotes:</div>
+            <div class="description">Any additional information. Usually a list of passenger names.</div>
+          </div>
+        </div>
+        <div class='item'>
+          <i class="italic icon"></i>
+          <div class="content">
+            <div class="header">Passengers:</div>
+            <div class="description">Number of passengers in the migrant boat.</div>
+          </div>
+        </div>
+        <div class='item'>
+          <i class="reorder icon"></i>
+          <div class="content">
+            <div class="header">USCG_Vessel:</div>
+            <div class="description">Name of the Coast Guard cutter involved in the interdiction.</div>
+          </div>
+        </div>
+        <div class='item'>
+          <i class="calendar icon"></i>
+          <div class="content">
+            <div class="header">EncounterDate:</div>
+            <div class="description">Date when the boat was interdicted or landed.</div>
+          </div>
+        </div>
+        <div class='item'>
+          <i class="italic icon"></i>
+          <div class="content">
+            <div class="header">NumDeaths:</div>
+            <div class="description">Number of migrant deaths.</div>
+          </div>
+        </div>
+        <div class='item'>
+          <i class="map icon"></i>
+          <div class="content">
+            <div class="header">LaunchCoords:</div>
+            <div class="description">Where the boat left the Island, if known, in LONG-LAT Format.</div>
+          </div>
+        </div>
+        <div class='item'>
+          <i class="reorder icon"></i>
+          <div class="content">
+            <div class="header">VesselType:</div>
+            <div class="description">Type of boat used by the migrants, either a “Go Fast”, a Raft, or a Rustic vessel.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p>
+      Considering the data types, I used two different views to present it.
+    </p>
+    <h3 class="ui dividing header">
+      Map View:
+    </h3>
+    <p>
+      Map view shows the landing and departure location of ships, represented by points. Aside of location, the size the color of points can be used to represent different attributes, such as death rate ,vessel type and etc.
+    </p>
+    <h3 class="ui dividing header">
+      Statistic View:
+    </h3>
+    <p>
+      Statistic view show the statistic result of data, using both histogram and scatter plot. Histogram is stacked thus is able to show three dimensions. Scatter plot is much like the map above, with points indicating ships, size and color encoding two additional dimensions.
+    </p>
+    <h2 class="ui dividing header" id='function'>
+      Function
+    </h2>
+    <p>
+      In the main view, an icon is on the left top, with label "Menu" when hovering. Click it to open the option pannel and it contains all the functions of this work.
+    </p>
+    <h3 class="ui dividing header">
+      Search Box:
+    </h3>
+    <p>
+      Search box is provided in the top of the option pannel to search a specific name of a passenger. To make it easier to use, it will list all the names possible according to your input.
+    </p>
+    <p>
+      A search box may not be a intuitive way of data exploration, but this project is a part of team work. By using search box, I can quickly locate the point of a certain ship with a specific passenger given out by my partner.
+    </p>
+    <h3 class="ui dividing header">
+      Filter:
+    </h3>
+    <p>
+      Filter is provided just under the search box as a list of buttons.
+    </p>
+    <p>
+      Click the button and a dropdown list will appear. To restrict the dataset into a smaller scale, just click the corresponding item, the item "Banned" for example. To redo it, just click the item with the name of this field, the item "Record" for example.
+    </p>
+    <h3 class="ui dividing header">
+      Map Options:
+    </h3>
+    <p>
+      In this project, map is not static but has a lot of options and interactions.
+    </p>
+    <p>
+      Much familiar as the former filter, two buttons are provided to precisely control the points in each map. "Size" button can encode a quantitative dimension, death rate or death amount for example, to the size of each point. "Color" button can encode a norminal dimension, vessel types or record for example, to the color of each point.
+    </p>
+    <h3 class="ui dividing header">
+      Histogram Options:
+    </h3>
+    <p>
+      Histogram offered two different views, in order to give out a clearer relationship of the statistic data. To switch between two view, click "View" button and choose one.
+    </p>
+    <p>
+      Other options is more intuitive. Variables binded on X axis and Y axis can be changed using buttons and the additional stacked dimension can be changed as well.
+    </p>
+    <h3 class="ui dividing header">
+      Scatter Plot:
+    </h3>
+    <p>
+      Scatter plot is also a story of points. Use similar method to change the points' attribute and the vaciavles binded on X axis and Y axis.
+    </p>
+    <p>
+      By the way, I've spent quite a time keep refining the animation of each option you change, making sure that you will not miss any corresponding change in demo. I hope you like it.
+    </p>
+    <h3 class="ui dividing header">
+      Other Interactions:
+    </h3>
+    <p>
+      While points contain verbose information which can not fully display on a single view, I provide a basic list holding all the information. To see a list of any point, move your cursor on it and click it.
+    </p>
+    <p>
+      When hovering it, the point will enlarge and turn black to respond. Leaving it and the point turns back. When you click it, it will keep staying black and enlarged, and points indicating the same ship in other view will also become black and enlarged. The location of the list will change according to which view the point locates.
+    </p>
+    <p>
+      Another little trick remains unfinished. You may notice that when hovering on any rectangle of the histogram, it will become black, while click it gives you nothing. Well, it should be another interaction, but I've encountered some problems and this trick may be postponed indefinitely due to the approaching deadline.
+    </p>
+    <h2 class="ui dividing header" id='result'>
+      Result
+    </h2>
+    <p>
+      Using this visualization tool, I did some simple data exploration and found some elementary results.
+    </p>
+    <div class='ui list'>
+      <div class="description">The results are listed below:</div>
+      <div class='list'>
+        <div class="item">
+          <i class="icon reorder"></i>
+          <div class="content">
+            <div class="header">Landing Choices and Interdiction Patterns</div>
+            <div class="description">Using the filter and watching the map view, I found that in 2005, people chose to directly heading to the crescent-shaped bank of Florida and the pass rate is very low. The next year, more people heading to the left part of Florida peninsula and most of them succeeded. While in 2007, both left part and right part of the peninsula has become the landing target while still large amount of people interdicted in front of the bank. And also few people successfully landed on Mexico.</div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="icon ok sign"></i>
+          <div class="content">
+            <div class="header">Pass Rate</div>
+            <div class="description">
+              For the former result, I may draw the conclusion that the coast guard mainly put their attention on the crescent-shaped bank, where Most interditions happened. So pass rate mainly related to the location, while other attributes, like vessel types, seem to have little contribution to the pass rate.
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="icon reorder"></i>
+          <div class="content">
+            <div class="header">Vessel Choices</div>
+            <div class="description">
+              For the three years, people always chose "Rustic" to be the main vessel, and the percentage of "Rustic" kept approximately unchanged. So I thought this kind of ship may be the relatively effective as a vessel.
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="icon remove sign"></i>
+          <div class="content">
+            <div class="header">Death Rate</div>
+            <div class="description">
+              Using the histogram, switching to grouped view and binding years with X axis, I found that in 2007 the death rate of "Go Fast" ship severely increased. To view it in map view, noticing that the landing target is moving upward through time, I may draw the conclusion that the high death rate is caused by a longer voyage.
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <i class="icon remove sign"></i>
+          <div class="content">
+            <div class="header">Abnormal Average Death Rate</div>
+            <div class="description">I found that the average death rate is abnormally high in January. At first I thought the ocean current or special climate may be the reason. Later I noticed that there are few record in January, and some small ship only holds five people but only one survive, which definitely cause this kind of abnormal result. So it is just a statistic lie.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui segment">
+    <p class="copyright cl-effect-1">&copy; <a href="http://hacker-yhj.github.io">Hongjian Yang</a> 2013.</p>
+  </div>
+  <script src="js/report_UI.js"></script>
+</body>

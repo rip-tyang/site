@@ -1,0 +1,148 @@
+/* line 3, ../scss/sass/report.scss */
+html, body {
+  display: block;
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-size: 15px;
+  background-image: url(../BG/noisy.png);
+  background-repeat: repeat;
+  margin: 0px;
+  padding: 0px;
+  /* Effect 1: Brackets */
+}
+/* line 12, ../scss/sass/report.scss */
+html a, body a {
+  text-decoration: none;
+}
+/* line 16, ../scss/sass/report.scss */
+html a:visited, body a:visited {
+  color: #333;
+}
+/* line 20, ../scss/sass/report.scss */
+html .container, body .container {
+  width: 900px;
+  margin: auto auto;
+}
+/* line 25, ../scss/sass/report.scss */
+html .segment, body .segment {
+  background-color: #fcfcfc;
+  margin-top: 40px;
+  border-bottom: solid 1px #ccc 0.5;
+}
+/* line 31, ../scss/sass/report.scss */
+html .segment .instruction, body .segment .instruction {
+  margin-top: 50px;
+  width: 60%;
+  float: left;
+}
+/* line 37, ../scss/sass/report.scss */
+html .segment .buttons, body .segment .buttons {
+  width: 20%;
+  margin-left: 150px;
+  margin-top: 30px;
+  -webkit-transition: color 0.3s ease;
+  -moz-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+}
+/* line 43, ../scss/sass/report.scss */
+html .segment .buttons .label, body .segment .buttons .label {
+  position: relative !important;
+  text-align: center;
+}
+/* line 49, ../scss/sass/report.scss */
+html .segment .copyright, body .segment .copyright {
+  text-align: center;
+}
+/* line 54, ../scss/sass/report.scss */
+html .cl-effect-1 a, body .cl-effect-1 a {
+  -webkit-transition: color 0.3s;
+  -moz-transition: color 0.3s;
+  transition: color 0.3s;
+}
+/* line 61, ../scss/sass/report.scss */
+html .cl-effect-1 a::before,
+html .cl-effect-1 a::after, body .cl-effect-1 a::before,
+body .cl-effect-1 a::after {
+  display: inline-block;
+  opacity: 0;
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
+  -moz-transition: -moz-transform 0.3s, opacity 0.2s;
+  transition: transform 0.3s, opacity 0.2s;
+}
+/* line 69, ../scss/sass/report.scss */
+html .cl-effect-1 a::before, body .cl-effect-1 a::before {
+  margin-right: 10px;
+  content: '[';
+  -webkit-transform: translateX(20px);
+  -moz-transform: translateX(20px);
+  transform: translateX(20px);
+}
+/* line 77, ../scss/sass/report.scss */
+html .cl-effect-1 a::after, body .cl-effect-1 a::after {
+  margin-left: 10px;
+  content: ']';
+  -webkit-transform: translateX(-20px);
+  -moz-transform: translateX(-20px);
+  transform: translateX(-20px);
+}
+/* line 88, ../scss/sass/report.scss */
+html .cl-effect-1 a:hover::before,
+html .cl-effect-1 a:hover::after,
+html .cl-effect-1 a:focus::before,
+html .cl-effect-1 a:focus::after, body .cl-effect-1 a:hover::before,
+body .cl-effect-1 a:hover::after,
+body .cl-effect-1 a:focus::before,
+body .cl-effect-1 a:focus::after {
+  opacity: 1;
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  transform: translateX(0px);
+}
+/* line 95, ../scss/sass/report.scss */
+html .cl-effect-1 a:hover, body .cl-effect-1 a:hover {
+  color: #333;
+}
+
+/* line 100, ../scss/sass/report.scss */
+.main.menu {
+  -webkit-transition: margin 0.3s ease;
+  -moz-transition: margin 0.3s ease;
+  -o-transition: margin 0.3s ease;
+  transition: margin 0.3s ease;
+  min-width: 320px;
+  font-size: 0.875rem;
+  top: 0px;
+}
+
+/* line 108, ../scss/sass/report.scss */
+.main.container {
+  position: relative;
+  margin-left: 270px;
+  width: 50%;
+  line-height: 1.5rem;
+}
+/* line 114, ../scss/sass/report.scss */
+.main.container .peek {
+  position: fixed;
+  top: 260px;
+  left: 80px;
+}
+/* line 119, ../scss/sass/report.scss */
+.main.container .peek .menu {
+  width: 150px;
+}
+/* line 123, ../scss/sass/report.scss */
+.main.container .peek .menu .active:nth-child(1) {
+  border-right-color: #00B9F0 !important;
+  color: #00B9F0 !important;
+}
+/* line 128, ../scss/sass/report.scss */
+.main.container .peek .menu .active:nth-child(2) {
+  border-right-color: #56BB73 !important;
+  color: #56BB73 !important;
+}
+/* line 133, ../scss/sass/report.scss */
+.main.container .peek .menu .active:nth-child(3) {
+  border-right-color: #EF3F49 !important;
+  color: #EF3F49 !important;
+}

@@ -1,0 +1,175 @@
+body{
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+nav#name {
+  text-align: center;
+  border-bottom: solid #ccc 1px;
+  font-size: 1.25em;
+  color: #777
+}
+
+h1{
+  width: 420px;
+  margin: auto auto;
+  color: #777;
+  -webkit-transition: color 0.3s;
+  -moz-transition: color 0.3s;
+  transition: color 0.3s;
+}
+
+h1:hover{
+  color: #b3d4fc;
+  cursor: default;
+}
+.main-text{
+  color: #777;
+  font-size: 1em;
+}
+
+#vis, .options{
+}
+
+div.tooltip{
+}
+
+div.container{
+  width: 150%;
+  text-align: center;
+  margin-left: -25%;
+  margin-right: 0;
+  background-color: #eee;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  -ms-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  -o-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+div.options{
+  height: 200px;
+  text-align: center;
+}
+
+.options table{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.detailed{
+  width: 350px;
+}
+
+td.curve, td.filters, td.detailed{
+  border-radius: 40px;
+  border: dotted #ccc 5px;
+  padding: 5px;
+}
+
+.optiontext{
+  font-family: Helvitica, sans-serif;
+  font-weight: 600;
+}
+
+.detailed.optiontext{
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.copyright_container{
+  text-align: center;
+  background-color: #eee;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 150%;
+  margin-left: -25%;
+  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  -ms-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  -o-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  font-size: 1em;
+}
+
+.axis path,.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.s_bar {
+  fill-opacity: 1;
+  fill: #b3d4fc;
+}
+
+.d_bar {
+  fill-opacity: 1;
+  fill: #ff99cc;
+}
+
+.sx.axis path, .dx.axis path {
+  display: none;
+}
+
+.sx.axis text,.dx.axis text {
+  font-family: Helvitica, sans-serif;
+  font-size: 14px;
+  font-weight: 200;
+  text-anchor: start;
+  transform:rotate(45deg);
+  -ms-transform:rotate(45deg);   /* IE 9 */
+  -moz-transform:rotate(45deg);  /* Firefox */
+  -webkit-transform:rotate(45deg); /* Safari 和 Chrome */
+  -o-transform:rotate(45deg);  /* Opera */
+}
+
+.sy.axis, .dy.axis {
+  font-family: Helvitica, sans-serif;
+  font-size: 18px;
+  font-weight: 200;
+}
+
+#s_input, #d_input {
+  position: absolute;
+  z-index: 1;
+  left: -70px;
+}
+
+#s_input {
+  top: 850px;
+}
+
+#d_input {
+  top: 890px;
+}
+
+#s_lable, #d_lable{
+  position: absolute;
+  font-family: Helvitica, sans-serif;
+  font-size: 18px;
+  font-weight: 200;
+  left: -48px;
+}
+
+#s_lable{
+  top: 845px;
+}
+
+#d_lable{
+  top: 885px;
+}
+
+.s_icon, .d_icon{
+  position: absolute;
+}
+
+.d_icon{
+  left: -50px;
+  top: 1010px;
+}
+
+.s_icon{
+  left: -52px;
+  top: 800px;

@@ -1,0 +1,72 @@
+require './preprocessing.rb'
+
+list = Preprocessing.new.array
+
+task :all => [:geographical, :passengers]
+
+task :geographical do
+  f = File.new('geo_information.csv', 'w')
+  f.print 'ID,Year,Month,Day,' +
+    'USCG,Vessel,Record,Amount,Death,' +
+    "L_Longitude,L_Latitude,D_Longitude,D_Latitude\n"
+  list.each_with_index do |e, i|
+    f.print '"' + i.to_s + '"'
+    f.print ',' + '"' + e[:year].to_s + '"'
+    f.print ',' + '"' + e[:month].to_s + '"'
+    f.print ',' + '"' + e[:day].to_s + '"'
+    f.print ',' + '"' + e[:USCG] + '"'
+    f.print ',' + '"' + e[:vessel] + '"'
+    f.print ',' + '"' + e[:record] + '"'
+    f.print ',' + '"' + e[:passengers].to_s + '"'
+    f.print ',' + '"' + e[:death].to_s + '"'
+    f.print ',' + '"' + e[:destination][0].to_s + '"'
+    f.print ',' + '"' + e[:destination][1].to_s + '"'
+    f.print ',' + '"' + e[:departure][0].to_s + '"'
+    f.print ',' + '"' + e[:departure][1].to_s + '"'
+    f.print "\n"
+  end
+  p 'geographical information generation success'
+end
+
+task :passengers do
+  f = File.new('passenger_information.csv', 'w')
+  f.print "ID,names\n"
+  list.each_with_index do |e, i|
+    next unless e[:names]
+    e[:names].each do |n|
+      f.print i.to_s + ',' + n + "\n"
+    end
+  end
+
+  p 'passengers information generation success'
+end
+
+task :statistic do
+  f = File.new('boundary.txt', 'w')
+  l_rect = {}
+  d_rect = {}
+  list.each do |e|
+    l_rect[:top_left_x] ||= e[:destination][0]
+    l_rect[:top_left_y] ||= e[:destination][1]
+    l_rect[:buttom_right_x] ||= e[:destination][0]
+    l_rect[:buttom_right_y] ||= e[:destination][1]
+    l_rect[:top_left_x] = e[:destination][0] if e[:destination][0] < l_rect[:top_left_x]
+    l_rect[:top_left_y] = e[:destination][1] if e[:destination][1] < l_rect[:top_left_y]
+    l_rect[:buttom_right_x] = e[:destination][0] if e[:destination][0] > l_rect[:buttom_right_x]
+    l_rect[:buttom_right_y] = e[:destination][1] if e[:destination][1] > l_rect[:buttom_right_y]
+    if e[:departure][0] != 0.0 then
+      d_rect[:top_left_x] ||= e[:departure][0]
+      d_rect[:top_left_y] ||= e[:departure][1]
+      d_rect[:buttom_right_x] ||= e[:departure][0]
+      d_rect[:buttom_right_y] ||= e[:departure][1]
+      d_rect[:top_left_x] = e[:departure][0] if e[:departure][0] < d_rect[:top_left_x]
+      d_rect[:top_left_y] = e[:departure][1] if e[:departure][1] < d_rect[:top_left_y]
+      d_rect[:buttom_right_x] = e[:departure][0] if e[:departure][0] > d_rect[:buttom_right_x]
+      d_rect[:buttom_right_y] = e[:departure][1] if e[:departure][1] > d_rect[:buttom_right_y]
+    end
+  end
+  f.print '(' + l_rect[:top_left_x].to_s + ', ' + l_rect[:top_left_y].to_s + ")\n"
+  f.print '(' + l_rect[:buttom_right_x].to_s + ', ' + l_rect[:buttom_right_y].to_s + ")\n"
+  f.print '(' + d_rect[:top_left_x].to_s + ', ' + d_rect[:top_left_y].to_s + ")\n"
+  f.print '(' + d_rect[:buttom_right_x].to_s + ', ' + d_rect[:buttom_right_y].to_s + ')'
+end

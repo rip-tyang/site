@@ -16,6 +16,7 @@ html, body
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 *::selection
+  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
   background: #333
   color: $main-color
 
@@ -27,26 +28,31 @@ a:hover
   color: inherit
 
 .color
+  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
   color: $main-color
   fill: currentColor
 
   &::before,
   &::after
     background-color: currentColor
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
 
 .colorLight
+  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
   color: $secondary-color
   fill: currentColor
 
   &::before,
   &::after
     background-color: currentColor
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
 
 .colorBg
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
   background-color: $main-color
 
 .colorHover
-  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
 
   &:hover
     color: $main-color
@@ -54,6 +60,7 @@ a:hover
 
 .colorScroll
   &::-webkit-scrollbar
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
     width: 12px
     background-color: $secondary-color
 

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<hmtl lang="en">
+<head>
+	<title>Mines dectection</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" media="screen" type="text/css" href="css/styles.min.css" />
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/blob/Blob.js"></script>
+	<script src="bower_components/FileSaver/FileSaver.min.js"></script>
+	<script type="text/javascript" src="js/mines.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<header class="row">
+			<div class="twelvecol">
+			<h1>Minesweeper</h1>
+			</div>
+		</header>
+		<section class="row">
+			<div class="eightcol">
+				<canvas id="board" width="600" height="400" oncontextmenu="return false;">
+					<p>Not supported</p>
+				</canvas>
+				<noscript>
+					<p>Not supported</p>
+				</noscript>
+			</div>
+			<div class="fourcol last">
+				<div class="startscreen">
+					<h1>Start Game</h1>
+					<p>Please choose a difficulty.</p>
+					<button id="easybtn">Easy</button>
+					<button id="mediumbtn">Medium</button>
+					<button id="insanebtn">Insane</button>
+				</div>
+				<div class="gamescreen">
+					<h1 id="status">Game on :)</h1>
+					<p id="msg">Click on a square to start the game!</p>
+					<button id="reset">Reset</button>
+					<button id="switchscreens">Change Difficulty</button>
+					<br>
+					<p><span id="time">0</span> seconds have passed</p>
+					<span id="mines"></span>
+					<span id="flags"></span>
+				</div>
+				<div class="instroction">
+					<p class="desc">
+					Minesweeper uses javascript and canvas, fully animated, with timer and counter. Right click to label a mine, left click to check a mine.
+					</p>
+				</div>
+				<div class='sl-tool'>
+					<button id="save">Save</button>
+					<button id="load">Load</button>
+					<input type="file" id="upload" name="files" accept="text/plain" style="display: none;" />
+				</div>
+			</div>
+		</section>
+	</div>
+	<footer>
+		Done by Hongjian Yang(1100016617), Peng Xu(1100016616).
+	</footer>
+</body>
+</html>

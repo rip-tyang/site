@@ -1,6 +1,6 @@
 exports = module.exports =
   title: 'Thomas Yang'
-  subtitle: 'subtitle'
+  subtitle: 'I turn coffee and sugar into code.'
   description: [
     'I am Thomas.'
     'lalala'
@@ -35,41 +35,52 @@ exports = module.exports =
     email:
       link: 'mailto:jscnm1993@gmail.com'
       link_class: 'email'
-      icon_class: 'fa-envelope'
+      icon_class: 'fa-paper-plane'
   projects:
-    MigrantVisualization:
+    Contestify:
+      title: 'Contestify'
+      description: '''An online tournament hosting website.
+      '''
+      img: 'contestify'
+      link: 'http://contestify.heroku.com/'
+      year: '2016'
+    paceGame:
+      title: 'PaceGame'
+      description: '''A online platform for exploring and
+      hosting offline boardgame.
+      '''
+      img: 'pace_game'
+      link: 'http://pacegames.herokuapp.com/'
+      year: '2016'
+    keyboardVis:
+      title: 'KeyboardVis'
+      description: '''A visualization for analyzing key stroke
+      intensity of any text file.
+      '''
+      img: 'key_vis'
+      link: '/projects/keyboard-stroke'
+      year: '2016'
+    minesweeper:
+      title: 'Minesweeper'
+      description: '''Classic minesweeper game.
+      '''
+      img: 'minesweeper'
+      link: '/projects/mines'
+      year: '2014'
+    MigrantVis:
       title: 'MigrantVis'
-      description: '''This is a part of VAST Challenge 2008.
-      VAST is short for IEEE Visual Analytics Science and Technology and
-      the challenge is held every year,
-      for designing and analyzing visualization tools and tasks.'''
+      description: '''A visualization tool to present an illegal
+      immigrant event made up for IEEE Visual Analytics Science and
+      Technology (VAST) Challenge 2008.
+      '''
       img: 'migrant_vis'
-      link: '#'
+      link: '/projects/vis-3'
       year: '2013'
-    test1:
-      title: 'MigrantVis'
-      description: '''This is a part of VAST Challenge 2008.
-      VAST is short for IEEE Visual Analytics Science and Technology and
-      the challenge is held every year,
-      for designing and analyzing visualization tools and tasks.'''
-      img: 'migrant_vis'
-      link: '#'
-      year: '2013'
-    test2:
-      title: 'MigrantVis'
-      description: '''This is a part of VAST Challenge 2008.
-      VAST is short for IEEE Visual Analytics Science and Technology and
-      the challenge is held every year,
-      for designing and analyzing visualization tools and tasks.'''
-      img: 'migrant_vis'
-      link: '#'
-      year: '2013'
-    test3:
-      title: 'MigrantVis'
-      description: '''This is a part of VAST Challenge 2008.
-      VAST is short for IEEE Visual Analytics Science and Technology and
-      the challenge is held every year,
-      for designing and analyzing visualization tools and tasks.'''
-      img: 'migrant_vis'
-      link: '#'
+    AirlineVis:
+      title: 'AirlineVis'
+      description: '''A visualization tool shows the quantity of
+      airline routes between different places.
+      '''
+      img: 'air_vis'
+      link: '/projects/vis-2'
       year: '2013'

@@ -1,0 +1,300 @@
+/* line 3, ../scss/sass/homepage.scss */
+html, body {
+  display: block;
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-size: 15px;
+  background-image: url(../BG/squairy_light_@2X.png);
+  background-repeat: repeat;
+  margin: 0px;
+  padding: 0px;
+  /* Effect 1: Brackets */
+}
+/* line 12, ../scss/sass/homepage.scss */
+html a, body a {
+  text-decoration: none;
+}
+/* line 16, ../scss/sass/homepage.scss */
+html a:visited, body a:visited {
+  color: #333;
+}
+/* line 20, ../scss/sass/homepage.scss */
+html .pushed, body .pushed {
+  margin-left: 200px !important;
+}
+/* line 24, ../scss/sass/homepage.scss */
+html .container, body .container {
+  width: 1020px;
+  margin: auto auto;
+}
+/* line 29, ../scss/sass/homepage.scss */
+html .hidden, body .hidden {
+  display: none;
+}
+/* line 33, ../scss/sass/homepage.scss */
+html .cl-effect-1 a, body .cl-effect-1 a {
+  -webkit-transition: color 0.3s;
+  -moz-transition: color 0.3s;
+  transition: color 0.3s;
+}
+/* line 40, ../scss/sass/homepage.scss */
+html .cl-effect-1 a::before,
+html .cl-effect-1 a::after, body .cl-effect-1 a::before,
+body .cl-effect-1 a::after {
+  display: inline-block;
+  opacity: 0;
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
+  -moz-transition: -moz-transform 0.3s, opacity 0.2s;
+  transition: transform 0.3s, opacity 0.2s;
+}
+/* line 48, ../scss/sass/homepage.scss */
+html .cl-effect-1 a::before, body .cl-effect-1 a::before {
+  margin-right: 10px;
+  content: '[';
+  -webkit-transform: translateX(20px);
+  -moz-transform: translateX(20px);
+  transform: translateX(20px);
+}
+/* line 56, ../scss/sass/homepage.scss */
+html .cl-effect-1 a::after, body .cl-effect-1 a::after {
+  margin-left: 10px;
+  content: ']';
+  -webkit-transform: translateX(-20px);
+  -moz-transform: translateX(-20px);
+  transform: translateX(-20px);
+}
+/* line 67, ../scss/sass/homepage.scss */
+html .cl-effect-1 a:hover::before,
+html .cl-effect-1 a:hover::after,
+html .cl-effect-1 a:focus::before,
+html .cl-effect-1 a:focus::after, body .cl-effect-1 a:hover::before,
+body .cl-effect-1 a:hover::after,
+body .cl-effect-1 a:focus::before,
+body .cl-effect-1 a:focus::after {
+  opacity: 1;
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  transform: translateX(0px);
+}
+/* line 74, ../scss/sass/homepage.scss */
+html .cl-effect-1 a:hover, body .cl-effect-1 a:hover {
+  color: #333;
+}
+
+/* line 80, ../scss/sass/homepage.scss */
+#menu .input input {
+  color: #D95C5C;
+  font-weight: 500;
+}
+/* line 85, ../scss/sass/homepage.scss */
+#menu #searchHelper {
+  -webkit-transition: display 1s ease;
+  -moz-transition: display 1s ease;
+  -o-transition: display 1s ease;
+  transition: display 1s ease;
+  z-index: 999;
+  width: 100%;
+  position: absolute;
+  margin: auto auto;
+}
+/* line 92, ../scss/sass/homepage.scss */
+#menu #searchHelper ul {
+  width: 100%;
+  display: inline;
+  text-align: left;
+  list-style-type: none;
+}
+/* line 98, ../scss/sass/homepage.scss */
+#menu #searchHelper ul li {
+  width: 100%;
+}
+/* line 104, ../scss/sass/homepage.scss */
+#menu .button {
+  width: 88%;
+  display: inline-block;
+}
+/* line 108, ../scss/sass/homepage.scss */
+#menu .button .text {
+  float: left;
+}
+/* line 112, ../scss/sass/homepage.scss */
+#menu .button .dropdown.icon {
+  float: right;
+}
+
+/* line 118, ../scss/sass/homepage.scss */
+.main.menu {
+  -webkit-transition: margin 0.3s ease;
+  -moz-transition: margin 0.3s ease;
+  -o-transition: margin 0.3s ease;
+  transition: margin 0.3s ease;
+  min-width: 320px;
+  font-size: 0.875rem;
+}
+
+/* line 125, ../scss/sass/homepage.scss */
+.main.container {
+  position: relative;
+}
+/* line 128, ../scss/sass/homepage.scss */
+.main.container .message {
+  background-color: rgba(0, 0, 0, 0);
+  text-align: center;
+  margin-top: 0px;
+}
+/* line 133, ../scss/sass/homepage.scss */
+.main.container #descriptive.landing {
+  top: 60px;
+  left: 600px;
+}
+/* line 137, ../scss/sass/homepage.scss */
+.main.container #descriptive.departure {
+  top: 60px;
+}
+/* line 140, ../scss/sass/homepage.scss */
+.main.container #descriptive {
+  position: absolute;
+  top: 410px;
+  left: 300px;
+  width: 200px;
+  max-height: 330px;
+  overflow: scroll;
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  background-color: #eee;
+}
+/* line 151, ../scss/sass/homepage.scss */
+.main.container #descriptive .death {
+  color: #D95C5C;
+}
+/* line 156, ../scss/sass/homepage.scss */
+.main.container #mapView {
+  background-image: url(../BG/map_2.png);
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  background-color: #ddd;
+  margin-top: 50px;
+  width: 1020px;
+  height: 350px;
+}
+/* line 165, ../scss/sass/homepage.scss */
+.main.container #mapView .landing,
+.main.container #mapView .departure {
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+/* line 168, ../scss/sass/homepage.scss */
+.main.container #mapView .landing circle,
+.main.container #mapView .departure circle {
+  cursor: pointer;
+}
+/* line 172, ../scss/sass/homepage.scss */
+.main.container #mapView .landing circle.active,
+.main.container #mapView .departure circle.active {
+  stroke-width: 7px;
+  stroke: #333;
+}
+/* line 177, ../scss/sass/homepage.scss */
+.main.container #mapView .landing .target,
+.main.container #mapView .departure .target {
+  stroke: #333;
+  opacity: 0.3;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-dasharray: 5,5;
+}
+/* line 187, ../scss/sass/homepage.scss */
+.main.container #chartView {
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  background-color: #ddd;
+  width: 1020px;
+  height: 350px;
+}
+/* line 196, ../scss/sass/homepage.scss */
+.main.container #chartView .scatter .axis path,
+.main.container #chartView .scatter .axis line,
+.main.container #chartView .bar .axis path,
+.main.container #chartView .bar .axis line {
+  fill: none;
+  stroke: #333;
+  shape-rendering: crispEdges;
+}
+/* line 202, ../scss/sass/homepage.scss */
+.main.container #chartView .scatter .axis text,
+.main.container #chartView .bar .axis text {
+  fill: #333;
+}
+/* line 208, ../scss/sass/homepage.scss */
+.main.container #chartView .scatter circle {
+  cursor: pointer;
+}
+/* line 212, ../scss/sass/homepage.scss */
+.main.container #chartView .scatter circle.unselected {
+  opacity: 0.3;
+}
+/* line 216, ../scss/sass/homepage.scss */
+.main.container #chartView .scatter .target {
+  stroke: #333;
+  opacity: 0.3;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  stroke-dasharray: 5,5;
+}
+/* line 224, ../scss/sass/homepage.scss */
+.main.container #chartView .scatter circle.active {
+  stroke-width: 7px;
+  stroke: #333;
+}
+/* line 231, ../scss/sass/homepage.scss */
+.main.container #chartView .bar .layer rect {
+  cursor: pointer;
+}
+/* line 235, ../scss/sass/homepage.scss */
+.main.container #chartView .bar .layer rect.hover {
+  -webkit-transition: fill 0.3s ease;
+  -moz-transition: fill 0.3s ease;
+  -o-transition: fill 0.3s ease;
+  transition: fill 0.3s ease;
+  fill: #333;
+}
+/* line 240, ../scss/sass/homepage.scss */
+.main.container #chartView .bar .layer rect.unselected {
+  opacity: 0.3;
+}
+
+/* line 247, ../scss/sass/homepage.scss */
+.launch.button {
+  -webkit-transition-property: width, margin;
+  -moz-transition-property: width, margin;
+  -o-transition-property: width, margin;
+  transition-property: width margin;
+  -webkit-transition: 0.3s ease;
+  -moz-transition: 0.3s ease;
+  -o-transition: 0.3s ease;
+  transition: 0.3s ease;
+  position: fixed;
+  top: 63px;
+  z-index: 500;
+  width: 50px;
+  overflow: hidden;
+}
+/* line 257, ../scss/sass/homepage.scss */
+.launch.button span {
+  display: inline;
+  overflow: hidden;
+}
+/* line 262, ../scss/sass/homepage.scss */
+.launch.button .container {
+  width: 155px;
+  margin: auto auto;
+}
+
+/* line 268, ../scss/sass/homepage.scss */
+.launch.button.longer {
+  width: 155px;
+}
