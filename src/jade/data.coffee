@@ -2,9 +2,13 @@ exports = module.exports =
   title: 'Thomas Yang'
   subtitle: 'I turn coffee and sugar into code.'
   description: [
-    'I am Thomas.'
-    'lalala'
-    'balabala'
+    'I am a developer and I love design.'
+    'I am curious and I love challenges.'
+    'I draw on screen.'
+    'I spot values from data.'
+    'I make websites that inform and enchant.'
+    'I build programs to avoid repeated works.'
+    'And I am good at these.'
   ]
   copyright: 'Made with ♥ by ©Thomas Yang'
   social:
