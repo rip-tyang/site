@@ -1,11 +1,12 @@
 Util = require './_util'
 
 class LetterShuffle
-  constructor: (@elem, option = {}) ->
+  constructor: (option = {}) ->
     @step = option.step || 2
     @fps = option.fps || 24
     @delay = option.delay || 0
     @type = option.type || 'lower'
+    @elem = option.targetElem
     @text = @elem.textContent.slice 0
     @letters = Chars[TypeMap[@type]]
     @loopId
@@ -46,7 +47,7 @@ class LetterShuffle
   play: () =>
     return if @loopId
     @currentIndex = 0
-    @currentStep = 8*@step # let the first letter last longer
+    @currentStep = 4*@step # let the first letter last longer
     @loopId = Util.loopFunc 1000/@fps, @tick
 
   endLoop: () =>

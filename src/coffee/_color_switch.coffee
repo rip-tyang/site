@@ -1,13 +1,17 @@
 class ColorSwitch
-  constructor: (@locationObj, @elem) ->
+  constructor: (option = {}) ->
     @mainColor
     @secondaryColor
+    @location = document.location
     @sheet = document.createElement 'style'
     @sheet.id = 'colorSheet'
     @checkHashTag()
     @bindHashTag()
     document.head.appendChild @sheet
-    @elem.addEventListener 'click', @randomColor, false
+    if option.triggerEvent && option.triggerElem
+      option.triggerElem.addEventListener option.triggerEvent,
+        @randomColor,
+        false
 
   # static methods
   red = (color6Digit) ->
@@ -23,7 +27,7 @@ class ColorSwitch
     window.addEventListener 'hashchange', @checkHashTag, false
 
   checkHashTag: () =>
-    urlColor = @locationObj.hash.split('#color=')[1]
+    urlColor = @location.hash.split('#color=')[1]
     if urlColor
       @parseColor urlColor
       @updateSheet()
@@ -43,7 +47,7 @@ class ColorSwitch
       colorString = Array(7 - colorString.length).join('0') + colorString
     @parseColor colorString
     @updateSheet()
-    @locationObj.hash = "#color=#{colorString}"
+    @location.hash = "#color=#{colorString}"
 
   updateSheet: () =>
     @sheet.innerHTML = """
