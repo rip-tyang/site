@@ -16,7 +16,7 @@ class AsideEffectSnow extends AsideEffect
 
   tick: () =>
     @ctx.clearRect 0, 0, @canvas.width, @canvas.height
-    @ctx.fillStyle = 'rgba(255,255,255,0.8)'
+    @ctx.fillStyle = 'rgba(255,255,255,0.5)'
     @ctx.beginPath()
 
     for p in @particles
