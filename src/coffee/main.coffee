@@ -5,7 +5,7 @@ LetterShuffle = require './_letter_shuffle'
 ColorSwitch = require './_color_switch'
 AsideEffectSnow = require './_aside_effect_snow'
 
-domready () ->
+domready ->
   colorSwitch = new ColorSwitch
     triggerEvent: 'click'
     triggerElem: document.getElementById 'logo'

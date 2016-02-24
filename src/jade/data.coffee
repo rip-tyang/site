@@ -41,6 +41,14 @@ exports = module.exports =
       link_class: 'email'
       icon_class: 'fa-paper-plane'
   projects:
+    OhMyDearJS:
+      title: 'Oh My Dear JS'
+      description: '''A visualization for bizarre behaviors in
+      Javascript.
+      '''
+      img: 'oh_my_dear_js'
+      link: '/projects/oh-my-dear-js'
+      year: '2016'
     Contestify:
       title: 'Contestify'
       description: '''An online tournament hosting website.
@@ -57,7 +65,7 @@ exports = module.exports =
       link: 'http://pacegames.herokuapp.com/'
       year: '2016'
     keyboardVis:
-      title: 'KeyboardVis'
+      title: 'Keyboard Vis'
       description: '''A visualization for analyzing key stroke
       intensity of any text file.
       '''
@@ -72,7 +80,7 @@ exports = module.exports =
       link: '/projects/mines'
       year: '2014'
     MigrantVis:
-      title: 'MigrantVis'
+      title: 'Migrant Vis'
       description: '''A visualization tool to present an illegal
       immigrant event made up for IEEE Visual Analytics Science and
       Technology (VAST) Challenge 2008.
@@ -81,7 +89,7 @@ exports = module.exports =
       link: '/projects/vis-3'
       year: '2013'
     AirlineVis:
-      title: 'AirlineVis'
+      title: 'Airline Vis'
       description: '''A visualization tool shows the quantity of
       airline routes between different places.
       '''
