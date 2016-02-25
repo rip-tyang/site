@@ -1,6 +1,7 @@
 webpack = require 'webpack'
 path = require 'path'
 nib = require 'nib'
+stylus = require 'stylus'
 ManifestPlugin = require 'webpack-manifest-plugin'
 banner = 'Copyright 2015 Thomas Yang http://thomas-yang.me/'
 
@@ -27,7 +28,7 @@ module.exports =
       },
       {
         test: /\.styl$/
-        loader: 'style-loader!css-loader!stylus-loader'
+        loader: 'style-loader!css-loader!stylus-loader?resolve url'
       },
       {
         test: /\.(eot|ttf|woff)$/
@@ -37,6 +38,10 @@ module.exports =
 
   stylus:
     use: [nib()]
+    define:
+      url: stylus.url
+        paths: [__dirname + '/src']
+        limit: false
 
   plugins: [
     new ManifestPlugin(),
