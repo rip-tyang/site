@@ -1,24 +1,33 @@
 Util = require './_util'
 
 class AsideEffect
-  constructor: (@canvas) ->
+  constructor: (option = {}) ->
+    @canvas = option.canvas
+    throw Error 'No Canvas Attached' if not @canvas
+
+    @animated = true
     @ctx = @canvas.getContext '2d'
-    @fps = 24
+    @switch = option.switch
     @loopId
 
     window.addEventListener 'resize', @onResize, false
+    @switch.addEventListener 'click', @toggle, false if @switch
 
   tick: () =>
-    @
+    @animated
 
   play: () =>
-    @loopId = Util.loopFunc 1000/@fps, @tick
+    @animated = true
+    @loopId = window.requestInterval
+      elem: @canvas
+      fn: @tick
 
   pause: () =>
-    if @loopId
-      clearInterval @loopId
-      @loopId = null
+    @animated = false
+    @loopId = null
 
+  toggle: () =>
+    if @loopId then @pause() else @play()
   onResize: () =>
     rect = @canvas.getBoundingClientRect()
     @canvas.width = rect.width

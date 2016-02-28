@@ -3,7 +3,6 @@ Util = require './_util'
 class LetterShuffle
   constructor: (option = {}) ->
     @step = option.step || 2
-    @fps = option.fps || 24
     @delay = option.delay || 0
     @type = option.type || 'lower'
     @elem = option.targetElem
@@ -34,7 +33,8 @@ class LetterShuffle
     arr.join ''
 
   tick: () =>
-    @endLoop() if @currentIndex >= @text.length
+    if @currentIndex >= @text.length
+      return @endLoop()
     if @currentStep > 0
       --@currentStep
     else
@@ -43,16 +43,18 @@ class LetterShuffle
 
     @elem.textContent = @text[0...@currentIndex] +
       @randomChar @text.length - @currentIndex
+    true
 
   play: () =>
     return if @loopId
     @currentIndex = 0
     @currentStep = 4*@step # let the first letter last longer
-    @loopId = Util.loopFunc 1000/@fps, @tick
+    @loopId = window.requestInterval
+      fn: @tick
+      elem: @elem
 
   endLoop: () =>
-    if @loopId
-      clearInterval @loopId
-      @loopId = null
+    @loopId = null
+    false
 
 exports = module.exports = LetterShuffle

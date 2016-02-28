@@ -1,7 +1,7 @@
 AsideEffect = require './_aside_effect'
 
 class AsideEffectSnow extends AsideEffect
-  constructor: (@canvas) ->
+  constructor: (option = {}) ->
     super
     @nums = 52
     @angle = 0
@@ -25,12 +25,13 @@ class AsideEffectSnow extends AsideEffect
 
     @ctx.fill()
     @update()
+    @animated
 
   update: () =>
-    @angle += 0.02 * Math.random()
+    @angle += 0.01 * Math.random()
     for p in @particles
-      p.y += Math.cos(@angle+p.d) + 1 + p.r/2
-      p.x += Math.sin(@angle) * 2
+      p.y += Math.cos(@angle+p.d) + 0.5 + p.r/2
+      p.x += Math.sin(@angle)
 
       if p.x > @width + 5 || p.x < -5 || p.y > @height
         if Math.random() > 0.33

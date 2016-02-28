@@ -8,12 +8,14 @@ AsideEffectSnow = require './_aside_effect_snow'
 domready ->
   colorSwitch = new ColorSwitch
     triggerEvent: 'click'
-    triggerElem: document.getElementById 'logo'
+    triggerElem: document.getElementById('logo').children[0]
 
   subtitleShuffle = new LetterShuffle
     targetElem: document.getElementsByTagName('h2')[0]
     triggerEvent: 'click'
-    triggerElem: document.getElementById 'logo'
+    triggerElem: document.getElementById('logo').children[0]
 
-  asideEffect = new AsideEffectSnow document.getElementById 'asideBG'
+  asideEffect = new AsideEffectSnow
+    canvas: document.getElementById 'asideBG'
+    switch: document.getElementById('logo').children[1]
   asideEffect.play()
