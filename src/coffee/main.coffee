@@ -3,7 +3,7 @@ require './_polyfill'
 domready = require 'domready'
 LetterShuffle = require './_letter_shuffle'
 ColorSwitch = require './_color_switch'
-AsideEffectSnow = require './_aside_effect_snow'
+RandomAsideEffect = require './_aside_effect_generator'
 
 domready ->
   colorSwitch = new ColorSwitch
@@ -15,7 +15,7 @@ domready ->
     triggerEvent: 'click'
     triggerElem: document.getElementById('logo').children[0]
 
-  asideEffect = new AsideEffectSnow
+  asideEffect = new RandomAsideEffect
     canvas: document.getElementById 'asideBG'
     switch: document.getElementById('logo').children[1]
   asideEffect.play()

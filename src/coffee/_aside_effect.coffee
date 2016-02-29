@@ -28,6 +28,7 @@ class AsideEffect
 
   toggle: () =>
     if @loopId then @pause() else @play()
+
   onResize: () =>
     rect = @canvas.getBoundingClientRect()
     @canvas.width = rect.width
