@@ -28,39 +28,47 @@ a:hover
   color: inherit
 
 .color
-  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
+  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1), fill 0.4s cubic-bezier(0.4, 0, 0.2, 1)
   color: $main-color
   fill: currentColor
+  will-change: color, fill
 
   &::before,
   &::after
     background-color: currentColor
     transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
+    will-change: background-color
 
 .colorLight
-  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
+  transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1), fill 0.4s cubic-bezier(0.4, 0, 0.2, 1)
   color: $secondary-color
   fill: currentColor
+  will-change: color, fill
 
   &::before,
   &::after
     background-color: currentColor
     transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
+    will-change: background-color
 
 .colorBg
   transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
   background-color: $main-color
+  will-change: background-color
 
 .colorHover
   transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
+  will-change: background-color
 
   &:hover
     color: $main-color
     background-color: white
+    will-change: background-color
 
 .colorScroll
   &::-webkit-scrollbar
     transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1)
+    will-change: background-color
     width: 8px
     background-color: $secondary-color
 
