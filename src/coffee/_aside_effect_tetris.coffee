@@ -72,11 +72,20 @@ class Piece
 class RandomPieceGenerator
   constructor: ->
     @bag = [0...7]
-    @shuffle()
+    @init()
+
+  init: ->
+    Util.shuffle @bag
     @iterator = -1
 
-  shuffle: =>
-    @
+  next: ->
+    ++@iterator
+    @init() if @iterator >= @bag.length
+    Piece.fromIndex @bag[@iterator]
+
+class Grid
+  constructor: (@rowSize, @columnSize) ->
+    
 
 class AsideEffectTetris extends AsideEffect
   constructor: ->
