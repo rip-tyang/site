@@ -6,10 +6,10 @@ class Piece
   constructor: (@cells) ->
     @dimension = @cells.length
     @row = 0
-    @column = 0
+    @column = ~~((10 - @dimension) / 2) #Centralize
 
   @fromIndex: (index) ->
-    piece = switch index
+    switch index
       # 0
       when 0 then new @ [ [1, 1], [1, 1] ]
       # J
@@ -49,13 +49,9 @@ class Piece
         [0, 0, 0, 0]
         [0, 0, 0, 0]
       ]
-    piece.row = 0
-    piece.column = Math.floor((10 - piece.dimension) / 2) #Centralize
-    piece
 
-  clone: () =>
-    cp = Util.cloneArray @cells
-    piece = new Piece cp
+  clone: =>
+    piece = new Piece Util.cloneArray(@cells)
     piece.row = @row
     piece.column = @column
     piece
@@ -76,16 +72,43 @@ class RandomPieceGenerator
 
   init: ->
     Util.shuffle @bag
-    @iterator = -1
+    @iterator = 0
+    @
 
   next: ->
-    ++@iterator
-    @init() if @iterator >= @bag.length
-    Piece.fromIndex @bag[@iterator]
+    @init() if @iterator is @bag.length-1
+    Piece.fromIndex @bag[@iterator++]
 
 class Grid
-  constructor: (@rowSize, @columnSize) ->
-    
+  constructor: (@rowSize, @colSize, _cells) ->
+    @cells = Util.arr @rowSize, @colSize,
+      (if _cells? then (i, j) -> _cells[i][j] else 0)
+
+  clone: =>
+    new Grid @rowSize, @colSize, @cells
+
+  isLine: (row) =>
+    for i in [0...@colSize]
+      return false if @cells[row][i] is 0
+    return true
+
+  isEmptyRow: (row) =>
+    for i in [0...@colSize]
+      return false if @cells[row][i] is 1
+    return true
+
+  clearLines: =>
+    dis = 0
+    for i in [@rowSize-1..0]
+      if @isLine(i)
+        ++dis
+        for j in [0...@colSize]
+          @cell[i][j] = 0
+      else if dis > 0
+        for j in [0...@colSize]
+          @cells[i+dis][j] = @cell[i][j]
+          @cell[i][j] = 0
+    distance
 
 class AsideEffectTetris extends AsideEffect
   constructor: ->
@@ -100,5 +123,5 @@ class AsideEffectTetris extends AsideEffect
     @width = @canvas.width
     @height = @canvas.height
 
-
+new Grid(3, 2)
 exports = module.exports = AsideEffectTetris

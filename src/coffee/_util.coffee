@@ -2,8 +2,33 @@ class Util
   @loopFunc: (delay, func) ->
     setInterval func, delay
 
-  @arrayFilledWith: (size, func) ->
-    Array.apply(null, Array(size)).map func
+  # construct multidimensional array with value or function
+  # @para (size1, size2, size3, ..., value/func)
+  # @func (index1, index2, index3, ...) -> value
+  # example:
+  # Util.arr() -> []
+  # Util.arr(2) -> [0, 0]
+  # Util.arr(2, 3) -> [3, 3]
+  # Util.arr(2, 3, 0) -> [[0,0,0],[0,0,0]]
+  # Util.arr(2, 3, function (a, b) { return a + b; }) -> [[0,1,2], [1,2,3]]
+  @arr: (size, other..., v) ->
+    # arr() -> []
+    return [] unless size?
+
+    # arr(2) -> [0, 0]
+    return Array.apply(null, Array(size)).map(() -> 0) unless v?
+
+    # if last value is not a function, wrap it up
+    _func = if typeof v isnt 'function' then () -> v else v
+
+    array = (size, other..., v) ->
+      return size() if arguments.length is 1
+      return Array.apply(null, Array(size)).map (e, i) ->
+        array.apply @, other.concat(v.bind(@, i))
+
+    other.unshift size
+    other.push _func
+    array.apply @, other
 
   # Fisher-Yates (aka Knuth) Shuffle
   @shuffle: (array) ->

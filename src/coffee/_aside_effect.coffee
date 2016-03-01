@@ -13,23 +13,23 @@ class AsideEffect
     window.addEventListener 'resize', @onResize, false
     @switch.addEventListener 'click', @toggle, false if @switch?
 
-  tick: () =>
+  tick: =>
     @animated
 
-  play: () =>
+  play: =>
     @animated = true
     @loopId = window.requestInterval
       elem: @canvas
       fn: @tick
 
-  pause: () =>
+  pause: =>
     @animated = false
     @loopId = null
 
-  toggle: () =>
+  toggle: =>
     if @loopId then @pause() else @play()
 
-  onResize: () =>
+  onResize: =>
     rect = @canvas.getBoundingClientRect()
     @canvas.width = rect.width
     @canvas.height = rect.height
