@@ -4,6 +4,22 @@ aside
   width: 30%
   float: left
 
+#corner
+  position: absolute
+  cursor: pointer
+  width: 40px
+  height: 40px
+  top: 0
+  left: 0
+
+  & > svg
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)
+    transform: translate(-32px, -32px)
+
+  &:hover > svg
+    transform: translate(0px, 0px)
+
+
 #asideContainer
   position: absolute
   width: 230px
