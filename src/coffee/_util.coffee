@@ -16,7 +16,7 @@ class Util
     return [] unless size?
 
     # arr(2) -> [0, 0]
-    return Array.apply(null, Array(size)).map(() -> 0) unless v?
+    return Array.apply(null, Array(size)).map(() -> 0) if arguments.size is 1
 
     # if last value is not a function, wrap it up
     _func = if typeof v isnt 'function' then () -> v else v
@@ -43,16 +43,14 @@ class Util
       [array[randomIndex], array[currentIndex]]
     array
 
-  @cloneArray: (arr) ->
+  @cloneArray: (arr) =>
     if Array.isArray arr
       _arr = arr.slice 0
-      for i in [0..._arr.length]
-        _arr[i] = @cloneArray _arr[i]
-      _arr
+      return _arr = _arr.map @cloneArray
     else if typeof arr is 'object'
       throw Error 'Cannot clone nested array with object'
     else
-      arr
+      return arr
 
   # rotate a square 2d array in clockwise direction
   @isSquareArray: (arr) ->
