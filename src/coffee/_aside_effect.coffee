@@ -3,7 +3,7 @@ Util = require './_util'
 class AsideEffect
   constructor: (option = {}) ->
     @canvas = option.canvas
-    throw Error 'No Canvas Attached' if not @canvas
+    throw Error 'No Canvas Attached' unless @canvas?
 
     @animated = true
     @ctx = @canvas.getContext '2d'
@@ -11,7 +11,7 @@ class AsideEffect
     @loopId
 
     window.addEventListener 'resize', @onResize, false
-    @switch.addEventListener 'click', @toggle, false if @switch
+    @switch.addEventListener 'click', @toggle, false if @switch?
 
   tick: () =>
     @animated

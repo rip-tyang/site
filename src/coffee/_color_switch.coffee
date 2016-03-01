@@ -1,17 +1,14 @@
 class ColorSwitch
   constructor: (option = {}) ->
-    @mainColor
-    @secondaryColor
     @location = document.location
     @sheet = document.createElement 'style'
     @sheet.id = 'colorSheet'
+    @mainColor
+    @secondaryColor
+
     @checkHashTag()
     @bindHashTag()
-    document.head.appendChild @sheet
-    if option.triggerEvent && option.triggerElem
-      option.triggerElem.addEventListener option.triggerEvent,
-        @randomColor,
-        false
+    @bindSwitch option
 
   # static methods
   red = (color6Digit) ->
@@ -23,25 +20,32 @@ class ColorSwitch
   blue = (color6Digit) ->
     return parseInt(color6Digit[4...6], 16)
 
-  bindHashTag: () =>
+  bindSwitch: (option) =>
+    document.head.appendChild @sheet
+    if option.triggerEvent? && option.triggerElem?
+      option.triggerElem.addEventListener option.triggerEvent,
+        @randomColor,
+        false
+
+  bindHashTag: =>
     window.addEventListener 'hashchange', @checkHashTag, false
 
-  checkHashTag: () =>
+  checkHashTag: =>
     urlColor = @location.hash.split('#color=')[1]
-    if urlColor
+    if urlColor?
       @parseColor urlColor
       @updateSheet()
 
   parseColor: (color) =>
-    if color and color.length
+    if color? and color.length?
       wColor = color
       if wColor.length is 3
-        wcolor = wColor.split('').map((e) -> e+e).join('')
+        wColor = wColor.split('').map((e) -> e+e).join('')
       @mainColor = "##{wColor}"
       @secondaryColor =
         "rgba(#{red(wColor)},#{green(wColor)},#{blue(wColor)},0.8)"
 
-  randomColor: () =>
+  randomColor: =>
     colorString = (~~(Math.random()*0xFFFFFF)).toString(16)
     if colorString.length < 6
       colorString = Array(7 - colorString.length).join('0') + colorString
@@ -49,7 +53,7 @@ class ColorSwitch
     @updateSheet()
     @location.hash = "#color=#{colorString}"
 
-  updateSheet: () =>
+  updateSheet: =>
     @sheet.innerHTML = """
       *::selection {
         color: #{@mainColor} !important;

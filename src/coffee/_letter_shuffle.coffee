@@ -27,12 +27,12 @@ class LetterShuffle
 
   randomChar: (len = 1) =>
     return '' if len <= 0
-    arr = Array.apply(null, Array(len))
+    arr = Array.apply null, Array(len)
     arr = arr.map (e) =>
       @letters[~~(Math.random()*@letters.length)]
     arr.join ''
 
-  tick: () =>
+  tick: =>
     if @currentIndex >= @text.length
       return @endLoop()
     if @currentStep > 0
@@ -45,7 +45,7 @@ class LetterShuffle
       @randomChar @text.length - @currentIndex
     true
 
-  play: () =>
+  play: =>
     return if @loopId
     @currentIndex = 0
     @currentStep = 4*@step # let the first letter last longer
@@ -53,7 +53,7 @@ class LetterShuffle
       fn: @tick
       elem: @elem
 
-  endLoop: () =>
+  endLoop: =>
     @loopId = null
     false
 

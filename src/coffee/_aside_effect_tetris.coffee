@@ -69,9 +69,17 @@ class Piece
       else throw Error "Invalid rotate parameter: #{type}"
     @
 
+class RandomPieceGenerator
+  constructor: ->
+    @bag = [0...7]
+    @shuffle()
+    @iterator = -1
+
+  shuffle: =>
+    @
 
 class AsideEffectTetris extends AsideEffect
-  constructor: () ->
+  constructor: ->
     super
     @cellSize
     @width
