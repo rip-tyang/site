@@ -2,6 +2,9 @@ class Util
   @loopFunc: (delay, func) ->
     setInterval func, delay
 
+  @arrayFilledWith: (size, func) ->
+    Array.apply(null, Array(size)).map func
+
   # Fisher-Yates (aka Knuth) Shuffle
   @shuffle: (array) ->
     currentIndex = array.length
