@@ -7,11 +7,18 @@ class AsideEffect
 
     @animated = true
     @ctx = @canvas.getContext '2d'
-    @switch = option.switch
+
+    # switch effect mod
+    @switchElem = option.switch
+
+    # play and pause
+    @toggleElem = option.toggle
+
     @loopId
 
     window.addEventListener 'resize', @onResize, false
-    @switch.addEventListener 'click', @toggle, false if @switch?
+    @switchElem.addEventListener 'click', @switch, false if @switchElem?
+    @toggleElem.addEventListener 'click', @toggle, false if @toggleElem?
 
   tick: =>
     @animated
@@ -26,6 +33,9 @@ class AsideEffect
     @animated = false
     @loopId = null
 
+  switch: =>
+    @
+    
   toggle: =>
     if @loopId then @pause() else @play()
 
