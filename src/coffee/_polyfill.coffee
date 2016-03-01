@@ -5,7 +5,7 @@ func = {}
 
 # requestAnimationFrame() shim by Paul Irish
 # http://paulirish.com/2011/requestanimationframe-for-smart-animating/
-func.requestAnimationFrameForIE8 = () ->
+func.requestAnimationFrameForIE8 = ->
   window.requestAnimationFrame = do ->
     window.requestAnimationFrame       ||
     window.webkitRequestAnimationFrame ||
@@ -15,7 +15,7 @@ func.requestAnimationFrameForIE8 = () ->
     (callback, elem) ->
       window.setTimeout(callback, 1000 / 60)
 
-func.textContentForIE8 = () ->
+func.textContentForIE8 = ->
   if Object.defineProperty and
   Object.getOwnPropertyDescriptor and
   Object.getOwnPropertyDescriptor(Element.prototype, 'textContent') and
@@ -24,12 +24,12 @@ func.textContentForIE8 = () ->
       innerText = Object.getOwnPropertyDescriptor Element.prototype,
         'innerText'
       Object.defineProperty Element.prototype, 'textContent',
-        get: () ->
-          return innerText.get.call(@)
+        get: ->
+          innerText.get.call @
         set: (s) ->
-          return innerText.set.call(@, s)
+          innerText.set.call @, s
 
-func.eventListenerForIE8 = () ->
+func.eventListenerForIE8 = ->
   return if window.addEventListener
   do (
     WindowPrototype = Window.prototype,
@@ -48,7 +48,7 @@ func.eventListenerForIE8 = () ->
           event.preventDefault = -> event.returnValue = false
           event.stopPropagation = -> event.cancelBubble = true
           event.target = event.srcElement || target
-          listener.call(target, event)
+          listener.call target, event
 
         registry.unshift [target, type, listener,eventFunc]
 
@@ -68,7 +68,7 @@ func.eventListenerForIE8 = () ->
         ElementPrototype[dispatchEvent] = (eventObject) ->
           this.fireEvent 'on' + eventObject.type, eventObject
 
-func.betterAnimation = () ->
+func.betterAnimation = ->
 
   # Behaves the same as setInterval except uses requestAnimationFrame()
   # where possible for better performance
@@ -78,11 +78,11 @@ func.betterAnimation = () ->
   window.requestInterval = (option) ->
     delay = option.delay
     fn = option.fn
-    elem = option.elem || document
+    elem = option.elem ? document
     handle = {}
 
     if not delay
-      loopFunc = () ->
+      loopFunc = ->
         res = fn.call()
         handle.value = window.requestAnimationFrame loopFunc, elem if res
       handle.value = window.requestAnimationFrame loopFunc, elem
@@ -93,10 +93,10 @@ func.betterAnimation = () ->
           window.mozCancelRequestAnimationFrame) &&
         !window.oRequestAnimationFrame           &&
         !window.msRequestAnimationFrame
-          return window.setInterval(fn, delay)
+          return window.setInterval fn, delay
 
       start = new Date().getTime()
-      loopFunc = () ->
+      loopFunc = ->
         current = new Date().getTime()
         delta = current - start
 
