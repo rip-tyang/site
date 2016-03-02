@@ -319,9 +319,12 @@ class AsideEffectTetris extends AsideEffect
     @aiActive = true
     @currentPieces = [@rpg.next(), @rpg.next()]
     @currP = if @aiActive then @aiMove() else @currentPieces[0]
-    @alive = true
     @score = 0
-    @animated = true
+    @reset()
+
+  reset: =>
+    @alive = true
+    @
 
   tick: =>
     @gravity()
@@ -339,7 +342,6 @@ class AsideEffectTetris extends AsideEffect
             @cellSize)
 
     @grid.removePiece @currP
-    @animated
 
   pause: =>
     super
@@ -374,9 +376,11 @@ class AsideEffectTetris extends AsideEffect
     super
     @width = @canvas.width
     @height = @canvas.height
-    @cellSize = if @width * 2 > @height then @height / 22 else @width / 11
+    if @width * 2 > @height
+      @cellSize = ((@height-@gap) / 20) - @gap
+    else
+      @cellSize = ((@width-@gap) / 10) - @gap
     @origin.x = (@width - @cellSize * 10 - @gap * 11) / 2
     @origin.y = @height - @cellSize * 20 - @gap * 21
 
-new Grid(3, 2)
 exports = module.exports = AsideEffectTetris

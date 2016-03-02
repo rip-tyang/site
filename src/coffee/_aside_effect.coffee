@@ -5,7 +5,6 @@ class AsideEffect
     @canvas = option.canvas
     throw Error 'No Canvas Attached' unless @canvas?
 
-    @animated = true
     @ctx = @canvas.getContext '2d'
 
     # switch effect mod
@@ -14,6 +13,7 @@ class AsideEffect
     # play and pause
     @toggleElem = option.toggle
 
+    @delay
     @loopId
 
     window.addEventListener 'resize', @onResize, false
@@ -21,17 +21,21 @@ class AsideEffect
     @toggleElem.addEventListener 'click', @toggle, false if @toggleElem?
 
   tick: =>
-    @animated
+    @
 
   play: =>
-    @animated = true
     @loopId = window.requestInterval
+      delay: @delay
       elem: @canvas
       fn: @tick
 
+  reset: =>
+    @
+
   pause: =>
-    @animated = false
+    @loopId = window.clearRequestInterval @loopId
     @loopId = null
+    @
 
   switch: =>
     @

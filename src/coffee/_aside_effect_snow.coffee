@@ -27,7 +27,6 @@ class AsideEffectSnow extends AsideEffect
 
     @ctx.fill()
     @update()
-    @animated
 
   switch: =>
     @mod = -@mod

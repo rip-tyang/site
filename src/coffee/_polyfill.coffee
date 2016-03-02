@@ -83,8 +83,8 @@ func.betterAnimation = ->
 
     if not delay
       loopFunc = ->
-        res = fn.call()
-        handle.value = window.requestAnimationFrame loopFunc, elem if res
+        fn.call()
+        handle.value = window.requestAnimationFrame loopFunc, elem
       handle.value = window.requestAnimationFrame loopFunc, elem
     else
       if !window.requestAnimationFrame           &&
@@ -101,11 +101,9 @@ func.betterAnimation = ->
         delta = current - start
 
         if delta >= delay
-          res = fn.call()
+          fn.call()
           start = new Date().getTime()
-          handle.value = window.requestAnimationFrame loopFunc,elem if res
-        else
-          handle.value = window.requestAnimationFrame loopFunc,elem
+        handle.value = window.requestAnimationFrame loopFunc,elem
 
       handle.value = window.requestAnimationFrame loopFunc,elem
     handle
@@ -115,22 +113,21 @@ func.betterAnimation = ->
   # possible for better performance
   # @param {int|object} fn The callback function
   # modified so it fits more in CoffeeScrit
-  # window.clearRequestInterval = (handle) ->
-  #   console.log 'clearing'
-  #   if window.cancelAnimationFrame
-  #     window.cancelAnimationFrame handle.value
-  #   else if window.webkitCancelAnimationFrame
-  #     window.webkitCancelAnimationFrame handle.value
-  #   else if window.webkitCancelRequestAnimationFrame
-  #     # Support for legacy API
-  #     window.webkitCancelRequestAnimationFrame handle.value
-  #   else if window.mozCancelRequestAnimationFrame
-  #     window.mozCancelRequestAnimationFrame handle.value
-  #   else if window.oCancelRequestAnimationFrame
-  #     window.oCancelRequestAnimationFrame handle.value
-  #   else if window.msCancelRequestAnimationFrame
-  #     window.msCancelRequestAnimationFrame handle.value
-  #   else clearInterval handle
+  window.clearRequestInterval = (handle) ->
+    if window.cancelAnimationFrame
+      window.cancelAnimationFrame handle.value
+    else if window.webkitCancelAnimationFrame
+      window.webkitCancelAnimationFrame handle.value
+    else if window.webkitCancelRequestAnimationFrame
+      # Support for legacy API
+      window.webkitCancelRequestAnimationFrame handle.value
+    else if window.mozCancelRequestAnimationFrame
+      window.mozCancelRequestAnimationFrame handle.value
+    else if window.oCancelRequestAnimationFrame
+      window.oCancelRequestAnimationFrame handle.value
+    else if window.msCancelRequestAnimationFrame
+      window.msCancelRequestAnimationFrame handle.value
+    else clearInterval handle
 
   # Behaves the same as setTimeout
   # except uses requestAnimationFrame()
