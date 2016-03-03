@@ -44,9 +44,9 @@ module.exports =
         limit: false
 
   plugins: [
-    new ManifestPlugin(),
-    new webpack.BannerPlugin(banner),
+    new ManifestPlugin()
+    new webpack.BannerPlugin(banner)
     new webpack.optimize.UglifyJsPlugin
-      compress: true
       mangle: true
+      compress: true
   ]

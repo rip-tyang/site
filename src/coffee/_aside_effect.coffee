@@ -16,9 +16,19 @@ class AsideEffect
     @delay
     @loopId
 
+    @bindListener()
+
     window.addEventListener 'resize', @onResize, false
+
+  bindListener: =>
     @switchElem.addEventListener 'click', @switch, false if @switchElem?
     @toggleElem.addEventListener 'click', @toggle, false if @toggleElem?
+    @
+
+  removeListener: =>
+    @switchElem.removeEventListener 'click', @switch, false if @switchElem?
+    @toggleElem.removeEventListener 'click', @toggle, false if @toggleElem?
+    @
 
   tick: =>
     @
@@ -28,11 +38,13 @@ class AsideEffect
       delay: @delay
       elem: @canvas
       fn: @tick
+    @
 
   reset: =>
     @
 
   pause: =>
+    return @ unless @loopId
     @loopId = window.clearRequestInterval @loopId
     @loopId = null
     @

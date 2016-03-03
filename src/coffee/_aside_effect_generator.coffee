@@ -11,7 +11,7 @@ class AsideEffectGenerator
       AsideEffectGameOfLife
     ]
     @idx = ~~(Math.random()*@effects.length)
-    @instance = Util.arr @effects.length, null
+    @instance = Array @effects.length
     @option = option
     @nextTrigger = option.nextTrigger
     @nextTrigger.addEventListener 'click', @next, false if @nextTrigger?
@@ -19,11 +19,11 @@ class AsideEffectGenerator
     @next()
 
   next: =>
-    @curr.pause() if @curr?
+    @curr.pause().removeListener() if @curr?
     @idx = 0 if @idx is @effects.length
     @curr = @instance[@idx]
     @curr = @instance[@idx] = new @effects[@idx](@option) unless @curr?
-    @curr.reset().play()
+    @curr.reset().bindListener().play()
     ++@idx
 
 

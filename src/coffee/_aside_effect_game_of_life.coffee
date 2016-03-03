@@ -109,7 +109,7 @@ class AsideEffectGameOfLife extends AsideEffect
     @onResize()
 
   switch: =>
-    @pause()
+    @toggle()
 
   tick: =>
     @g.update()

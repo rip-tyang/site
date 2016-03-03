@@ -76,7 +76,6 @@ class Piece
 class RandomPieceGenerator
   constructor: ->
     @bag = [0...7]
-    @iterator = 0
     @init()
 
   init: ->
@@ -85,7 +84,7 @@ class RandomPieceGenerator
     @
 
   next: ->
-    @init() if @iterator is @bag.length-1
+    @init() if @iterator is @bag.length
     Piece.fromIndex @bag[@iterator++]
 
 class Grid
@@ -123,55 +122,36 @@ class Grid
   overflowed: =>
     !@isEmptyRow(0) || !@isEmptyRow(1)
 
-  height: =>
-    for i in [0...@rowSize]
-      return @rowSize - i unless @isEmptyRow i
-    return 0
+  calcFeatures: =>
+    rowCount = Util.arr @rowSize, 0
+    colHeight = Array @colSize
+    bumpiness = 0
+    holes = 0
+    lines = 0
 
-  lines: =>
-    res = 0
-    for i in [0...@rowSize]
-      ++res if @isLine i
-    res
-
-  holes: =>
-    res = 0
-    for i in [0...@colSize]
+    for j in [0...@colSize]
       block = false
-      for j in [0...@rowSize]
+      for i in [0...@rowSize]
         if @cells[i][j] is 1
           block = true
+          ++rowCount[i]
+          colHeight[j] = @rowSize - i unless colHeight[j]
         else if block
-          ++res
-    res
+          ++holes
 
-  # blockades: =>
-  #   res = 0
-  #   for i in [0...@colSize]
-  #     hole = false
-  #     for j in [@rowSize-1..0]
-  #       if @cells[i][j] is 1
-  #         hole = true
-  #       else if hole
-  #         ++res
-  #   res
-
-  columnHeight: (col) =>
-    for i in [0...@rowSize]
-      return @rowSize - i unless @cells[i][col] is 0
-    return 0
-
-  aggregateHeight: =>
-    res = 0
     for i in [0...@colSize]
-      res += @columnHeight i
-    res
+      colHeight[i] = 0 unless colHeight[i]
 
-  bumpiness: =>
-    res = 0
+    for i in [0...@rowSize]
+      ++lines if rowCount[i] is @colSize
+
     for i in [0...@colSize-1]
-      res += Math.abs(@columnHeight(i) - @columnHeight(i+1))
-    res
+      bumpiness += Math.abs(colHeight[i] - colHeight[i+1])
+
+    cumulatedHeight = colHeight.reduce (p, c) -> p + c
+
+    [cumulatedHeight, lines, holes, bumpiness]
+
 
   addPiece: (p) =>
     for i in [0...p.dimension]
@@ -270,8 +250,8 @@ class AI
 
   # arrP, possible piece
   best: (grid, currP) =>
-    best = null
-    highestScore = Math.max()
+    bestPiece = null
+    highestScore = -Infinity
     originalP = currP.clone()
 
     for rotation in [0...4]
@@ -285,21 +265,19 @@ class AI
 
         grid.addPiece _tp
 
-        score = [ grid.aggregateHeight()
-          grid.lines()
-          grid.holes()
-          grid.bumpiness()]
-        score = score.map (e, i) => e*@weights[i]
-        score = score.reduce (p, c) -> p + c
+        score = grid.calcFeatures().reduce((p, c, i) =>
+          p + c*@weights[i]
+        , 0)
         grid.removePiece _tp
 
         if score > highestScore
-          best = _p.clone()
+          bestPiece = _p.clone()
           highestScore = score
+
 
         ++_p.column
 
-    return {piece: best, score: highestScore }
+    return {piece: bestPiece, score: highestScore }
 
 class AsideEffectTetris extends AsideEffect
   constructor: (option = {})->
@@ -318,12 +296,29 @@ class AsideEffectTetris extends AsideEffect
     @ai = new AI [-0.51006, 0.760666, -0.35663, -0.184483]
     @aiActive = true
     @currentPieces = [@rpg.next(), @rpg.next()]
-    @currP = if @aiActive then @aiMove() else @currentPieces[0]
+    @currentIdx = 0
+    @currP = if @aiActive then @aiMove() else @currentPieces[@currentIdx]
     @score = 0
+    @alive = true
     @reset()
 
   reset: =>
-    @alive = true
+    unless @alive
+      @alive = true
+      @grid = new Grid 22, 10
+      @aiActive = true
+      @currentPieces = [@rpg.next(), @rpg.next()]
+      @currentIdx = 0
+      @currP = if @aiActive then @aiMove() else @currentPieces[@currentIdx]
+      @score = 0
+    @
+
+  play: =>
+    @loopId = window.requestInterval
+      delay: @delay
+      elem: @canvas
+      fn: () =>
+        @tick() if @alive
     @
 
   tick: =>
@@ -343,10 +338,6 @@ class AsideEffectTetris extends AsideEffect
 
     @grid.removePiece @currP
 
-  pause: =>
-    super
-    @alive = false
-
   switch: =>
     @aiActive = !@aiActive
 
@@ -355,21 +346,25 @@ class AsideEffectTetris extends AsideEffect
       ++@currP.row
     else
       @setCurrP()
+    @
 
   setCurrP: =>
     @grid.addPiece @currP
     @score += @grid.clearLines()
-    @pause() if @grid.overflowed()
+    if @grid.overflowed()
+      @alive = false
+      return
 
-    @currentPieces.shift()
-    @currentPieces.push @rpg.next()
-    @currP = if @aiActive then @aiMove() else @currentPieces[0]
+    @currentPieces[@currentIdx] = @rpg.next()
+    @currP = if @aiActive then @aiMove() else @currentPieces[@currentIdx]
 
   aiMove: =>
-    res = {best: null, score: Math.max()}
-    for piece in @currentPieces
-      tmp  = @ai.best @grid, piece
-      res = tmp if tmp.score > res.score
+    res = {piece: null, score: -Infinity}
+    @currentPieces.forEach (p, i) =>
+      tmp  = @ai.best @grid, p
+      if tmp.score > res.score
+        res = tmp
+        @currentIdx = i
     res.piece
 
   onResize: () =>
