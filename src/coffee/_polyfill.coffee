@@ -83,8 +83,9 @@ func.betterAnimation = ->
 
     if not delay
       loopFunc = ->
-        fn.call()
+        # request first so fn could use handle to cancel next animation
         handle.value = window.requestAnimationFrame loopFunc, elem
+        fn.call()
       handle.value = window.requestAnimationFrame loopFunc, elem
     else
       if !window.requestAnimationFrame           &&
@@ -97,13 +98,13 @@ func.betterAnimation = ->
 
       start = new Date().getTime()
       loopFunc = ->
+        # request first so fn could use handle to cancel next animation
+        handle.value = window.requestAnimationFrame loopFunc,elem
         current = new Date().getTime()
         delta = current - start
-
         if delta >= delay
           fn.call()
           start = new Date().getTime()
-        handle.value = window.requestAnimationFrame loopFunc,elem
 
       handle.value = window.requestAnimationFrame loopFunc,elem
     handle

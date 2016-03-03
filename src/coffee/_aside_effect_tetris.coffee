@@ -317,13 +317,12 @@ class AsideEffectTetris extends AsideEffect
     @loopId = window.requestInterval
       delay: @delay
       elem: @canvas
-      fn: () =>
-        @tick() if @alive
+      fn: @tick
     @
 
   tick: =>
     @gravity()
-    return unless @alive
+    return @pause() unless @alive
     @grid.addPiece @currP
     @ctx.clearRect 0, 0, @canvas.width, @canvas.height
     @ctx.fillStyle = 'rgba(255,255,255,0.5)'

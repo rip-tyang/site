@@ -43,7 +43,6 @@ class LetterShuffle
 
     @elem.textContent = @text[0...@currentIndex] +
       @randomChar @text.length - @currentIndex
-    true
 
   play: =>
     return if @loopId
@@ -54,7 +53,7 @@ class LetterShuffle
       elem: @elem
 
   endLoop: =>
+    window.clearRequestInterval @loopId
     @loopId = null
-    false
 
 exports = module.exports = LetterShuffle
