@@ -47,6 +47,7 @@ module.exports =
     new ManifestPlugin()
     new webpack.BannerPlugin(banner)
     new webpack.optimize.UglifyJsPlugin
-      mangle: true
+      sourceMap: false
       compress: true
+      mangle: true
   ]

@@ -25,4 +25,5 @@ domready ->
     switch: document.getElementById('logo').children[0]
     nextTrigger: document.getElementById('logo').children[1]
     hash:hashtagManager
+
 new Banner
