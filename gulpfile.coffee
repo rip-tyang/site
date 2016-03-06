@@ -68,8 +68,8 @@ gulp.task 'server', () ->
 
   # reload browser when changes detected
   wds.app.get '/reload', (req, res) ->
-    wds.io.sockets.emit('ok')
-    res.sendStatus(200)
+    wds.sockWrite wds.sockets, 'ok'
+    res.sendStatus 200
   wds.listen 5000, 'localhost', (err) ->
     throw new $.util.PluginError('webpack-dev-server', err) if err
 

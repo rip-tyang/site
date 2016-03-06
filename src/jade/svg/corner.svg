@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="40px" height="40px" viewBox="0 0 600 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+<svg width="80px" height="80px" viewBox="0 0 1200 1200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
     <!-- Generator: Sketch 3.2.2 (9983) - http://www.bohemiancoding.com/sketch -->
     <title>corner</title>
     <desc>Created with Sketch.</desc>
     <defs>
-        <linearGradient x1="12.779882%" y1="12.7549123%" x2="49.4781329%" y2="49.4778101%" id="linearGradient-1">
+        <linearGradient x1="12.7965376%" y1="12.7549123%" x2="49.4783664%" y2="49.4778101%" id="linearGradient-1">
             <stop stop-color="#EAEAEA" offset="0%"></stop>
             <stop stop-color="#FAFAFA" offset="23.86%"></stop>
             <stop stop-color="#FFFFFF" offset="30.22%"></stop>
@@ -12,20 +12,17 @@
             <stop stop-color="#E1E1E1" offset="89.2%"></stop>
             <stop stop-color="#CCCCCC" offset="100%"></stop>
         </linearGradient>
-        <linearGradient x1="64.4566242%" y1="64.4564933%" x2="49.5039333%" y2="49.5038167%" id="linearGradient-2">
-            <stop stop-color="#FFFFFF" stop-opacity="0" offset="0%"></stop>
-            <stop stop-color="#E4E4E4" offset="60.99%"></stop>
-            <stop stop-color="#D1D1D1" offset="100%"></stop>
-        </linearGradient>
     </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="corner" sketch:type="MSLayerGroup">
+        <g id="corner" sketch:type="MSLayerGroup" transform="translate(0.000000, -1.000000)">
             <g id="Page-1" sketch:type="MSShapeGroup">
-                <g id="corner" transform="translate(300.000000, 300.000000) scale(-1, -1) translate(-300.000000, -300.000000) ">
-                    <rect id="Rectangle-1" stroke="#979797" fill="#FFFFFF" x="0" y="0" width="600" height="600"></rect>
-                    <path d="M523.7,159.12 L161.72,521.019 C162.88,519.83 164.02,518.629 165.15,517.4 C212.1,466.73 206.6,341.67 206.6,206.6 C347.41,206.6 473.63,208.86 523.7,159.12 C580.3,102.88 594.2,34.81 600,0 L0,0 L0,600 L147.5,600 L0,599.999 C33.971,594.339 99.621,580.96 155.03,527.71 L523.7,159.12 Z" id="bg" fill="currentColor"></path>
-                    <path d="M523.7,159.12 L161.72,521.019 C162.88,519.83 164.02,518.629 165.15,517.4 C212.1,466.73 206.6,341.67 206.6,206.6 C347.41,206.6 473.63,208.86 523.7,159.12 L523.7,159.12 L523.7,159.12 Z" id="highlight" fill="url(#linearGradient-1)"></path>
-                    <path d="M147.5,600 C199.68,600 600,231.157 600,159.12 L600,0 C594.2,34.81 580.3,102.88 523.7,159.12 L155.28,527.46 L155.03,527.71 C99.621,580.96 33.971,594.339 0,599.999 L147.5,600 L147.5,600 Z" id="shade" fill="url(#linearGradient-2)"></path>
+                <g id="corner">
+                    <g id="Page-1">
+                        <g id="corner" transform="translate(600.000000, 600.500000) scale(-1, -1) translate(-600.000000, -600.500000) ">
+                            <path d="M761.72,1121.019 C762.88,1119.83 764.02,1118.629 765.15,1117.4 C812.1,1066.73 806.6,941.67 806.6,806.6 C947.41,806.6 1073.63,808.86 1123.7,759.12 C1180.3,702.88 1194.2,634.81 1200,600 L1200,7.8736835 L0,0 L0,1200 L600,1200 L747.5,1200 L600,1199.999 C633.971,1194.339 699.621,1180.96 755.03,1127.71 L1123.7,759.12 L761.72,1121.019 Z" id="bg" fill="currentcolor"></path>
+                            <path d="M761.72,1121.019 C762.88,1119.83 764.02,1118.629 765.15,1117.4 C812.1,1066.73 806.6,941.67 806.6,806.6 C947.41,806.6 1073.63,808.86 1123.7,759.12 L761.72,1121.019 Z" id="highlight" fill="url(#linearGradient-1)"></path>
+                        </g>
+                    </g>
                 </g>
             </g>
         </g>

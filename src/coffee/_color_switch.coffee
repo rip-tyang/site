@@ -5,9 +5,10 @@ class ColorSwitch
     @sheet.id = 'colorSheet'
     @mainColor
     @secondaryColor
-
-    @checkHashTag()
-    @bindHashTag()
+    @hashtagManager = option.hash
+    throw Error 'No hashtag manager' unless @hashtagManager?
+    @hashtagManager.onHashChange @checkHashTag
+    @checkHashTag @hashtagManager.obj
     @bindSwitch option
 
   # static methods
@@ -27,13 +28,9 @@ class ColorSwitch
         @randomColor,
         false
 
-  bindHashTag: =>
-    window.addEventListener 'hashchange', @checkHashTag, false
-
-  checkHashTag: =>
-    urlColor = @location.hash.split('#color=')[1]
-    if urlColor?
-      @parseColor urlColor
+  checkHashTag: (hashObj)=>
+    if hashObj.color?
+      @parseColor hashObj.color
       @updateSheet()
 
   parseColor: (color) =>
@@ -49,9 +46,7 @@ class ColorSwitch
     colorString = (~~(Math.random()*0xFFFFFF)).toString(16)
     if colorString.length < 6
       colorString = Array(7 - colorString.length).join('0') + colorString
-    @parseColor colorString
-    @updateSheet()
-    @location.hash = "#color=#{colorString}"
+    @hashtagManager.setHash 'color', "#{colorString}"
 
   updateSheet: =>
     @sheet.innerHTML = """

@@ -280,6 +280,7 @@ class AI
     return {piece: bestPiece, score: highestScore }
 
 class AsideEffectTetris extends AsideEffect
+  @name: 'tetris'
   constructor: (option = {})->
     super
     @width = @canvas.width

@@ -93,6 +93,7 @@ class GameOfLifeBoard
     @
 
 class AsideEffectGameOfLife extends AsideEffect
+  @name: 'game-of-life'
   constructor: (options = {}) ->
     super
     @gap = 2

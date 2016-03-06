@@ -2,6 +2,7 @@ Util = require './_util'
 AsideEffect = require './_aside_effect'
 
 class AsideEffectSnow extends AsideEffect
+  @name: 'snow'
   constructor: (option = {}) ->
     super
     @nums = 52
