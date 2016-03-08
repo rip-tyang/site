@@ -41,6 +41,15 @@ exports = module.exports =
       link_class: 'email'
       icon_class: 'fa-paper-plane'
   projects:
+    HCIProjectPage:
+      title: 'HCI Project Page'
+      description: '''A landing page for my HCI class project --
+      a interactive tool to illuminate basic CS concepts
+      for zero-experienced CS self-learners.
+      '''
+      img: 'goalgo'
+      link: '/projects/hci-tmp'
+      year: '2016'
     OhMyDearJS:
       title: 'Oh My Dear JS'
       description: '''A visualization for bizarre behaviors in
