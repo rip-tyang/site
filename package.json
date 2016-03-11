@@ -10,6 +10,7 @@
   "description": "",
   "devDependencies": {
     "chai": "^3.5.0",
+    "chai-things": "^0.2.0",
     "gulp-mocha": "^2.2.0",
     "mocha": "^2.4.5"
   },

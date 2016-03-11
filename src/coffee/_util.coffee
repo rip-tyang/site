@@ -16,7 +16,7 @@ class Util
     return [] unless size?
 
     # arr(2) -> [0, 0]
-    return Array.apply(null, Array(size)).map(() -> 0) if arguments.size is 1
+    return Array.apply(null, Array(size)).map(() -> 0) if arguments.length is 1
 
     # if last value is not a function, wrap it up
     _func = if typeof v isnt 'function' then () -> v else v
@@ -32,6 +32,7 @@ class Util
 
   # Fisher-Yates (aka Knuth) Shuffle
   @shuffle: (array) ->
+    return null unless Array.isArray array
     currentIndex = array.length
     # While there remain elements to shuffle...
     while 0 isnt currentIndex
