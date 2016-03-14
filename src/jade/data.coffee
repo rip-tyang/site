@@ -41,6 +41,17 @@ exports = module.exports =
       link_class: 'email'
       icon_class: 'fa-paper-plane'
   projects:
+    Whatyouvemissedwhenyouarecoding:
+      title: 'WYHMWYAC'
+      description: '''See what's going on in the world while you are coding
+      and making commits to GitHub.
+      We tried to make some crazy coders reflect more on
+      how much beauty they have missed through mindblowing visuals
+      (beautiful photos, floating descriptions, etc).
+      '''
+      img: 'wyhmwyac'
+      link: 'http://hanax.co/whatyouvemissedwhenyouarecoding'
+      year: '2016'
     HCIProjectPage:
       title: 'HCI Project Page'
       description: '''A landing page for my HCI class project --
