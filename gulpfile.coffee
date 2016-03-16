@@ -89,6 +89,15 @@ gulp.task 'serve', () ->
   runSequence 'clean', ['jade', 'copy', 'server']
 
 ############################################
+# test
+############################################
+
+gulp.task 'test', () ->
+  gulp.src('src/coffee/test/*', {read: false})
+    .pipe $.mocha({reporter: 'nyan'})
+
+
+############################################
 # dist
 ############################################
 
@@ -122,7 +131,7 @@ gulp.task 'dist:copy:miscellaneous', () ->
 gulp.task 'dist:copy', ['dist:copy:assets', 'dist:copy:miscellaneous']
 
 gulp.task 'dist:build', () ->
-  runSequence 'clean', ['dist:webpack', 'dist:copy'], 'dist:jade'
+  runSequence 'test', 'clean', ['dist:webpack', 'dist:copy'], 'dist:jade'
 
 gulp.task 'dist', ['dist:build']
 
