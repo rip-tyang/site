@@ -50,7 +50,7 @@ exports = module.exports =
       (beautiful photos, floating descriptions, etc).
       '''
       img: 'wyhmwyac'
-      link: 'http://hanax.co/whatyouvemissedwhenyouarecoding'
+      link: '/projects/wyvmwyac'
       year: '2016'
     HCIProjectPage:
       title: 'HCI Project Page'

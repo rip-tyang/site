@@ -26,4 +26,18 @@ domready ->
     nextTrigger: document.getElementById('logo').children[1]
     hash:hashtagManager
 
+  # color switch corner init
+  # show in the begining
+  # hide when mouseout for the first time
+  # show when hovering
+  document.getElementById('corner').addEventListener 'mouseout',
+    removeCornerShowClass, false
+
 new Banner
+
+removeCornerShowClass = do ->
+  first = true
+  (event) ->
+    return unless first
+    first = false
+    document.getElementById('corner').classList.remove 'cornerShow'
