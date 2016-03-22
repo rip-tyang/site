@@ -58,6 +58,7 @@ gulp.task 'clean', del.bind(null, [paths.dist])
 gulp.task 'server', () ->
   config =
     contentBase: paths.dist
+    proxy: require './proxy'
     stats:
       colors: true
       timings: true

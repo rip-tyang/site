@@ -1,6 +1,6 @@
 exports = module.exports =
   title: 'Thomas Yang'
-  subtitle: 'I turn coffee and sugar into code.'
+  subtitle: 'I write JavaScript. Don't call me, I'll callback you. I promise!'
   description: [
     'I am a developer and I love design.'
     'I am curious and I love challenges.'
