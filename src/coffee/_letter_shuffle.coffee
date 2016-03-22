@@ -7,6 +7,7 @@ class LetterShuffle
     @type = option.type || 'lower'
     @elem = option.targetElem
     @text = @elem.textContent.slice 0
+    @textArr = @text.split ' '
     @letters = Chars[TypeMap[@type]]
     @loopId
 
@@ -17,7 +18,7 @@ class LetterShuffle
   Chars = [
     ",.?/\\(^)![]{}*&^%$#'\""
     'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-    'abcdefghijklmnopqrstuvwxyz0123456789'
+    "fijkl,.?/\\(^)![]{}*&^%$#'\"|"
   ]
 
   TypeMap =
@@ -39,15 +40,24 @@ class LetterShuffle
       --@currentStep
     else
       ++@currentIndex
+      if @currentIndex > @currentLen
+        @currentLen += @textArr[++@currentArr].length + 1
       @currentStep = ~~(Math.random()*@step)
-
-    @elem.textContent = @text[0...@currentIndex] +
-      @randomChar @text.length - @currentIndex
+    texts = @textArr.map (e, i) =>
+      if i < @currentArr
+        return e
+      else if i is @currentArr
+        return e[0...e.length-(@currentLen-@currentIndex)] +
+          @randomChar(@currentLen-@currentIndex)
+      else return @randomChar e.length
+    @elem.textContent = texts.join ' '
 
   play: =>
     return if @loopId
     @currentIndex = 0
     @currentStep = 4*@step # let the first letter last longer
+    @currentArr = 0
+    @currentLen = @textArr[@currentArr].length
     @loopId = window.requestInterval
       fn: @tick
       elem: @elem
