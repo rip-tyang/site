@@ -41,6 +41,13 @@ exports = module.exports =
       link_class: 'email'
       icon_class: 'fa-paper-plane'
   projects:
+    OneDivPhilographics:
+      title: 'One Div Philographics'
+      description: '''A replica of the Philographics to show my respect and admiration, using only ONE div for each graph.
+      '''
+      img: 'one_div_philographics'
+      link: '/projects/one-div-philographics'
+      year: '2016'
     Whatyouvemissedwhenyouarecoding:
       title: 'WYHMWYAC'
       description: '''See what's going on in the world while you are coding
