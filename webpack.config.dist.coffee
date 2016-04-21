@@ -31,7 +31,7 @@ module.exports =
         loader: 'style-loader!css-loader!stylus-loader?resolve url'
       },
       {
-        test: /\.(eot|ttf|woff)$/
+        test: /\.(eot|ttf|woff|otf|svg)$/
         loader: 'url?limit=100000'
       }
     ],
