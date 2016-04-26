@@ -41,6 +41,13 @@ exports = module.exports =
       link_class: 'email'
       icon_class: 'fa-paper-plane'
   projects:
+    AmazonMovieReviewVis:
+      title: 'Movie Review Vis'
+      description: '''Amazon movie reviews in calendar view, including sentiment analysis.
+      '''
+      img: 'amazon-movie-review-vis'
+      link: '/projects/amazon-movie-review-vis'
+      year: '2016'
     OneDivPhilographics:
       title: 'One Div Philographics'
       description: '''A replica of the Philographics to show my respect and admiration, using only ONE div for each graph.
