@@ -16,9 +16,10 @@ class LetterShuffle
 
 
   Chars = [
-    ",.?/\\(^)![]{}*&^%$#'\""
+    ",.?/\\(^)![]{}*&^%$#'\"|"
     'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-    "fijkl,.?/\\(^)![]{}*&^%$#'\"|"
+    'abcdefghijklmnopqrstuvwxyz0123456789'
+    # "fijkl,.?/\\(^)![]{}*&^%$#'\"|"
   ]
 
   TypeMap =
