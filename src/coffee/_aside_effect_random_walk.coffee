@@ -3,29 +3,80 @@ AsideEffect = require './_aside_effect'
 
 class AsideEffectRandomWalk extends AsideEffect
   @name: 'random-walk'
-  @curr: {x: 0, y: 0}
-  @width = @canvas.width
-  @height = @canvas.height
 
   constructor: (options = {}) ->
     super
+    @firstLayer = document.createElement 'canvas'
+    @fCtx = @firstLayer.getContext '2d'
+    @firstLayer.width = @width = @canvas.width
+    @firstLayer.height = @height = @canvas.height
+    @cellSize = 8
+    @cursorExpandCurrSize = @cursorSize = 4
+    @cursorExpandSize = 160
+    @curr = { x: 0, y: 0 }
+    @cursor = { x: 0, y: 0 }
+    @isPaused = false
+    @showCursorShreshold = @showCursorCounter = 3
+
     @onResize()
+    @curr = { x: ~~(@width * .5), y: ~~(@height * .7) }
 
-  posToCanvas: =>
-    
+  switch: =>
+    @isPaused = !@isPaused
+
   tick: =>
-    @ctx.fillStyle = 'rgba(255,255,255,0.1)'
+    @ctx.clearRect 0, 0, @canvas.width, @canvas.height
+    @fCtx.strokeStyle = 'rgba(255, 255, 255, .2)'
+
+    if !@isPaused
+      @fCtx.beginPath()
+      @fCtx.moveTo @curr.x, @curr.y
+      rand = ((~~(Math.random() * 2)) * 2 - 1) * @cellSize
+      axis = if Math.random() > 0.5 then 'x' else 'y'
+      @curr[axis] += rand
+      @fCtx.lineTo @curr.x, @curr.y
+      @curr.x = (@curr.x + @width) % @width
+      @curr.y = (@curr.y + @height) % @height
+      @fCtx.stroke()
+      if @showCursorCounter is @showCursorShreshold
+        @showCursorCounter = 0
+        @cursor.x = @curr.x - @cursorSize
+        @cursor.y = @curr.y - @cursorSize
+      @showCursorCounter++
+    else
+      alpha = @cursorExpandSize - @cursorExpandCurrSize
+      alpha /= @cursorExpandSize - @cursorSize
+      alpha = alpha * .8 + .2
+      @ctx.strokeStyle = "rgba(255, 255, 255, #{alpha})"
+      @ctx.beginPath()
+      @cursorExpandCurrSize += @cursorExpandSize / 80
+      if @cursorExpandCurrSize > @cursorExpandSize
+        @cursorExpandCurrSize = @cursorSize
+      @ctx.arc(
+        @cursor.x,
+        @cursor.y,
+        @cursorExpandCurrSize,
+        0,
+        2 * Math.PI)
+      @ctx.stroke()
+
+    @ctx.strokeStyle = 'rgba(255, 255, 255, 1)'
     @ctx.beginPath()
-
-    for p in @particles
-      @ctx.moveTo p.x, p.y
-      @ctx.arc p.x, p.y, p.r, 0, Math.PI*2, true
-
-    @ctx.fill()
-    @update()
+    @ctx.arc(
+      @cursor.x,
+      @cursor.y,
+      @cursorSize,
+      0,
+      2 * Math.PI)
+    @ctx.stroke()
+    @ctx.drawImage @firstLayer, 0, 0
 
   onResize: =>
     super
+    @firstLayer.width = @width = @canvas.width
+    @firstLayer.height = @height = @canvas.height
+    @curr.x = ((@curr.x % @width) + @width) % @width
+    @curr.y = ((@curr.y % @height) + @height) % @height
 
 
 exports = module.exports = AsideEffectRandomWalk

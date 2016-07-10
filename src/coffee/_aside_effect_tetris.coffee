@@ -51,7 +51,7 @@ class Piece
       ]
 
   clone: =>
-    piece = new Piece Util.cloneArray(@cells)
+    piece = new Piece(Util.cloneArray(@cells))
     piece.row = @row
     piece.column = @column
     piece
@@ -108,14 +108,14 @@ class Grid
   # return how many lines cleared
   clearLines: =>
     dis = 0
-    for i in [@rowSize-1..0]
+    for i in [@rowSize - 1..0]
       if @isLine(i)
         ++dis
         for j in [0...@colSize]
           @cells[i][j] = 0
       else if dis > 0
         for j in [0...@colSize]
-          @cells[i+dis][j] = @cells[i][j]
+          @cells[i + dis][j] = @cells[i][j]
           @cells[i][j] = 0
     dis
 
@@ -132,12 +132,10 @@ class Grid
     for j in [0...@colSize]
       block = false
       for i in [0...@rowSize]
-        if @cells[i][j] is 1
-          block = true
-          ++rowCount[i]
-          colHeight[j] = @rowSize - i unless colHeight[j]
-        else if block
-          ++holes
+        block |= @cells[i][j] is 1
+        rowCount[i] += @cells[i][j]
+        colHeight[j] ||= (@rowSize - i) if @cells[i][j] is 1
+        holes += (1 - @cells[i][j]) if block
 
     for i in [0...@colSize]
       colHeight[i] = 0 unless colHeight[i]
@@ -145,13 +143,12 @@ class Grid
     for i in [0...@rowSize]
       ++lines if rowCount[i] is @colSize
 
-    for i in [0...@colSize-1]
-      bumpiness += Math.abs(colHeight[i] - colHeight[i+1])
+    for i in [0...@colSize - 1]
+      bumpiness += Math.abs(colHeight[i] - colHeight[i + 1])
 
     cumulatedHeight = colHeight.reduce (p, c) -> p + c
 
     [cumulatedHeight, lines, holes, bumpiness]
-
 
   addPiece: (p) =>
     for i in [0...p.dimension]
@@ -216,22 +213,22 @@ class Grid
     initRow = _p.row
     initCol = _p.column
 
-    for i in [0..._p.dimension-1]
+    for i in [0..._p.dimension - 1]
       _p.column = initCol + i
       return _p.calcOffset p if @valid _p
 
-      for j in [0..._p.dimension-1]
+      for j in [0..._p.dimension - 1]
         _p.row = initRow - j
         return _p.calcOffset p if @valid _p
 
       _p.row = initRow
     _p.column = initCol
 
-    for i in [0..._p.dimension-1]
+    for i in [0..._p.dimension - 1]
       _p.column = initCol - i
       return _p.calcOffset p if @valid _p
 
-      for j in [0..._p.dimension-1]
+      for j in [0..._p.dimension - 1]
         _p.row = initRow - j
         return _p.calcOffset p if @valid _p
 
@@ -247,6 +244,7 @@ class AI
   # holesW
   # bumpinessW
   constructor: (@weights) ->
+    @
 
   # arrP, possible piece
   best: (grid, currP) =>
@@ -256,7 +254,6 @@ class AI
 
     for rotation in [0...4]
       _p = originalP.rotate(true).clone()
-
       --_p.column while grid.canMoveLeft _p
 
       while grid.valid _p
@@ -266,7 +263,7 @@ class AI
         grid.addPiece _tp
 
         score = grid.calcFeatures().reduce((p, c, i) =>
-          p + c*@weights[i]
+          p + c * @weights[i]
         , 0)
         grid.removePiece _tp
 
@@ -274,14 +271,13 @@ class AI
           bestPiece = _p.clone()
           highestScore = score
 
-
         ++_p.column
 
-    return {piece: bestPiece, score: highestScore }
+    return { piece: bestPiece, score: highestScore }
 
 class AsideEffectTetris extends AsideEffect
   @name: 'tetris'
-  constructor: (option = {})->
+  constructor: (option = {}) ->
     super
     @width = @canvas.width
     @height = @canvas.height
@@ -292,9 +288,9 @@ class AsideEffectTetris extends AsideEffect
     @cellSize
     @onResize()
 
-    @grid = new Grid 22, 10
-    @rpg = new RandomPieceGenerator
-    @ai = new AI [-0.51006, 0.760666, -0.35663, -0.184483]
+    @grid = new Grid(22, 10)
+    @rpg = new RandomPieceGenerator()
+    @ai = new AI([-0.51006, 0.760666, -0.35663, -0.184483])
     @aiActive = true
     @currentPieces = [@rpg.next(), @rpg.next()]
     @currentIdx = 0
@@ -304,14 +300,14 @@ class AsideEffectTetris extends AsideEffect
     @reset()
 
   reset: =>
-    unless @alive
-      @alive = true
-      @grid = new Grid 22, 10
-      @aiActive = true
-      @currentPieces = [@rpg.next(), @rpg.next()]
-      @currentIdx = 0
-      @currP = if @aiActive then @aiMove() else @currentPieces[@currentIdx]
-      @score = 0
+    return @ if @alive
+    @alive = true
+    @grid = new Grid(22, 10)
+    @aiActive = true
+    @currentPieces = [@rpg.next(), @rpg.next()]
+    @currentIdx = 0
+    @currP = if @aiActive then @aiMove() else @currentPieces[@currentIdx]
+    @score = 0
     @
 
   play: =>
@@ -331,8 +327,8 @@ class AsideEffectTetris extends AsideEffect
     for i in [2...@grid.rowSize]
       for j in [0...@grid.colSize]
         if @grid.cells[i][j] is 1
-          @ctx.fillRect(@origin.x + @cellSize * j + @gap * (j+1),
-            @origin.y + @cellSize * (i-2) + @gap * (i-1),
+          @ctx.fillRect(@origin.x + @cellSize * j + @gap * (j + 1),
+            @origin.y + @cellSize * (i - 2) + @gap * (i - 1),
             @cellSize,
             @cellSize)
 
@@ -359,7 +355,7 @@ class AsideEffectTetris extends AsideEffect
     @currP = if @aiActive then @aiMove() else @currentPieces[@currentIdx]
 
   aiMove: =>
-    res = {piece: null, score: -Infinity}
+    res = { piece: null, score: -Infinity }
     @currentPieces.forEach (p, i) =>
       tmp  = @ai.best @grid, p
       if tmp.score > res.score
@@ -367,14 +363,14 @@ class AsideEffectTetris extends AsideEffect
         @currentIdx = i
     res.piece
 
-  onResize: () =>
+  onResize: =>
     super
     @width = @canvas.width
     @height = @canvas.height
     if @width * 2 > @height
-      @cellSize = ((@height-@gap) / 20) - @gap
+      @cellSize = ((@height - @gap) / 20) - @gap
     else
-      @cellSize = ((@width-@gap) / 10) - @gap
+      @cellSize = ((@width - @gap) / 10) - @gap
     @origin.x = (@width - @cellSize * 10 - @gap * 11) / 2
     @origin.y = @height - @cellSize * 20 - @gap * 21
 

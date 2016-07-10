@@ -2,13 +2,15 @@ Util = require './_util'
 AsideEffectSnow = require './_aside_effect_snow'
 AsideEffectTetris = require './_aside_effect_tetris'
 AsideEffectGameOfLife = require './_aside_effect_game_of_life'
+AsideEffectRandomWalk = require './_aside_effect_random_walk.coffee'
 
 class AsideEffectGenerator
-  constructor: (option = {})->
+  constructor: (option = {}) ->
     @effects = [
       AsideEffectSnow
       AsideEffectTetris
       AsideEffectGameOfLife
+      AsideEffectRandomWalk
     ]
     @instance = Array @effects.length
     @option = option
@@ -28,7 +30,7 @@ class AsideEffectGenerator
     if 0 <= idx < @effects.length
       @idx = idx
     else
-      @idx = ~~(Math.random()*@effects.length)
+      @idx = ~~(Math.random() * @effects.length)
     @play()
 
   next: =>

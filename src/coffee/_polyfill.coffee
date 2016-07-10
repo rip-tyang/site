@@ -1,4 +1,4 @@
-run = () ->
+run = ->
   f() for name, f of func
 
 func = {}
@@ -50,23 +50,23 @@ func.eventListenerForIE8 = ->
           event.target = event.srcElement || target
           listener.call target, event
 
-        registry.unshift [target, type, listener,eventFunc]
+        registry.unshift [target, type, listener, eventFunc]
 
-        this.attachEvent 'on' + type, registry[0][3]
+        @attachEvent 'on' + type, registry[0][3]
 
         WindowPrototype[removeEventListener] =
         DocumentPrototype[removeEventListener] =
         ElementPrototype[removeEventListener] = (type, listener) ->
           for register in registry
-            if register[0] is this &&
+            if register[0] is @ &&
               register[1] is type &&
               register[2] is listener
-                this.detachEvent 'on' + type, registry.splice(index, 1)[0][3]
+                @detachEvent 'on' + type, registry.splice(index, 1)[0][3]
 
         WindowPrototype[dispatchEvent] =
         DocumentPrototype[dispatchEvent] =
         ElementPrototype[dispatchEvent] = (eventObject) ->
-          this.fireEvent 'on' + eventObject.type, eventObject
+          @fireEvent 'on' + eventObject.type, eventObject
 
 func.betterAnimation = ->
 
@@ -88,25 +88,17 @@ func.betterAnimation = ->
         fn.call()
       handle.value = window.requestAnimationFrame loopFunc, elem
     else
-      if !window.requestAnimationFrame           &&
-        !window.webkitRequestAnimationFrame      &&
-        !(window.mozRequestAnimationFrame        &&
-          window.mozCancelRequestAnimationFrame) &&
-        !window.oRequestAnimationFrame           &&
-        !window.msRequestAnimationFrame
-          return window.setInterval fn, delay
-
       start = new Date().getTime()
       loopFunc = ->
         # request first so fn could use handle to cancel next animation
-        handle.value = window.requestAnimationFrame loopFunc,elem
+        handle.value = window.requestAnimationFrame loopFunc, elem
         current = new Date().getTime()
         delta = current - start
         if delta >= delay
           fn.call()
           start = new Date().getTime()
 
-      handle.value = window.requestAnimationFrame loopFunc,elem
+      handle.value = window.requestAnimationFrame loopFunc, elem
     handle
 
   # Behaves the same as clearInterval

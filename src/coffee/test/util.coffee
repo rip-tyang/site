@@ -32,10 +32,11 @@ describe 'Util.arr', ->
     t.should.be.a 'array'
     t.should.have.length randomLen
     t.should.all.equals undefined
-    tt = t.map () -> randomVal
+    tt = t.map -> randomVal
     tt.should.all.equals randomVal
 
-  it 'should return multidimensional array with the size specified by arguments excluding the last one ', ->
+  it 'should return multidimensional array with the
+      size specified by arguments excluding the last one ', ->
     randomL1 = ~~(Math.random() * 10)
     randomL2 = ~~(Math.random() * 10)
     randomVal = ~~(Math.random() * 10)
@@ -46,7 +47,8 @@ describe 'Util.arr', ->
       e.should.have.length randomL2
       e.should.all.equals randomVal
 
-  it 'should accept last argument as a function and pass indexs of every dimension into it', ->
+  it 'should accept last argument as a function and
+      pass indexs of every dimension into it', ->
     randomL1 = ~~(Math.random() * 10)
     randomL2 = ~~(Math.random() * 10)
     func = (a, b) -> a + b
@@ -70,7 +72,7 @@ describe 'Util.shuffle', ->
     t.should.be.empty
 
   it 'should not change elements', ->
-    origArray = Util.arr ~~(Math.random() * 10), () -> ~~(Math.random() * 10)
+    origArray = Util.arr ~~(Math.random() * 10), -> ~~(Math.random() * 10)
     t = Util.shuffle origArray
     t.should.be.a 'array'
     t.should.have.length origArray.length
@@ -81,8 +83,8 @@ describe 'Util.cloneArray', ->
     Util.cloneArray.bind(@, [{}]).should.throw Error
 
   it 'should deep clone array', ->
-    args = Util.arr 1+~~(Math.random()*4), () -> ~~(Math.random()*8)
-    args.push () -> ~~(Math.random()*100)
+    args = Util.arr 1 + ~~(Math.random() * 4), -> ~~(Math.random() * 8)
+    args.push -> ~~(Math.random() * 100)
     tArr = Util.arr.apply(@, args)
     Util.cloneArray(tArr).should.eql tArr
 
@@ -94,8 +96,8 @@ describe 'Util.isSquareArray', ->
     t.should.all.equals false
 
   it 'should indentify a square array', ->
-    t1 = ~~(Math.random()*10)
-    t2 = ~~(Math.random()*10)
+    t1 = ~~(Math.random() * 10)
+    t2 = ~~(Math.random() * 10)
     tArr = Util.arr t1, t2, 0
 
     t = Util.isSquareArray tArr
@@ -103,22 +105,42 @@ describe 'Util.isSquareArray', ->
 
 describe 'Util.rotateArrayClockwise', ->
   it 'should throw error with non-2d array', ->
-    [t1, t2] = [~~(Math.random()*10), ~~(Math.random()*10)] while t1 is t2
+    [t1, t2] = [~~(Math.random() * 10), ~~(Math.random() * 10)] while t1 is t2
     tArr = Util.arr t1, t2, 0
     Util.rotateArrayClockwise.bind(@, tArr).should.throw Error
 
   it 'should rotate an 2d array', ->
-    tArr = [[1,2,3,4],[1,2,3,4],[1,2,3,4],[1,2,3,4]]
-    rArr = [[1,1,1,1],[2,2,2,2],[3,3,3,3],[4,4,4,4]]
+    tArr = [
+      [1, 2, 3, 4]
+      [1, 2, 3, 4]
+      [1, 2, 3, 4]
+      [1, 2, 3, 4]
+    ]
+    rArr = [
+      [1, 1, 1, 1]
+      [2, 2, 2, 2]
+      [3, 3, 3, 3]
+      [4, 4, 4, 4]
+    ]
     Util.rotateArrayClockwise(tArr).should.eql rArr
 
 describe 'Util.rotateArrayCounterClockwise', ->
   it 'should throw error with non-2d array', ->
-    [t1, t2] = [~~(Math.random()*10), ~~(Math.random()*10)] while t1 is t2
+    [t1, t2] = [~~(Math.random() * 10), ~~(Math.random() * 10)] while t1 is t2
     tArr = Util.arr t1, t2, 0
     Util.rotateArrayCounterClockwise.bind(@, tArr).should.throw Error
 
   it 'should rotate an 2d array', ->
-    tArr = [[1,1,1,1],[2,2,2,2],[3,3,3,3],[4,4,4,4]]
-    rArr = [[1,2,3,4],[1,2,3,4],[1,2,3,4],[1,2,3,4]]
+    tArr = [
+      [1, 1, 1, 1]
+      [2, 2, 2, 2]
+      [3, 3, 3, 3]
+      [4, 4, 4, 4]
+    ]
+    rArr = [
+      [1, 2, 3, 4]
+      [1, 2, 3, 4]
+      [1, 2, 3, 4]
+      [1, 2, 3, 4]
+    ]
     Util.rotateArrayCounterClockwise(tArr).should.eql rArr

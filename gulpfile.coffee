@@ -65,7 +65,7 @@ gulp.task 'server', () ->
       assets: true
       hash: true
       chunks: false
-  wds = new WebpackDevServer webpack_dev_runner, config
+  wds = new WebpackDevServer(webpack_dev_runner, config)
 
   # reload browser when changes detected
   wds.app.get '/reload', (req, res) ->

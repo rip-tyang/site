@@ -1,6 +1,6 @@
 exports = module.exports =
   title: 'Thomas Yang'
-  subtitle: "Feel. Experience. Truth."
+  subtitle: 'Feel. Experience. Truth.'
   description: [
     'I am a developer and I love design.'
     'I am curious and I love challenges.'
@@ -43,15 +43,16 @@ exports = module.exports =
   projects:
     AmazonMovieReviewVis:
       title: 'Movie Review Vis'
-      description: '''Amazon movie reviews in calendar view, including sentiment analysis.
-      '''
+      description: 'Amazon movie reviews in calendar view,
+                    including sentiment analysis.'
       img: 'amazon-movie-review-vis'
       link: '/projects/amazon-movie-review-vis'
       year: '2016'
     OneDivPhilographics:
       title: 'One Div Philographics'
-      description: '''A replica of the Philographics to show my respect and admiration, using only ONE div for each graph.
-      '''
+      description: 'A replica of the Philographics to show
+                    my respect and admiration, using only ONE
+                    div for each graph.'
       img: 'one_div_philographics'
       link: '/projects/one-div-philographics'
       year: '2016'

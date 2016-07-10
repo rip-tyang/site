@@ -28,7 +28,7 @@ class ColorSwitch
         @randomColor,
         false
 
-  checkHashTag: (hashObj)=>
+  checkHashTag: (hashObj) =>
     if hashObj.color?
       @parseColor hashObj.color
       @updateSheet()
@@ -37,13 +37,13 @@ class ColorSwitch
     if color? and color.length?
       wColor = color
       if wColor.length is 3
-        wColor = wColor.split('').map((e) -> e+e).join('')
+        wColor = wColor.split('').map((e) -> e + e).join('')
       @mainColor = "##{wColor}"
       @secondaryColor =
         "rgba(#{red(wColor)},#{green(wColor)},#{blue(wColor)},0.8)"
 
   randomColor: =>
-    colorString = (~~(Math.random()*0xFFFFFF)).toString(16)
+    colorString = (~~(Math.random() * 0xFFFFFF)).toString(16)
     if colorString.length < 6
       colorString = Array(7 - colorString.length).join('0') + colorString
     @hashtagManager.setHash 'color', "#{colorString}"

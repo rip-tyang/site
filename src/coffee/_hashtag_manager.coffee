@@ -1,7 +1,7 @@
 qs = require 'querystring'
 
 class HashtagManager
-  constructor: () ->
+  constructor: ->
     @cb = []
     @obj = qs.parse document.location.hash.slice(1)
     window.addEventListener 'hashchange', @hashChanged, false
@@ -10,6 +10,7 @@ class HashtagManager
     @obj = qs.parse document.location.hash.slice(1)
     func(@obj) for func in @cb
 
+  # will triger `hashchange` event
   setHash: (key, value) =>
     @obj[key] = value
     document.location.hash = "##{qs.stringify @obj}"

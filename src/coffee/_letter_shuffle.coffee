@@ -31,7 +31,7 @@ class LetterShuffle
     return '' if len <= 0
     arr = Array.apply null, Array(len)
     arr = arr.map (e) =>
-      @letters[~~(Math.random()*@letters.length)]
+      @letters[~~(Math.random() * @letters.length)]
     arr.join ''
 
   tick: =>
@@ -43,20 +43,20 @@ class LetterShuffle
       ++@currentIndex
       if @currentIndex > @currentLen
         @currentLen += @textArr[++@currentArr].length + 1
-      @currentStep = ~~(Math.random()*@step)
+      @currentStep = ~~(Math.random() * @step)
     texts = @textArr.map (e, i) =>
       if i < @currentArr
         return e
       else if i is @currentArr
-        return e[0...e.length-(@currentLen-@currentIndex)] +
-          @randomChar(@currentLen-@currentIndex)
+        return e[0...e.length - (@currentLen - @currentIndex)] +
+          @randomChar(@currentLen - @currentIndex)
       else return @randomChar e.length
     @elem.textContent = texts.join ' '
 
   play: =>
     return if @loopId
     @currentIndex = 0
-    @currentStep = 4*@step # let the first letter last longer
+    @currentStep = 4 * @step # let the first letter last longer
     @currentArr = 0
     @currentLen = @textArr[@currentArr].length
     @loopId = window.requestInterval

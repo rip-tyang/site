@@ -16,10 +16,10 @@ class Util
     return [] unless size?
 
     # arr(2) -> [0, 0]
-    return Array.apply(null, Array(size)).map(() -> 0) if arguments.length is 1
+    return Array.apply(null, Array(size)).map( -> 0) if arguments.length is 1
 
     # if last value is not a function, wrap it up
-    _func = if typeof v isnt 'function' then () -> v else v
+    _func = if typeof v isnt 'function' then -> v else v
 
     array = (size, other..., v) ->
       return size() if arguments.length is 1
@@ -64,17 +64,17 @@ class Util
       throw Error 'Not a 2 dimensional array'
 
     size = arr.length
-    center = ~~(size/2)
+    center = ~~(size / 2)
 
     for i in [0...center]
-      for j in [i...size-i-1]
+      for j in [i...size - i - 1]
         [arr[i][j]
-         arr[size-j-1][i]
-         arr[size-i-1][size-j-1]
-         arr[j][size-i-1] ] =
-        [arr[size-j-1][i]
-         arr[size-i-1][size-j-1]
-         arr[j][size-i-1]
+         arr[size - j - 1][i]
+         arr[size - i - 1][size - j - 1]
+         arr[j][size - i - 1] ] =
+        [arr[size - j - 1][i]
+         arr[size - i - 1][size - j - 1]
+         arr[j][size - i - 1]
          arr[i][j] ]
     arr
 
@@ -83,17 +83,17 @@ class Util
       throw Error 'Not a 2 dimensional array'
 
     size = arr.length
-    center = ~~(size/2)
+    center = ~~(size / 2)
 
     for i in [0...center]
-      for j in [i...size-i-1]
+      for j in [i...size - i - 1]
         [arr[i][j]
-         arr[j][size-i-1]
-         arr[size-i-1][size-j-1]
-         arr[size-j-1][i] ] =
-        [arr[j][size-i-1]
-         arr[size-i-1][size-j-1]
-         arr[size-j-1][i]
+         arr[j][size - i - 1]
+         arr[size - i - 1][size - j - 1]
+         arr[size - j - 1][i] ] =
+        [arr[j][size - i - 1]
+         arr[size - i - 1][size - j - 1]
+         arr[size - j - 1][i]
          arr[i][j] ]
     arr
 

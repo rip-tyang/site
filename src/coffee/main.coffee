@@ -8,23 +8,26 @@ Banner = require './_banner'
 HashtagManager = require './_hashtag_manager'
 
 domready ->
-  hashtagManager = new HashtagManager
+  hashtagManager = new HashtagManager()
 
-  colorSwitch = new ColorSwitch
+  colorSwitchConfig =
     triggerEvent: 'click'
     triggerElem: document.getElementById('corner')
     hash: hashtagManager
+  colorSwitch = new ColorSwitch(colorSwitchConfig)
 
-  subtitleShuffle = new LetterShuffle
+  subtitleShuffleConfig =
     targetElem: document.getElementsByTagName('h2')[0]
     triggerEvent: 'click'
     triggerElem: document.getElementById('corner')
+  subtitleShuffle = new LetterShuffle(subtitleShuffleConfig)
 
-  effectGenerator = new AsideEffectGenerator
+  effectGeneratorConfig =
     canvas: document.getElementById 'asideBG'
     switch: document.getElementById('logo').children[0]
     nextTrigger: document.getElementById('logo').children[1]
-    hash:hashtagManager
+    hash: hashtagManager
+  effectGenerator = new AsideEffectGenerator(effectGeneratorConfig)
 
   # color switch corner init
   # show in the begining
@@ -33,7 +36,7 @@ domready ->
   document.getElementById('corner').addEventListener 'mouseout',
     removeCornerShowClass, false
 
-new Banner
+new Banner()
 
 removeCornerShowClass = do ->
   first = true
