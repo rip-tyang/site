@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "gulp dist && ssh site 'rm -r /usr/share/nginx/html/ && mkdir /usr/share/nginx/html' && cd dist && scp -r * site:/usr/share/nginx/html/"
   },
   "author": "Thomas Yang <jscnm1993@gmail.com>",
   "license": "ISC",
