@@ -17,35 +17,29 @@ describe 'Util.arr', ->
     t.should.have.length randomLen
     t.should.all.equals 0
 
-  it 'should return a number filled with last argument', ->
-    randomLen = ~~(Math.random() * 10)
-    randomVal = ~~(Math.random() * 10)
-    t = Util.arr randomLen, randomVal
-    t.should.be.a 'array'
-    t.should.have.length randomLen
-    t.should.all.equals randomVal
-
-  it 'should support map even with last argument equals `undefined`', ->
-    randomLen = ~~(Math.random() * 10)
-    randomVal = ~~(Math.random() * 10)
-    t = Util.arr randomLen, undefined
-    t.should.be.a 'array'
-    t.should.have.length randomLen
-    t.should.all.equals undefined
-    tt = t.map -> randomVal
-    tt.should.all.equals randomVal
-
-  it 'should return multidimensional array with the
-      size specified by arguments excluding the last one ', ->
+  it 'should return a zero-filled multidimensional array', ->
     randomL1 = ~~(Math.random() * 10)
     randomL2 = ~~(Math.random() * 10)
-    randomVal = ~~(Math.random() * 10)
+    t = Util.arr randomL1, randomL2
+    t.should.be.a 'array'
+    t.should.have.length randomL1
+    t.forEach (e) ->
+      e.should.have.length randomL2
+      e.should.all.equals 0
+
+  it 'should return multidimensional array filled with
+      function given as last parameter', ->
+    randomL1 = ~~(Math.random() * 10)
+    randomL2 = ~~(Math.random() * 10)
+    randomVal = do ->
+      t = ~~(Math.random() * 10)
+      -> t
     t = Util.arr randomL1, randomL2, randomVal
     t.should.be.a 'array'
     t.should.have.length randomL1
     t.forEach (e) ->
       e.should.have.length randomL2
-      e.should.all.equals randomVal
+      e.should.all.equals randomVal()
 
   it 'should accept last argument as a function and
       pass indexs of every dimension into it', ->

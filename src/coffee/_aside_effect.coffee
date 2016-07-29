@@ -1,5 +1,3 @@
-Util = require './_util'
-
 class AsideEffect
   constructor: (option = {}) ->
     @canvas = option.canvas

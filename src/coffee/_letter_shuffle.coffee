@@ -1,25 +1,10 @@
-Util = require './_util'
+_ = require './_util'
 
 class LetterShuffle
-  constructor: (option = {}) ->
-    @step = option.step || 2
-    @delay = option.delay || 0
-    @type = option.type || 'lower'
-    @elem = option.targetElem
-    @text = @elem.textContent.slice 0
-    @textArr = @text.split ' '
-    @letters = Chars[TypeMap[@type]]
-    @loopId
-
-    if option.triggerEvent && option.triggerElem
-      option.triggerElem.addEventListener option.triggerEvent, @play, false
-
-
   Chars = [
     ",.?/\\(^)![]{}*&^%$#'\"|"
     'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
     'abcdefghijklmnopqrstuvwxyz0123456789'
-    # "fijkl,.?/\\(^)![]{}*&^%$#'\"|"
   ]
 
   TypeMap =
@@ -27,23 +12,41 @@ class LetterShuffle
     upper: 1
     lower: 2
 
+  constructor: (option = {}) ->
+    # maximum time a letter will be shuffled
+    @maxStep = option.maxStep || 8
+
+    @type = option.type || 'lower'
+    @elem = option.targetElem
+
+    # split the target text by words
+    # to keep the space not shuffled
+    # which will yield better visual effect
+    @text = @elem.textContent.slice 0
+
+    @textArr = @text.split ' '
+    @letters = Chars[TypeMap[@type]]
+    @loopId
+
+    if option.triggerEvent && option.triggerElem
+      option.triggerElem.addEventListener option.triggerEvent, @play, false
+
   randomChar: (len = 1) =>
     return '' if len <= 0
-    arr = Array.apply null, Array(len)
-    arr = arr.map (e) =>
-      @letters[~~(Math.random() * @letters.length)]
+    arr = _.arr len, => @letters[~~(Math.random() * @letters.length)]
     arr.join ''
 
   tick: =>
-    if @currentIndex >= @text.length
-      return @endLoop()
+    return @endLoop() if @currentIndex >= @text.length
+
     if @currentStep > 0
       --@currentStep
     else
       ++@currentIndex
       if @currentIndex > @currentLen
         @currentLen += @textArr[++@currentArr].length + 1
-      @currentStep = ~~(Math.random() * @step)
+      @currentStep = ~~(Math.random() * @maxStep)
+
     texts = @textArr.map (e, i) =>
       if i < @currentArr
         return e
@@ -55,8 +58,16 @@ class LetterShuffle
 
   play: =>
     return if @loopId
+
+    # from which letter until the last one will be randomized
+    # this will increase to the length of the target text
     @currentIndex = 0
-    @currentStep = 4 * @step # let the first letter last longer
+
+    # how many time left to move to the next letter
+    # will also be randomized for every letter
+    # let the first letter last longer
+    @currentStep = 4 * @step
+
     @currentArr = 0
     @currentLen = @textArr[@currentArr].length
     @loopId = window.requestInterval

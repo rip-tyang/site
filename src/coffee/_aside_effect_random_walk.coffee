@@ -1,4 +1,4 @@
-Util = require './_util'
+_ = require './_util'
 AsideEffect = require './_aside_effect'
 
 class AsideEffectRandomWalk extends AsideEffect
@@ -6,17 +6,23 @@ class AsideEffectRandomWalk extends AsideEffect
 
   constructor: (options = {}) ->
     super
+    # first layer is to draw random walk traces
+    # so that it won't be erased when pausing
     @firstLayer = document.createElement 'canvas'
     @fCtx = @firstLayer.getContext '2d'
     @firstLayer.width = @width = @canvas.width
     @firstLayer.height = @height = @canvas.height
+
     @cellSize = 8
     @cursorExpandCurrSize = @cursorSize = 4
     @cursorExpandSize = 160
     @curr = { x: 0, y: 0 }
     @cursor = { x: 0, y: 0 }
     @isPaused = false
-    @showCursorShreshold = @showCursorCounter = 3
+
+    # how many ticks until before updating the cursor
+    # too small will cause visually flicking
+    @showCursorShreshold = @showCursorCounter = 2
 
     @onResize()
     @curr = { x: ~~(@width * .5), y: ~~(@height * .7) }
@@ -39,17 +45,17 @@ class AsideEffectRandomWalk extends AsideEffect
       @curr.y = (@curr.y + @height) % @height
       @fCtx.stroke()
       if @showCursorCounter is @showCursorShreshold
-        @showCursorCounter = 0
+        @showCursorCounter = -1
         @cursor.x = @curr.x - @cursorSize
         @cursor.y = @curr.y - @cursorSize
       @showCursorCounter++
     else
       alpha = @cursorExpandSize - @cursorExpandCurrSize
       alpha /= @cursorExpandSize - @cursorSize
-      alpha = alpha * .8 + .2
+      alpha = alpha * .9 + .1
       @ctx.strokeStyle = "rgba(255, 255, 255, #{alpha})"
       @ctx.beginPath()
-      @cursorExpandCurrSize += @cursorExpandSize / 80
+      @cursorExpandCurrSize += @cursorExpandSize / 120
       if @cursorExpandCurrSize > @cursorExpandSize
         @cursorExpandCurrSize = @cursorSize
       @ctx.arc(

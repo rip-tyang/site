@@ -13,12 +13,12 @@
             <stop stop-color="#CCCCCC" offset="100%"></stop>
         </linearGradient>
     </defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="corner" sketch:type="MSLayerGroup" transform="translate(0.000000, -1.000000)">
-            <g id="Page-1" sketch:type="MSShapeGroup">
-                <g id="corner">
-                    <g id="Page-1">
-                        <g id="corner" transform="translate(600.000000, 600.500000) scale(-1, -1) translate(-600.000000, -600.500000) ">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g sketch:type="MSLayerGroup" transform="translate(0.000000, -1.000000)">
+            <g sketch:type="MSShapeGroup">
+                <g>
+                    <g>
+                        <g transform="translate(600.000000, 600.500000) scale(-1, -1) translate(-600.000000, -600.500000) ">
                             <path d="M761.72,1121.019 C762.88,1119.83 764.02,1118.629 765.15,1117.4 C812.1,1066.73 806.6,941.67 806.6,806.6 C947.41,806.6 1073.63,808.86 1123.7,759.12 C1180.3,702.88 1194.2,634.81 1200,600 L1200,7.8736835 L0,0 L0,1200 L600,1200 L747.5,1200 L600,1199.999 C633.971,1194.339 699.621,1180.96 755.03,1127.71 L1123.7,759.12 L761.72,1121.019 Z" id="bg" fill="currentcolor"></path>
                             <path d="M761.72,1121.019 C762.88,1119.83 764.02,1118.629 765.15,1117.4 C812.1,1066.73 806.6,941.67 806.6,806.6 C947.41,806.6 1073.63,808.86 1123.7,759.12 L761.72,1121.019 Z" id="highlight" fill="url(#linearGradient-1)"></path>
                         </g>

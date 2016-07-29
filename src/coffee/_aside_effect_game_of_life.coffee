@@ -1,4 +1,4 @@
-Util = require './_util'
+_ = require './_util'
 AsideEffect = require './_aside_effect'
 
 class GameOfLifeBoard
@@ -9,9 +9,11 @@ class GameOfLifeBoard
     @colSize = options.colSize || 20
 
     # board
-    @arr = Util.arr @rowSize + 2, @colSize + 2, 0
+    @arr = _.arr @rowSize + 2, @colSize + 2
+
     # status map
-    @m = Array(1 << 9)
+    @m = Array 1 << 9
+
     @buildMap().seed()
 
   seed: =>

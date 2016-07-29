@@ -1,57 +1,58 @@
 AsideEffect = require './_aside_effect'
-Util = require './_util'
+_ = require './_util'
 
 # Credit: https://github.com/LeeYiyuan/tetrisai
 class Piece
   constructor: (@cells) ->
     @dimension = @cells.length
     @row = 0
-    @column = ~~((10 - @dimension) / 2) #Centralize
+    #Centralize
+    @column = ~~((10 - @dimension) / 2)
 
   @fromIndex: (index) ->
     switch index
       # 0
-      when 0 then new @ [ [1, 1], [1, 1] ]
+      when 0 then new @([ [1, 1], [1, 1] ])
       # J
-      when 1 then new @ [
+      when 1 then new @([
         [1, 0, 0]
         [1, 1, 1]
         [0, 0, 0]
-      ]
+      ])
       # L
-      when 2 then new @ [
+      when 2 then new @([
         [0, 0, 1]
         [1, 1, 1]
         [0, 0, 0]
-      ]
+      ])
       # Z
-      when 3 then new @ [
+      when 3 then new @([
         [1, 1, 0]
         [0, 1, 1]
         [0, 0, 0]
-      ]
+      ])
       # S
-      when 4 then new @ [
+      when 4 then new @([
         [0, 1, 1]
         [1, 1, 0]
         [0, 0, 0]
-      ]
+      ])
       # T
-      when 5 then new @ [
+      when 5 then new @([
         [0, 1, 0]
         [1, 1, 1]
         [0, 0, 0]
-      ]
+      ])
       # I
-      when 6 then new @ [
+      when 6 then new @([
         [0, 0, 0, 0]
         [1, 1, 1, 1]
         [0, 0, 0, 0]
         [0, 0, 0, 0]
-      ]
+      ])
 
   clone: =>
-    piece = new Piece(Util.cloneArray(@cells))
+    piece = new Piece(_.cloneArray(@cells))
     piece.row = @row
     piece.column = @column
     piece
@@ -60,8 +61,8 @@ class Piece
   # false for counter-clockwise
   rotate: (type) =>
     switch type
-      when true then Util.rotateArrayClockwise @cells
-      when false then Util.rotateArrayCounterClockwise @cells
+      when true then _.rotateArrayClockwise @cells
+      when false then _.rotateArrayCounterClockwise @cells
       else throw Error "Invalid rotate parameter: #{type}"
     @
 
@@ -79,7 +80,7 @@ class RandomPieceGenerator
     @init()
 
   init: ->
-    Util.shuffle @bag
+    _.shuffle @bag
     @iterator = 0
     @
 
@@ -89,7 +90,7 @@ class RandomPieceGenerator
 
 class Grid
   constructor: (@rowSize, @colSize) ->
-    @cells = Util.arr @rowSize, @colSize, 0
+    @cells = _.arr @rowSize, @colSize
 
   # too memory intensive
   # clone: =>
@@ -123,8 +124,8 @@ class Grid
     !@isEmptyRow(0) || !@isEmptyRow(1)
 
   calcFeatures: =>
-    rowCount = Util.arr @rowSize, 0
-    colHeight = Array @colSize
+    rowCount = _.arr @rowSize
+    colHeight = _.arr @colSize
     bumpiness = 0
     holes = 0
     lines = 0
@@ -136,9 +137,6 @@ class Grid
         rowCount[i] += @cells[i][j]
         colHeight[j] ||= (@rowSize - i) if @cells[i][j] is 1
         holes += (1 - @cells[i][j]) if block
-
-    for i in [0...@colSize]
-      colHeight[i] = 0 unless colHeight[i]
 
     for i in [0...@rowSize]
       ++lines if rowCount[i] is @colSize

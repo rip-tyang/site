@@ -1,4 +1,4 @@
-Util = require './_util'
+_ = require './_util'
 AsideEffect = require './_aside_effect'
 
 class AsideEffectSnow extends AsideEffect
@@ -10,7 +10,7 @@ class AsideEffectSnow extends AsideEffect
     @mod = 1
     @width = @canvas.width
     @height = @canvas.height
-    @particles = Util.arr @nums, =>
+    @particles = _.arr @nums, =>
       x: Math.random() * @width
       y: Math.random() * @height
       r: Math.random() * 4 + 1

@@ -8,27 +8,22 @@ class Util
   # example:
   # Util.arr() -> []
   # Util.arr(2) -> [0, 0]
-  # Util.arr(2, 3) -> [3, 3]
-  # Util.arr(2, 3, 0) -> [[0,0,0],[0,0,0]]
+  # Util.arr(2, 3) -> [[0,0,0],[0,0,0]]
   # Util.arr(2, 3, function (a, b) { return a + b; }) -> [[0,1,2], [1,2,3]]
   @arr: (size, other..., v) ->
     # arr() -> []
     return [] unless size?
 
-    # arr(2) -> [0, 0]
-    return Array.apply(null, Array(size)).map( -> 0) if arguments.length is 1
+    throw TypeError 'first param should be a finite number' unless isFinite size
 
-    # if last value is not a function, wrap it up
-    _func = if typeof v isnt 'function' then -> v else v
+    # if last value is not a function, make a function that returns 0
+    [].push.call(arguments, -> 0) if typeof v isnt 'function'
 
     array = (size, other..., v) ->
       return size() if arguments.length is 1
       return Array.apply(null, Array(size)).map (e, i) ->
-        array.apply @, other.concat(v.bind(@, i))
-
-    other.unshift size
-    other.push _func
-    array.apply @, other
+        array.apply null, other.concat(v.bind(null, i))
+    array.apply null, arguments
 
   # Fisher-Yates (aka Knuth) Shuffle
   @shuffle: (array) ->

@@ -7,19 +7,26 @@ AsideEffectGenerator = require './_aside_effect_generator'
 Banner = require './_banner'
 HashtagManager = require './_hashtag_manager'
 
+new Banner()
+
+removeCornerShowClass = (e) ->
+  @removeEventListener e.type, arguments.callee
+  @classList.remove 'cornerShow'
+
 domready ->
+  $corner = document.getElementById('corner')
   hashtagManager = new HashtagManager()
 
   colorSwitchConfig =
     triggerEvent: 'click'
-    triggerElem: document.getElementById('corner')
+    triggerElem: $corner
     hash: hashtagManager
   colorSwitch = new ColorSwitch(colorSwitchConfig)
 
   subtitleShuffleConfig =
     targetElem: document.getElementsByTagName('h2')[0]
     triggerEvent: 'click'
-    triggerElem: document.getElementById('corner')
+    triggerElem: $corner
   subtitleShuffle = new LetterShuffle(subtitleShuffleConfig)
 
   effectGeneratorConfig =
@@ -33,14 +40,4 @@ domready ->
   # show in the begining
   # hide when mouseout for the first time
   # show when hovering
-  document.getElementById('corner').addEventListener 'mouseout',
-    removeCornerShowClass, false
-
-new Banner()
-
-removeCornerShowClass = do ->
-  first = true
-  (event) ->
-    return unless first
-    first = false
-    document.getElementById('corner').classList.remove 'cornerShow'
+  $corner.addEventListener 'mouseout', removeCornerShowClass, false

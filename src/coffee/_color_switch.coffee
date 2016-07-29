@@ -1,4 +1,9 @@
+_ = require './_util'
+
 class ColorSwitch
+  splitRGB = (color6Digit) ->
+    [0, 2, 4].map (e) -> parseInt(color6Digit[e...e + 2], 16)
+
   constructor: (option = {}) ->
     @location = document.location
     @sheet = document.createElement 'style'
@@ -10,16 +15,6 @@ class ColorSwitch
     @hashtagManager.onHashChange @checkHashTag
     @checkHashTag @hashtagManager.obj
     @bindSwitch option
-
-  # static methods
-  red = (color6Digit) ->
-    return parseInt(color6Digit[0...2], 16)
-
-  green = (color6Digit) ->
-    return parseInt(color6Digit[2...4], 16)
-
-  blue = (color6Digit) ->
-    return parseInt(color6Digit[4...6], 16)
 
   bindSwitch: (option) =>
     document.head.appendChild @sheet
@@ -40,12 +35,12 @@ class ColorSwitch
         wColor = wColor.split('').map((e) -> e + e).join('')
       @mainColor = "##{wColor}"
       @secondaryColor =
-        "rgba(#{red(wColor)},#{green(wColor)},#{blue(wColor)},0.8)"
+        "rgba(#{splitRGB(wColor).join(',')},0.8)"
 
   randomColor: =>
     colorString = (~~(Math.random() * 0xFFFFFF)).toString(16)
     if colorString.length < 6
-      colorString = Array(7 - colorString.length).join('0') + colorString
+      colorString = _.arr(6 - colorString.length).join('') + colorString
     @hashtagManager.setHash 'color', "#{colorString}"
 
   updateSheet: =>

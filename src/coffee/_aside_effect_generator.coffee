@@ -1,4 +1,3 @@
-Util = require './_util'
 AsideEffectSnow = require './_aside_effect_snow'
 AsideEffectTetris = require './_aside_effect_tetris'
 AsideEffectGameOfLife = require './_aside_effect_game_of_life'
@@ -12,9 +11,9 @@ class AsideEffectGenerator
       AsideEffectGameOfLife
       AsideEffectRandomWalk
     ]
+    @curr = null
     @instance = Array @effects.length
     @option = option
-    @curr
 
     @hashtagManager = option.hash
     throw Error 'No hashtag manager' unless @hashtagManager?
@@ -39,10 +38,9 @@ class AsideEffectGenerator
     @hashtagManager.setHash 'game', @idx
 
   play: =>
-    @curr.pause().removeListener() if @curr?
+    @curr?.pause().removeListener()
+    @instance[@idx] = @instance[@idx] || new @effects[@idx](@option)
     @curr = @instance[@idx]
-    @curr = @instance[@idx] = new @effects[@idx](@option) unless @curr?
     @curr.reset().bindListener().play()
-
 
 exports = module.exports = AsideEffectGenerator
