@@ -1,7 +1,7 @@
 aside
   position: relative
   height: 100%
-  width: 30%
+  width: 400px
   float: left
 
 #corner
@@ -12,7 +12,7 @@ aside
   overflow: hidden
   top: 0
   left: 0
-  background-image: url('assets/images/corner_bg.png')
+  background-image: inline-url('assets/images/corner_bg.png')
 
 
   & > svg
@@ -46,9 +46,19 @@ section#logo
   line-height: 0
   font-size: 0
   padding-bottom: 16px
+
   & > svg
     padding-right: 6px
     cursor: pointer
+
+    &:hover .svg-pattern rect
+      font-size: 2px
+
+    &:first-child
+      mask: url(#mask-stripe-logo)
+
+    &:last-child
+      mask: url(#mask-stripe-blank)
 
 section#title
   color: white

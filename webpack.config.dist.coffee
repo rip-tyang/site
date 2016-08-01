@@ -28,7 +28,7 @@ module.exports =
       },
       {
         test: /\.styl$/
-        loader: 'style-loader!css-loader!stylus-loader?resolve url'
+        loader: 'style-loader!css-loader!stylus-loader'
       },
       {
         test: /\.(eot|ttf|woff|otf|svg)$/
@@ -39,7 +39,7 @@ module.exports =
   stylus:
     use: [nib()]
     define:
-      url: stylus.url
+      'inline-url': stylus.url
         paths: [__dirname + '/src']
         limit: false
 
