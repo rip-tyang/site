@@ -2,12 +2,15 @@ AsideEffect = require './_aside_effect'
 _ = require './_util'
 
 # Credit: https://github.com/LeeYiyuan/tetrisai
+ROW = 25
+COL = 10
+
 class Piece
   constructor: (@cells) ->
     @dimension = @cells.length
     @row = 0
     #Centralize
-    @column = ~~((10 - @dimension) / 2)
+    @column = ~~((COL - @dimension) / 2)
 
   @fromIndex: (index) ->
     switch index
@@ -286,7 +289,7 @@ class AsideEffectTetris extends AsideEffect
     @cellSize
     @onResize()
 
-    @grid = new Grid(22, 10)
+    @grid = new Grid(ROW + 2, COL)
     @rpg = new RandomPieceGenerator()
     @ai = new AI([-0.51006, 0.760666, -0.35663, -0.184483])
     @aiActive = true
@@ -300,7 +303,7 @@ class AsideEffectTetris extends AsideEffect
   reset: =>
     return @ if @alive
     @alive = true
-    @grid = new Grid(22, 10)
+    @grid = new Grid(ROW + 2, COL)
     @aiActive = true
     @currentPieces = [@rpg.next(), @rpg.next()]
     @currentIdx = 0
@@ -320,7 +323,6 @@ class AsideEffectTetris extends AsideEffect
     return @pause() unless @alive
     @grid.addPiece @currP
     @ctx.clearRect 0, 0, @canvas.width, @canvas.height
-    @ctx.fillStyle = 'rgba(255,255,255,0.5)'
 
     for i in [2...@grid.rowSize]
       for j in [0...@grid.colSize]
@@ -363,13 +365,14 @@ class AsideEffectTetris extends AsideEffect
 
   onResize: =>
     super
+    @ctx.fillStyle = 'rgba(255,255,255,0.5)'
     @width = @canvas.width
     @height = @canvas.height
-    if @width * 2 > @height
-      @cellSize = ((@height - @gap) / 20) - @gap
+    if @width * ROW > @height * COL
+      @cellSize = ((@height - @gap) / ROW) - @gap
     else
-      @cellSize = ((@width - @gap) / 10) - @gap
-    @origin.x = (@width - @cellSize * 10 - @gap * 11) / 2
-    @origin.y = @height - @cellSize * 20 - @gap * 21
+      @cellSize = ((@width - @gap) / COL) - @gap
+    @origin.x = (@width - @cellSize * COL - @gap * (COL + 1)) / 2
+    @origin.y = @height - @cellSize * ROW - @gap * (ROW + 1)
 
 exports = module.exports = AsideEffectTetris
