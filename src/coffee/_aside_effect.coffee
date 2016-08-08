@@ -16,7 +16,7 @@ class AsideEffect
 
     @bindListener()
 
-    window.addEventListener 'resize', @onResize, false
+    @canvas.addEventListener 'resize', @onResize, false
 
   bindListener: =>
     @switchElem.addEventListener 'click', @switch, false if @switchElem?
