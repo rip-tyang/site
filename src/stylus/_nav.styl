@@ -47,11 +47,15 @@ nav
     margin-right: 0
     & > section
       text-align: center
+    & > section:not(:first-child)
+      margin-top: 16px
+
+    & > section:not(:last-child)
+      margin-bottom: 16px
 
 section#logo
   line-height: 0
   font-size: 0
-  padding-bottom: 16px
 
   & > svg
     padding-right: 6px
@@ -146,8 +150,8 @@ section#description > p
   @media(max-width: 1279px)
     font-weight: lighter
     letter-spacing: 1px
-    line-height: 18px
-    font-size: 16px
+    line-height: 12px
+    font-size: 12px
 
     &:not(:last-child)
       margin-bottom: 10px
@@ -173,7 +177,7 @@ footer
 
     &::after
       position: relative
-      top: 16px
+      top: 8px
       content: 'For more information, please view this page on desktop'
       letter-spacing: 1px
       font-size: 12px
@@ -192,6 +196,12 @@ footer
   @media(max-width: 1279px)
     margin-left: auto
     margin-right: auto
+    font-size: 18px
+    line-height: 28px
+    font-weight: normal
+    height: 28px
+    width: 90px
+    border: 2px solid white
 
 #asideBG
   position: absolute
