@@ -1,8 +1,8 @@
-aside
-  position: relative
+nav
+  position: absolute
+  left: 0
   height: 100%
   width: 400px
-  float: left
 
 #corner
   position: absolute
@@ -24,7 +24,7 @@ aside
     transform: translate(0px, 0px)
 
 
-#asideContainer
+#navContainer
   position: absolute
   width: 230px
   height: calc(100% - 30px)
@@ -32,9 +32,6 @@ aside
   right: 0
   top: 0
 
-
-  &::after
-    clear: both
 
   & > section:not(:first-child)
     margin-top: 32px

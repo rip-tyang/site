@@ -16,7 +16,7 @@ module.exports =
   ]
   watch: true
   debug: true
-  devtool: 'eval'
+  devtool: 'cheap-module-source-map'
   output:
     path: paths.dest
     filename: 'main.js'

@@ -1,11 +1,10 @@
 main
   height: 100%
   width: calc(100% - 400px)
-  float: left
+  position: absolute
+  right: 0
   overflow-y: scroll
   overflow-x: hidden
-  &::after
-    clear: both
 
 #mainContainer
   width: 860px
@@ -13,9 +12,13 @@ main
   margin-left: auto
   margin-right: auto
 
+.project
+  overflow: hidden
+  margin-bottom: 196px
+
 header
   margin-bottom: 96px
-  position: relative
+  overflow: hidden
 
 .projectTitle
   font-size: 32px
@@ -40,6 +43,7 @@ header
 
 .showcase
   position: relative
+  overflow: hidden
   height: 469px
 
 .projectYear
@@ -50,8 +54,8 @@ header
   opacity: 0.5
 
 .imageFrame
-  float: right
-  margin-bottom: 196px
+  position: absolute
+  right: 0
 
 .imageWrapper
   position: absolute
