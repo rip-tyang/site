@@ -26,14 +26,14 @@ port = 5000
 ############################################
 
 
-gulp.task 'jade', ->
+gulp.task 'pug', ->
   # uncache data.coffee from require cache
-  delete require.cache[require.resolve("#{paths.src}/jade/data")]
+  delete require.cache[require.resolve("#{paths.src}/pug/data")]
 
-  gulp.src("#{paths.src}/jade/index.jade")
+  gulp.src("#{paths.src}/pug/*.pug")
     .pipe $.plumber()
-    .pipe $.jade
-      data: require("#{paths.src}/jade/data")
+    .pipe $.pug
+      locals: require("#{paths.src}/pug/data")
       pretty: true
     .pipe gulp.dest(paths.dist)
 
@@ -80,16 +80,16 @@ gulp.task 'server', ->
     http.get "http://localhost:#{port}/reload", ->
       $.util.log 'Reloading...'
 
-  gulp.watch ['src/jade/**/*'], ['jade', reload]
-  gulp.watch ['src/jade/data.coffee'], ['jade', reload]
+  gulp.watch ['src/pug/**/*'], ['pug', reload]
+  gulp.watch ['src/pug/data.coffee'], ['pug', reload]
   gulp.watch ['src/assets/**/*'], ['copy:assets', reload]
   gulp.watch ['src/miscellaneous/**'], ['copy:miscellaneous', reload]
 
 gulp.task 'build', ->
-  runSequence 'clean', ['jade', 'copy', 'webpack']
+  runSequence 'clean', ['pug', 'copy', 'webpack']
 
 gulp.task 'serve', ->
-  runSequence 'clean', ['jade', 'copy', 'server']
+  runSequence 'clean', ['pug', 'copy', 'server']
 
 ############################################
 # test
@@ -114,17 +114,17 @@ gulp.task 'dist:webpack', ->
     .pipe webpackStream(webpackConfig(option))
     .pipe gulp.dest(paths.dist)
 
-gulp.task 'dist:jade', ->
-  jade_data = require "#{paths.src}/jade/data"
+gulp.task 'dist:pug', ->
+  pug_data = require "#{paths.src}/pug/data"
   manifest_data = require "#{paths.dist}/manifest.json"
 
-  jade_data.manifest = {}
-  jade_data.manifest[key] = v for key, v of manifest_data
+  pug_data.manifest = {}
+  pug_data.manifest[key] = v for key, v of manifest_data
 
-  gulp.src("#{paths.src}/jade/index.jade")
+  gulp.src("#{paths.src}/pug/*.pug")
     .pipe $.plumber()
-    .pipe $.jade
-      data: jade_data
+    .pipe $.pug
+      locals: pug_data
     .pipe gulp.dest(paths.dist)
 
 gulp.task 'dist:copy:assets', ->
@@ -139,7 +139,7 @@ gulp.task 'dist:copy:miscellaneous', ->
 gulp.task 'dist:copy', ['dist:copy:assets', 'dist:copy:miscellaneous']
 
 gulp.task 'dist:build', ->
-  runSequence 'test', 'clean', ['dist:webpack', 'dist:copy'], 'dist:jade'
+  runSequence 'test', 'clean', ['dist:webpack', 'dist:copy'], 'dist:pug'
 
 gulp.task 'dist', ['dist:build']
 

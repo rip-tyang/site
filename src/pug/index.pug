@@ -1,9 +1,9 @@
-include template/_mixins.jade
-extends template/_default.jade
+extends template/_default.pug
+include template/_mixins.pug
 
 block append css
 block append hjs
-  +jsF('main.js')
+  +js('main.js')
 block contents
   nav.colorBg
     canvas#asideBG.colorBg.colorLight
@@ -36,7 +36,9 @@ block contents
           .showcase.colorLight
             .projectYear= project.year
             .imageFrame
-              a(href='#{project.link}')
+              a(href=project.link)
                 .imageWrapper
-                  img(src='assets/images/#{project.img}.png', alt='#{project.title}', srcset='assets/images/#{project.img}@2.png 2x')
+                  img(src=`assets/images/${project.img}.png`,
+                      alt=project.title,
+                      srcset=`assets/images/${project.img}@2.png 2x`)
               include svg/frame.svg

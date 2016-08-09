@@ -1,0 +1,17 @@
+mixin ex_js(url)
+  script(src=url, type='text/javascript' charset='utf-8')
+
+mixin js(url)
+  if manifest
+    script(src=manifest[url], type='text/javascript' charset='utf-8')
+  else
+    script(src=url, type='text/javascript' charset='utf-8')
+
+mixin lib(url)
+  script(src=`lib/${url}.min.js`, type='text/javascript' charset='utf-8')
+
+mixin css(url)
+  link(type='text/css',href=`css/${url}.css`,rel='stylesheet')
+
+mixin ex_css(url)
+  link(type='text/css',href=url,rel='stylesheet')
