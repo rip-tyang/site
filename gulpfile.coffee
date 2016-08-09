@@ -1,37 +1,32 @@
 require 'coffee-script/register'
+fs = require 'fs'
+path = require 'path'
 gulp = require 'gulp'
 $ = require('gulp-load-plugins')()
 del = require 'del'
 runSequence = require 'run-sequence'
 webpack = require 'webpack'
 WebpackDevServer = require 'webpack-dev-server'
-webpack_dev_config = require './webpack.config'
-webpack_dev_runner = webpack webpack_dev_config
-webpack_dist_config = require './webpack.config.dist'
-webpack_stream = require 'webpack-stream'
+webpackConfig = require './webpack.config'
+webpackStream = require 'webpack-stream'
 http = require 'http'
-
-# web server handle
-wds = null
 
 paths =
   src: './src'
   dist: './dist'
 
+entry = fs.readdirSync path.join(paths.src, 'coffee')
+  .filter (e) -> /\.coffee$/.test e
+  .filter (e) -> !(/^_/.test(e))
+  .map (e) -> e[0..-8]
+
+port = 5000
 ############################################
 # dev
 ############################################
 
 
-gulp.task 'webpack', () ->
-  webpack_dev_runner.run (err, stats) ->
-    throw new $.util.PluginError('webpack', err) if err
-    $.util.log "[webpack]", stats.toString
-      colors: true
-      source: true
-      timings: true
-
-gulp.task 'jade', () ->
+gulp.task 'jade', ->
   # uncache data.coffee from require cache
   delete require.cache[require.resolve("#{paths.src}/jade/data")]
 
@@ -42,20 +37,20 @@ gulp.task 'jade', () ->
       pretty: true
     .pipe gulp.dest(paths.dist)
 
-gulp.task 'copy:assets', () ->
+gulp.task 'copy:assets', ->
   gulp.src("#{paths.src}/assets/**/*", { base: paths.src })
     .pipe gulp.dest(paths.dist)
 
-gulp.task 'copy:miscellaneous', () ->
+gulp.task 'copy:miscellaneous', ->
   gulp.src("#{paths.src}/miscellaneous/**/*",
-    {base: "#{paths.src}/miscellaneous"})
+    { base: "#{paths.src}/miscellaneous" })
     .pipe gulp.dest(paths.dist)
 
 gulp.task 'copy', ['copy:assets', 'copy:miscellaneous']
 
 gulp.task 'clean', del.bind(null, [paths.dist])
 
-gulp.task 'server', () ->
+gulp.task 'server', ->
   config =
     contentBase: paths.dist
     proxy: require './proxy'
@@ -65,6 +60,13 @@ gulp.task 'server', () ->
       assets: true
       hash: true
       chunks: false
+
+  option =
+    build: 'debug'
+    port: port
+    entry: entry
+
+  webpack_dev_runner = webpack webpackConfig(option)
   wds = new WebpackDevServer(webpack_dev_runner, config)
 
   # reload browser when changes detected
@@ -74,8 +76,8 @@ gulp.task 'server', () ->
   wds.listen 5000, 'localhost', (err) ->
     throw new $.util.PluginError('webpack-dev-server', err) if err
 
-  reload = () ->
-    http.get 'http://localhost:5000/reload', () ->
+  reload = ->
+    http.get "http://localhost:#{port}/reload", ->
       $.util.log 'Reloading...'
 
   gulp.watch ['src/jade/**/*'], ['jade', reload]
@@ -83,31 +85,36 @@ gulp.task 'server', () ->
   gulp.watch ['src/assets/**/*'], ['copy:assets', reload]
   gulp.watch ['src/miscellaneous/**'], ['copy:miscellaneous', reload]
 
-gulp.task 'build', () ->
+gulp.task 'build', ->
   runSequence 'clean', ['jade', 'copy', 'webpack']
 
-gulp.task 'serve', () ->
+gulp.task 'serve', ->
   runSequence 'clean', ['jade', 'copy', 'server']
 
 ############################################
 # test
 ############################################
 
-gulp.task 'test', () ->
-  gulp.src('src/coffee/test/*', {read: false})
-    .pipe $.mocha({reporter: 'nyan'})
+gulp.task 'test', ->
+  gulp.src('src/coffee/test/*', { read: false })
+    .pipe $.mocha({ reporter: 'nyan' })
 
 
 ############################################
 # dist
 ############################################
 
-gulp.task 'dist:webpack', () ->
+gulp.task 'dist:webpack', ->
+  option =
+    build: 'production'
+    port: port
+    entry: entry
+
   gulp.src "#{paths.src}/coffee/main.js"
-    .pipe webpack_stream(webpack_dist_config)
+    .pipe webpackStream(webpackConfig(option))
     .pipe gulp.dest(paths.dist)
 
-gulp.task 'dist:jade', () ->
+gulp.task 'dist:jade', ->
   jade_data = require "#{paths.src}/jade/data"
   manifest_data = require "#{paths.dist}/manifest.json"
 
@@ -120,18 +127,18 @@ gulp.task 'dist:jade', () ->
       data: jade_data
     .pipe gulp.dest(paths.dist)
 
-gulp.task 'dist:copy:assets', () ->
+gulp.task 'dist:copy:assets', ->
   gulp.src("#{paths.src}/assets/**/*", { base: paths.src })
     .pipe gulp.dest(paths.dist)
 
-gulp.task 'dist:copy:miscellaneous', () ->
+gulp.task 'dist:copy:miscellaneous', ->
   gulp.src("#{paths.src}/miscellaneous/**/*",
-    {base: "#{paths.src}/miscellaneous"})
+    { base: "#{paths.src}/miscellaneous" })
     .pipe gulp.dest(paths.dist)
 
 gulp.task 'dist:copy', ['dist:copy:assets', 'dist:copy:miscellaneous']
 
-gulp.task 'dist:build', () ->
+gulp.task 'dist:build', ->
   runSequence 'test', 'clean', ['dist:webpack', 'dist:copy'], 'dist:jade'
 
 gulp.task 'dist', ['dist:build']
