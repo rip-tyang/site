@@ -305,10 +305,12 @@ class AsideEffectTetris extends AsideEffect
     return @ if @alive
     @alive = true
     @grid = new Grid(ROW + 2, COL)
-    @aiActive = true
+    if !@aiActive
+      @aiActive = true
+      window.removeEventListener 'keydown', @onKeyDown
     @currentPieces = [@rpg.next(), @rpg.next()]
     @currentIdx = 0
-    @currP = if @aiActive then @aiMove() else @currentPieces[@currentIdx]
+    @currP = @aiMove()
     @score = 0
     @
 
@@ -338,6 +340,10 @@ class AsideEffectTetris extends AsideEffect
 
   switch: =>
     @aiActive = !@aiActive
+    if @aiActive
+      window.removeEventListener 'keydown', @onKeyDown
+    else
+      window.addEventListener 'keydown', @onKeyDown
 
   gravity: =>
     if @grid.canMoveDown @currP
@@ -364,6 +370,21 @@ class AsideEffectTetris extends AsideEffect
         res = tmp
         @currentIdx = i
     res.piece
+
+  onKeyDown: (e) =>
+    return unless @currP
+    switch e.keyCode
+      # left
+      when 37 then --@currP.column if @grid.canMoveLeft @currP
+      # up
+      when 38
+        if p = @grid.rotateOffset @currP
+          @currP.rotate(true)
+          @currP.row += p.rowOffset
+          @currP.column += p.columnOffset
+      # right
+      when 39 then ++@currP.column if @grid.canMoveRight @currP
+      when 40 then ++@currP.row while @grid.canMoveDown @currP
 
   onResize: =>
     super

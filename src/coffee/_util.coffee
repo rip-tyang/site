@@ -45,18 +45,17 @@ class Util
       return _arr = _arr.map @cloneArray
     else if typeof arr is 'object'
       throw Error 'Cannot clone nested array with object'
-    else
-      return arr
+    else return arr
 
-  # rotate a square 2d array in clockwise direction
   @isSquareArray: (arr) ->
     Array.isArray(arr) &&
     Array.isArray(arr[0]) &&
     arr.length is arr[0].length
 
+  # rotate a square 2d array in clockwise direction
   @rotateArrayClockwise: (arr) ->
     if not @isSquareArray arr
-      throw Error 'Not a 2 dimensional array'
+      throw Error 'Not a square array'
 
     size = arr.length
     center = ~~(size / 2)
@@ -73,9 +72,10 @@ class Util
          arr[i][j] ]
     arr
 
+  # rotate a square 2d array in counter clockwise direction
   @rotateArrayCounterClockwise: (arr) ->
     if not @isSquareArray arr
-      throw Error 'Not a 2 dimensional array'
+      throw Error 'Not a square array'
 
     size = arr.length
     center = ~~(size / 2)
