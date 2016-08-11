@@ -10,6 +10,8 @@ class Util
   # Util.arr(2) -> [0, 0]
   # Util.arr(2, 3) -> [[0,0,0],[0,0,0]]
   # Util.arr(2, 3, function (a, b) { return a + b; }) -> [[0,1,2], [1,2,3]]
+
+  # looks fancy but slow!!!!!
   @arr: (size, other..., v) ->
     # arr() -> []
     return [] unless size?

@@ -6,7 +6,7 @@ ROW = 25
 COL = 10
 
 class Piece
-  constructor: (@cells) ->
+  constructor: (@varience, @cells) ->
     @dimension = @cells.length
     @row = 0
     #Centralize
@@ -15,39 +15,39 @@ class Piece
   @fromIndex: (index) ->
     switch index
       # 0
-      when 0 then new @([ [1, 1], [1, 1] ])
+      when 0 then new @(1, [ [1, 1], [1, 1] ])
       # J
-      when 1 then new @([
+      when 1 then new @(4, [
         [1, 0, 0]
         [1, 1, 1]
         [0, 0, 0]
       ])
       # L
-      when 2 then new @([
+      when 2 then new @(4, [
         [0, 0, 1]
         [1, 1, 1]
         [0, 0, 0]
       ])
       # Z
-      when 3 then new @([
+      when 3 then new @(2, [
         [1, 1, 0]
         [0, 1, 1]
         [0, 0, 0]
       ])
       # S
-      when 4 then new @([
+      when 4 then new @(2, [
         [0, 1, 1]
         [1, 1, 0]
         [0, 0, 0]
       ])
       # T
-      when 5 then new @([
+      when 5 then new @(4, [
         [0, 1, 0]
         [1, 1, 1]
         [0, 0, 0]
       ])
       # I
-      when 6 then new @([
+      when 6 then new @(2, [
         [0, 0, 0, 0]
         [1, 1, 1, 1]
         [0, 0, 0, 0]
@@ -55,7 +55,10 @@ class Piece
       ])
 
   clone: =>
-    piece = new Piece(_.cloneArray(@cells))
+    c = @cells.slice 0
+    for i in [0...@dimension]
+      c[i] = @cells[i].slice 0
+    piece = new Piece(@variance, c)
     piece.row = @row
     piece.column = @column
     piece
@@ -75,7 +78,6 @@ class Piece
       rowOffset: @row - p.row
       columnOffset: @column - p.column
     }
-
 
 class RandomPieceGenerator
   constructor: ->
@@ -110,7 +112,7 @@ class Grid
   clearLines: =>
     dis = 0
     for i in [@rowSize - 1..0]
-      if @isLine(i)
+      if @isLine i
         ++dis
         for j in [0...@colSize]
           @cells[i][j] = 0
@@ -127,27 +129,27 @@ class Grid
     !@isEmptyRow(0) || !@isEmptyRow(1)
 
   calcFeatures: =>
-    rowCount = _.arr @rowSize
-    colHeight = _.arr @colSize
+    colHeight = Array @colSize
+    cumulatedHeight = 0
     bumpiness = 0
     holes = 0
     lines = 0
+
+    colHeight[j] = 0 for j in [0...@colSize]
 
     for j in [0...@colSize]
       block = false
       for i in [0...@rowSize]
         block |= @cells[i][j] is 1
-        rowCount[i] += @cells[i][j]
-        colHeight[j] ||= (@rowSize - i) if @cells[i][j] is 1
-        holes += (1 - @cells[i][j]) if block
+        @cells[i][j] isnt 1 || (colHeight[j] ||= (@rowSize - i))
+        !block || holes += (1 - @cells[i][j])
+      cumulatedHeight += colHeight[j]
 
     for i in [0...@rowSize]
-      ++lines if rowCount[i] is @colSize
+      ++lines if @isLine i
 
     for i in [0...@colSize - 1]
       bumpiness += Math.abs(colHeight[i] - colHeight[i + 1])
-
-    cumulatedHeight = colHeight.reduce (p, c) -> p + c
 
     [cumulatedHeight, lines, holes, bumpiness]
 
@@ -262,15 +264,16 @@ class AI
       --_p.column while grid.canMoveLeft _p
 
       while grid.valid _p
-        _tp = _p.clone()
-        ++_tp.row while grid.canMoveDown _tp
+        ++_p.row while grid.canMoveDown _p
 
-        grid.addPiece _tp
+        grid.addPiece _p
 
         score = grid.calcFeatures().reduce((p, c, i) =>
           p + c * @weights[i]
         , 0)
-        grid.removePiece _tp
+        grid.removePiece _p
+
+        _p.row = originalP.row
 
         if score > highestScore
           bestPiece = _p.clone()
