@@ -94,20 +94,17 @@ class RandomPieceGenerator
 class Grid
   constructor: (@rowSize, @colSize) ->
     @cells = _.arr @rowSize, @colSize
+    @rows = _.arr @rowSize
 
   # too memory intensive
   # clone: =>
   #   new Grid @rowSize, @colSize, @cells
 
   isLine: (row) =>
-    for i in [0...@colSize]
-      return false if @cells[row][i] is 0
-    return true
+    @rows[row] is @colSize
 
   isEmptyRow: (row) =>
-    for i in [0...@colSize]
-      return false if @cells[row][i] is 1
-    return true
+    @rows[row] is 0
 
   # return how many lines cleared
   clearLines: =>
@@ -117,10 +114,13 @@ class Grid
         ++dis
         for j in [0...@colSize]
           @cells[i][j] = 0
+        @rows[i] = 0
       else if dis > 0
         for j in [0...@colSize]
           @cells[i + dis][j] = @cells[i][j]
           @cells[i][j] = 0
+        @rows[i + dis] = @rows[i]
+        @rows[i] = 0
     dis
 
   overflowed: =>
@@ -156,14 +156,18 @@ class Grid
       for j in [0...p.dimension]
         r = p.row + i
         c = p.column + j
-        @cells[r][c] = 1 if p.cells[i][j] is 1 and r > 0
+        if p.cells[i][j] is 1
+          @cells[r][c] = 1
+          ++@rows[r]
     @
   removePiece: (p) =>
     for i in [0...p.dimension]
       for j in [0...p.dimension]
         r = p.row + i
         c = p.column + j
-        @cells[r][c] = 0 if p.cells[i][j] is 1 and r > 0
+        if p.cells[i][j] is 1
+          @cells[r][c] = 0
+          --@rows[r]
     @
 
   valid: (p) =>
@@ -337,6 +341,31 @@ class AsideEffectTetris extends AsideEffect
             @cellSize)
 
     @grid.removePiece @currP
+
+  # TODO
+  # instead of erase the whole grid
+  # erase the current piece and re-draw it after tick
+  # erasePiece: (p) =>
+  #   for i in [0...p.dimension]
+  #     for j in [0...p.dimension]
+  #       if p.cells[i][j] is 1
+  #         r = p.row + i
+  #         c = p.column + j
+  #         @ctx.clearRect(@origin.x + @cellSize * c + @gap * (c + 1),
+  #           @origin.y + @cellSize * (r - 2) + @gap * (r - 1),
+  #           @cellSize,
+  #           @cellSize)
+
+  # drawPiece: (p) =>
+  #   for i in [0...p.dimension]
+  #     for j in [0...p.dimension]
+  #       if p.cells[i][j] is 1
+  #         r = p.row + i
+  #         c = p.column + j
+  #         @ctx.fillRect(@origin.x + @cellSize * c + @gap * (c + 1),
+  #           @origin.y + @cellSize * (r - 2) + @gap * (r - 1),
+  #           @cellSize,
+  #           @cellSize)
 
   switch: =>
     @aiActive = !@aiActive
