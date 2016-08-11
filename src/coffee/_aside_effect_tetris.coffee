@@ -298,9 +298,10 @@ class AsideEffectTetris extends AsideEffect
     @currP = if @aiActive then @aiMove() else @currentPieces[@currentIdx]
     @score = 0
     @alive = true
-    @reset()
 
   reset: =>
+    super
+    @ctx.fillStyle = 'rgba(255,255,255,0.5)'
     return @ if @alive
     @alive = true
     @grid = new Grid(ROW + 2, COL)
@@ -319,6 +320,7 @@ class AsideEffectTetris extends AsideEffect
     @
 
   tick: =>
+    super
     @gravity()
     return @pause() unless @alive
     @grid.addPiece @currP
@@ -365,7 +367,6 @@ class AsideEffectTetris extends AsideEffect
 
   onResize: =>
     super
-    @ctx.fillStyle = 'rgba(255,255,255,0.5)'
     @width = @canvas.width
     @height = @canvas.height
     if @width * ROW > @height * COL

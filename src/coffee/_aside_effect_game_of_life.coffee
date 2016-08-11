@@ -115,10 +115,15 @@ class AsideEffectGameOfLife extends AsideEffect
   switch: =>
     @toggle()
 
+  reset: =>
+    super
+    @ctx.fillStyle = 'rgba(255,255,255,0.5)'
+    @
+
   tick: =>
+    super
     @g.update()
     @ctx.clearRect 0, 0, @canvas.width, @canvas.height
-    @ctx.fillStyle = 'rgba(255,255,255,0.5)'
 
     for i in [1..@rowSize]
       for j in [1..@colSize]

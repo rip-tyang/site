@@ -31,8 +31,8 @@ class AsideEffectRandomWalk extends AsideEffect
     @isPaused = !@isPaused
 
   tick: =>
+    super
     @ctx.clearRect 0, 0, @canvas.width, @canvas.height
-    @fCtx.strokeStyle = 'rgba(255, 255, 255, .2)'
 
     if !@isPaused
       @fCtx.beginPath()
@@ -65,8 +65,8 @@ class AsideEffectRandomWalk extends AsideEffect
         0,
         2 * Math.PI)
       @ctx.stroke()
+      @ctx.strokeStyle = 'rgba(255, 255, 255, 1)'
 
-    @ctx.strokeStyle = 'rgba(255, 255, 255, 1)'
     @ctx.beginPath()
     @ctx.arc(
       @cursor.x,
@@ -76,6 +76,12 @@ class AsideEffectRandomWalk extends AsideEffect
       2 * Math.PI)
     @ctx.stroke()
     @ctx.drawImage @firstLayer, 0, 0
+
+  reset: =>
+    super
+    @fCtx.strokeStyle = 'rgba(255, 255, 255, .2)'
+    @ctx.strokeStyle = 'rgba(255, 255, 255, 1)'
+    @
 
   onResize: =>
     super

@@ -13,10 +13,11 @@ class AsideEffect
 
     @delay
     @loopId
+    @needResize = false
 
     @bindListener()
 
-    @canvas.addEventListener 'resize', @onResize, false
+    window.addEventListener 'resize', @checkResize, false
 
   bindListener: =>
     @switchElem.addEventListener 'click', @switch, false if @switchElem?
@@ -29,6 +30,10 @@ class AsideEffect
     @
 
   tick: =>
+    if @needResize
+      @onResize()
+      @reset()
+      @needResize = false
     @
 
   play: =>
@@ -52,6 +57,12 @@ class AsideEffect
 
   toggle: =>
     if @loopId then @pause() else @play()
+
+  checkResize: =>
+    return if @needResize
+    rect = @canvas.getBoundingClientRect()
+    if rect.width isnt @canvas.width || rect.height isnt @canvas.height
+      @needResize = true
 
   onResize: =>
     rect = @canvas.getBoundingClientRect()

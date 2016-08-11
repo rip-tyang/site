@@ -18,8 +18,8 @@ class AsideEffectSnow extends AsideEffect
     @onResize()
 
   tick: =>
+    super
     @ctx.clearRect 0, 0, @canvas.width, @canvas.height
-    @ctx.fillStyle = 'rgba(255,255,255,0.5)'
     @ctx.beginPath()
 
     for p in @particles
@@ -28,6 +28,11 @@ class AsideEffectSnow extends AsideEffect
 
     @ctx.fill()
     @update()
+
+  reset: =>
+    super
+    @ctx.fillStyle = 'rgba(255,255,255,0.5)'
+    @
 
   switch: =>
     @mod = -@mod

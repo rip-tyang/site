@@ -34,7 +34,7 @@ class AsideEffectGenerator
 
   next: =>
     ++@idx
-    @idx = if @idx >= @effects.length then 0 else @idx
+    @idx %= @effects.length
     @hashtagManager.setHash 'game', @idx
 
   play: =>
