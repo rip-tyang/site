@@ -1,0 +1,69 @@
+==================================================================
+https://keybase.io/quarter2twelve
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://thomas-yang.me
+  * I am quarter2twelve (https://keybase.io/quarter2twelve) on keybase.
+  * I have a public key with fingerprint B181 F55C FE47 EB29 44BD  BF3C 117C BE72 55B1 AA6C
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101d6859230fd719e2df3c88438ae1c44e88bd2d4a864b2cb18c551cc0ea3d576db0a",
+            "fingerprint": "b181f55cfe47eb2944bdbf3c117cbe7255b1aa6c",
+            "host": "keybase.io",
+            "key_id": "117cbe7255b1aa6c",
+            "kid": "0101d6859230fd719e2df3c88438ae1c44e88bd2d4a864b2cb18c551cc0ea3d576db0a",
+            "uid": "bcfb800bb4afacb4d10b30523476af19",
+            "username": "quarter2twelve"
+        },
+        "service": {
+            "hostname": "thomas-yang.me",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1471980774,
+    "expire_in": 157680000,
+    "prev": "b16cae9fd39dd8949c944fbf7eab9342bcb4a11266ee1cbf425d36756ba73396",
+    "seqno": 3,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.56
+Comment: https://keybase.io/crypto
+
+yMIsAnicrVJdSBVBGL3+5EUpqIwgysqth7Cr7OzO/t0siMICH/onjOoyszN7XdTd
+6+5eTcWoLHqMLDEMLNEHycgMwwJBKzFTJM0EsVAqiH4QlSgIoZoVe+uxp2G+75wz
+53zz9a1ICqQl1KXyWxqzmzoThp40xgPHu1s+VnHYJhVcuIoroosHLSbU9SJFJuHC
+HA94QGRV0gSRN4gCNCoQQ9RVFYoqokCHkKoqJgKBSJUhFnQMVF2SgK7zFIlEUmSC
+ecSFOMO0otSJOablMVmGAoYk6QaFCsWCBiEmmOkCoOiYKoIkYYCQrDNioe36DGYO
+I5fmmDarsUtk0d4/8P/Zd3xRDusGVnkeY4gMpGNIAI9FXhJEqMjIAJoPdKljoRLK
+0KVx5HjUEbxyWlxGueoQx3plpk798fp5lnBeoV2C3OwKZEVzWCHExRzbs3W7mPUK
+PS8W9qleRczHllMcWVKJYNMibJyMUEYd17QtLgwYUvdMXxZAFlflFQWGOHomZjo0
+YvoIlolF4Hn/GVq2+AmyjqhmEFEjRNWgprN/MLChUIQ1EQqYBUUACLJM2cSwAQWJ
+iLIiyRgpoqjJnJ+r1LK5sMhsoiiTdM2ohby4w0I/7T2ZHEhIC6QsS/TXLJCWuvLv
+8q3jgr+0hYMTHR1Psurn7s+Pet1Z8pX5D86zzhdfQkc+1my8dez0GJrqzAwPR3eu
+Wd837GYU1W9ffm/zVHpaTnBkLX+o6bSZPnYzWt7oJl5ZVhWf7h/4PNL6eCi15JSy
+tWn00czo4eSMhZkf9enhht2vfr/oSxrqqemH73atKAicu9A5CLLGZ7ddul7RcKKu
+73xHTVBtvvr9gYVrj17bW81fznvelr+/qfdl2+TQeFvB7ks/W8YGEr+u2nAWBPsT
+yY7q61Ku+6YuHNjxsDK/fM/t5Q3tXQM3J96ONTTj11tbc89NDhbOfd6ceffOpva8
+5n17p99/m7tx8WxWc8/qTwdmU551ubWVmX8AgZ9K1A==
+=37jT
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/quarter2twelve
+
+==================================================================
+
