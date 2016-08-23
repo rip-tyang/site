@@ -30,7 +30,7 @@ gulp.task 'pug', ->
   # uncache data.coffee from require cache
   delete require.cache[require.resolve("#{paths.src}/pug/data")]
 
-  gulp.src("#{paths.src}/pug/*.pug")
+  gulp.src("#{paths.src}/pug/[^_]*.pug")
     .pipe $.plumber()
     .pipe $.pug
       locals: require("#{paths.src}/pug/data")
@@ -121,7 +121,7 @@ gulp.task 'dist:pug', ->
   pug_data.manifest = {}
   pug_data.manifest[key] = v for key, v of manifest_data
 
-  gulp.src("#{paths.src}/pug/*.pug")
+  gulp.src("#{paths.src}/pug/[^_]*.pug")
     .pipe $.plumber()
     .pipe $.pug
       locals: pug_data
