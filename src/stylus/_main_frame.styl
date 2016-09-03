@@ -1,5 +1,5 @@
 main
-  @media(max-width: 1279px)
+  @media(max-width: 720px)
     display: none
   height: 100%
   width: calc(100% - 400px)
@@ -7,19 +7,21 @@ main
   right: 0
   overflow-y: scroll
   overflow-x: hidden
+  font-size: 14px
 
 #mainContainer
-  width: 860px
+  width: 80%
+  max-width: 860px
   margin-top: 72px
   margin-left: auto
   margin-right: auto
 
 .project
   overflow: hidden
-  margin-bottom: 196px
+  margin-bottom: 15%
 
 header
-  margin-bottom: 96px
+  margin-bottom: 6%
   overflow: hidden
 
 .projectTitle
@@ -45,32 +47,36 @@ header
 
 .showcase
   position: relative
-  overflow: hidden
-  height: 469px
+  display: flex
+  justify-content: space-between
+  width: 100%
 
 .projectYear
-  position: absolute
   top: 2px
   font-size: 24px
   font-weight: bold
   opacity: 0.5
 
 .imageFrame
-  position: absolute
-  right: 0
+  max-width: 720px
+  width: calc(100% - 64px)
+
+  svg, a
+    width: 100%
+    display: block
 
 .imageWrapper
   position: absolute
-  margin-top: 33px
-  width: 720px
-  height: 400px
+  top: 7.068%
   overflow: hidden
   background-color: #333
 
 .imageWrapper > img
-  width: 720px
+  display: block
+  width: 100%
   position: relative
   transition: transform .4s cubic-bezier(0.4, 0, 0.2, 1), opacity .4s cubic-bezier(0.4, 0, 0.2, 1)
+
 
   &:hover
     transform: scale(1.05)
