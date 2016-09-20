@@ -41,6 +41,14 @@ exports = module.exports =
       link_class: 'email'
       icon_class: 'fa-paper-plane'
   projects:
+    iCode:
+      title: 'iCode'
+      description: 'Minimalist, punctuation mark only poster
+                    generator using your own source code.
+                    Can you tell what language it is only by punctation marks?'
+      img: 'iCode'
+      link: '/projects/iCode'
+      year: '2016'
     AmazonMovieReviewVis:
       title: 'Movie Review Vis'
       description: 'Amazon movie reviews in calendar view,
