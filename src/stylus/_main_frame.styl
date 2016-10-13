@@ -1,6 +1,4 @@
 main
-  @media(max-width: 720px)
-    display: none
   height: 100%
   width: calc(100% - 400px)
   position: absolute
@@ -8,6 +6,11 @@ main
   overflow-y: scroll
   overflow-x: hidden
   font-size: 14px
+  @media(max-width: 900px)
+    position: initial
+    overflow: initial
+    height: initial
+    width: 100%
 
 #mainContainer
   width: 80%
@@ -15,6 +18,8 @@ main
   margin-top: 72px
   margin-left: auto
   margin-right: auto
+  @media(max-width: 900px)
+    width: 90%
 
 .project
   overflow: hidden
@@ -39,11 +44,24 @@ header
     margin-left: 16px
     margin-right: 16px
 
+  @media(max-width: 900px)
+    font-size: 18px
+    line-height: 24px
+    &::after
+      height: 22px
+      width: 2px
+      margin-left: 8px
+      margin-right: 8px
+
 .projectDesc
   margin-left: 34px
   font-size: 16px
   line-height: 24px
   letter-spacing: 0.5px
+  @media(max-width: 900px)
+    margin-left: 20px
+    font-size: 12px
+    line-height: 18px
 
 .showcase
   position: relative
@@ -56,10 +74,14 @@ header
   font-size: 24px
   font-weight: bold
   opacity: 0.5
+  @media(max-width: 900px)
+    display: none
 
 .imageFrame
-  max-width: 720px
+  max-width: 900px
   width: calc(100% - 64px)
+  @media(max-width: 900px)
+    width: 100%
 
   svg, a
     width: 100%

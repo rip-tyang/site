@@ -4,8 +4,9 @@ nav
   height: 100%
   width: 400px
 
-  @media(max-width: 720px)
+  @media(max-width: 900px)
     width: 100%
+    position: relative
 
 #corner
   position: absolute
@@ -41,7 +42,7 @@ nav
   & > section:not(:last-child)
     margin-bottom: 32px
 
-  @media(max-width: 720px)
+  @media(max-width: 900px)
     width: 100%
     margin-left: 0
     margin-right: 0
@@ -150,7 +151,7 @@ section#description > p
   &:not(:last-child)
     margin-bottom: 8px
 
-  @media(max-width: 720px)
+  @media(max-width: 900px)
     font-weight: lighter
     letter-spacing: 1px
     line-height: 12px
@@ -172,19 +173,11 @@ footer
     font-size: 16px
     margin-top: 20px
 
-  @media(max-width: 720px)
+  @media(max-width: 900px)
     width: 100%
     margin-left: auto
     margin-right: auto
     text-align: center
-
-    &::after
-      position: relative
-      top: 8px
-      content: 'For more information, please view this page on desktop'
-      letter-spacing: 1px
-      font-size: 12px
-      font-weight: lighter
 
 #resume
   display: block
@@ -196,7 +189,7 @@ footer
   font-weight: bold
   text-align: center
 
-  @media(max-width: 720px)
+  @media(max-width: 900px)
     margin-left: auto
     margin-right: auto
     font-size: 18px
