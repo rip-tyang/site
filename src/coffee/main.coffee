@@ -10,10 +10,6 @@ HashtagManager = require './_hashtag_manager'
 
 new Banner()
 
-removeCornerShowClass = (e) ->
-  @removeEventListener e.type, arguments.callee
-  @classList.remove 'cornerShow'
-
 domready ->
   $corner = document.getElementById 'corner'
   $canvas = document.getElementById 'asideBG'
@@ -38,9 +34,3 @@ domready ->
     nextTrigger: $logos.children[1]
     hash: hashtagManager
   effectGenerator = new AsideEffectGenerator(effectGeneratorConfig)
-
-  # color switch corner init
-  # show in the begining
-  # hide when mouseout for the first time
-  # show when hovering
-  $corner.addEventListener 'mouseout', removeCornerShowClass, false
