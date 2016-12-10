@@ -2,7 +2,8 @@ AsideEffectSnow = require './_aside_effect_snow'
 AsideEffectTetris = require './_aside_effect_tetris'
 AsideEffectGameOfLife = require './_aside_effect_game_of_life'
 AsideEffectRandomWalk = require './_aside_effect_random_walk'
-AsideEffectPerlin = require './_aside_effect_perlin'
+# comment for not cool
+# AsideEffectPerlin = require './_aside_effect_perlin'
 
 class AsideEffectGenerator
   constructor: (option = {}) ->
@@ -11,7 +12,8 @@ class AsideEffectGenerator
       AsideEffectTetris
       AsideEffectGameOfLife
       AsideEffectRandomWalk
-      AsideEffectPerlin
+      # comment for not cool
+      # AsideEffectPerlin
     ]
     @curr = null
     @instance = Array @effects.length
