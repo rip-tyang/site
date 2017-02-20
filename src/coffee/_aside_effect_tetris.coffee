@@ -302,6 +302,8 @@ class AsideEffectTetris extends AsideEffect
     @aiActive = true
     @currentPieces = [@rpg.next(), @rpg.next()]
     @currentIdx = 0
+    @tickPerAction = 0
+    @currentTick = 0
     @currP = if @aiActive then @aiMove() else @currentPieces[@currentIdx]
     @score = 0
     @alive = true
@@ -314,6 +316,7 @@ class AsideEffectTetris extends AsideEffect
     @grid = new Grid(ROW + 2, COL)
     if !@aiActive
       @aiActive = true
+      @tickPerAction = 0
       window.removeEventListener 'keydown', @onKeyDown
     @currentPieces = [@rpg.next(), @rpg.next()]
     @currentIdx = 0
@@ -330,6 +333,10 @@ class AsideEffectTetris extends AsideEffect
 
   tick: =>
     super
+    @update @currentTick++
+
+  update: (tick) =>
+    return if tick & @tickPerAction
     @gravity()
     return @pause() unless @alive
     @grid.addPiece @currP
@@ -372,6 +379,7 @@ class AsideEffectTetris extends AsideEffect
 
   switch: =>
     @aiActive = !@aiActive
+    @tickPerAction ^= 0x07
     if @aiActive
       window.removeEventListener 'keydown', @onKeyDown
     else
