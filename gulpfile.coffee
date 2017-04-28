@@ -8,7 +8,6 @@ runSequence = require 'run-sequence'
 webpack = require 'webpack'
 WebpackDevServer = require 'webpack-dev-server'
 webpackConfig = require './webpack.config'
-webpackStream = require 'webpack-stream'
 http = require 'http'
 
 paths =
@@ -30,7 +29,7 @@ gulp.task 'pug', ->
   # uncache data.coffee from require cache
   delete require.cache[require.resolve("#{paths.src}/pug/data")]
 
-  gulp.src("#{paths.src}/pug/[^_]*.pug")
+  gulp.src "#{paths.src}/pug/[^_]*.pug"
     .pipe $.plumber()
     .pipe $.pug
       locals: require("#{paths.src}/pug/data")
@@ -38,7 +37,7 @@ gulp.task 'pug', ->
     .pipe gulp.dest(paths.dist)
 
 gulp.task 'copy:assets', ->
-  gulp.src("#{paths.src}/assets/**/*", { base: paths.src })
+  gulp.src "#{paths.src}/assets/**/*", { base: paths.src }
     .pipe gulp.dest(paths.dist)
 
 gulp.task 'copy:miscellaneous', ->
@@ -96,23 +95,32 @@ gulp.task 'serve', ->
 ############################################
 
 gulp.task 'test', ->
-  gulp.src('src/coffee/test/*', { read: false })
-    .pipe $.mocha({ reporter: 'nyan' })
-
+  gulp.src 'src/coffee/test/*', { read: false }
+    .pipe $.mocha({
+      reporter: 'nyan'
+      compilers: 'coffee:coffee-script/register'
+    })
 
 ############################################
 # dist
 ############################################
 
-gulp.task 'dist:webpack', ->
+gulp.task 'dist:webpack', (cb) ->
   option =
     build: 'production'
     port: port
     entry: entry
 
-  gulp.src "#{paths.src}/coffee/main.js"
-    .pipe webpackStream(webpackConfig(option))
-    .pipe gulp.dest(paths.dist)
+  webpack webpackConfig(option), (err, stats) ->
+    throw new $.util.PluginError('webpack', err) if err
+    $.util.log '[webpack]', stats.toString({
+      colors: true
+      timings: true
+      assets: true
+      hash: true
+      chunks: false
+    })
+    cb()
 
 gulp.task 'dist:pug', ->
   pug_data = require "#{paths.src}/pug/data"
@@ -121,14 +129,14 @@ gulp.task 'dist:pug', ->
   pug_data.manifest = {}
   pug_data.manifest[key] = v for key, v of manifest_data
 
-  gulp.src("#{paths.src}/pug/[^_]*.pug")
+  gulp.src "#{paths.src}/pug/[^_]*.pug"
     .pipe $.plumber()
     .pipe $.pug
       locals: pug_data
     .pipe gulp.dest(paths.dist)
 
 gulp.task 'dist:copy:assets', ->
-  gulp.src("#{paths.src}/assets/**/*", { base: paths.src })
+  gulp.src "#{paths.src}/assets/**/*", { base: paths.src }
     .pipe gulp.dest(paths.dist)
 
 gulp.task 'dist:copy:miscellaneous', ->
