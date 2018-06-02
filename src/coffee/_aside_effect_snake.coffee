@@ -147,6 +147,41 @@ class Grid
       break if next.equal start
     [path, pIndex]
 
+  makeSimplePath: =>
+    step = 0
+    boundary = [@column * 2 - 1, 1]
+    path = _.arr @row * 2, @column * 2, -> -1
+    pIndex = []
+    idx = 0
+    curr = new Point(@row, 0)
+
+    loop
+      path[curr.x][curr.y] = idx++
+      pIndex.push curr
+      break if curr.x == 0
+      curr = curr.up()
+
+    curr = curr.right()
+
+    loop
+      loop
+        path[curr.x][curr.y] = idx++
+        pIndex.push curr
+        break if curr.y == boundary[step]
+        curr = if step == 0 then curr.right() else curr.left()
+      break if curr.x == @row * 2 - 1
+      curr = curr.down()
+      step = (step + 1) % 2
+
+    curr = curr.left()
+
+    loop
+      path[curr.x][curr.y] = idx++
+      pIndex.push curr
+      break if curr.x == @row + 1
+      curr = curr.up()
+
+    [path, pIndex]
 
 class Snake
   D =
@@ -154,6 +189,8 @@ class Snake
    right: 0x2
    down: 0x4
    left: 0x8
+
+  STUBBORN_PROB = .2
 
   constructor: (@path, @pArr) ->
     @r = @path.length
@@ -171,6 +208,8 @@ class Snake
     @grid[halfR][0] = false
     @len = 4
     @head = 0
+    @stubborn = false
+    @stubbornSteps = @len / 2
 
   dCompose: (d1, d2) ->
     if d1 == d2 then d1 else ((d1 << 4) | d2) & 0xFF
@@ -234,24 +273,37 @@ class Snake
     ph = @arr[@head]
     pt = @arr[(@head + 1) % @len]
     fIndex = @path[food.x][food.y]
-    cIndex = @path[ph.x][ph.y]
+    hIndex = @path[ph.x][ph.y]
     tIndex = @path[pt.x][pt.y] || Infinity
     direction = null
-    nIndex = (cIndex + 1) % @total
+    nIndex = hIndex + 1
     ads = @adjacents()
-    destiny = false
-    ads.forEach (ad) =>
-      [d, p] = ad
-      if Math.random() < .2 then destiny = true
-      if direction? && destiny then return false
-      if fIndex >= @path[p.x][p.y] >= nIndex &&
-         @path[p.x][p.y] < tIndex
-        nIndex = @path[p.x][p.y]
-        direction = d
+    if @stubborn
+      ads.forEach (ad) =>
+        [d, p] = ad
+        if @pArr[nIndex % @total].equal p
+          direction = d
+          return false
+      if --@stubbornSteps < 0
+        @stubbornSteps = @len / 2
+        @stubborn = Math.random() < STUBBORN_PROB
+    else
+      @stubborn = Math.random() < STUBBORN_PROB
+      ads.forEach (ad) =>
+        [d, p] = ad
+        if fIndex >= @path[p.x][p.y] >= nIndex && @path[p.x][p.y] < tIndex
+          nIndex = @path[p.x][p.y]
+          direction = d
     @turn direction, nIndex == fIndex
     nIndex == fIndex
 
   draw: (ctx, l, t, s, r) =>
+    # @path.forEach (row, i) =>
+    #   row.forEach (cell, j) =>
+    #     ctx.save()
+    #     ctx.translate(l + s * (j + .5), t + s * (i + .5))
+    #     ctx.fillText @path[i][j], 0, 0
+    #     ctx.restore()
     @directions.forEach (d, i) =>
       p = @arr[i]
       ctx.save()
