@@ -3,17 +3,19 @@ AsideEffectTetris = require './_aside_effect_tetris'
 AsideEffectGameOfLife = require './_aside_effect_game_of_life'
 AsideEffectRandomWalk = require './_aside_effect_random_walk'
 AsideEffectSnake = require './_aside_effect_snake'
+AsideEffectThreeBody = require './_aside_effect_three_body'
 # comment for not cool
 # AsideEffectPerlin = require './_aside_effect_perlin'
 
 class AsideEffectGenerator
   constructor: (option = {}) ->
     @effects = [
-      AsideEffectSnow
-      AsideEffectTetris
-      AsideEffectGameOfLife
-      AsideEffectRandomWalk
-      AsideEffectSnake
+      # AsideEffectSnow
+      # AsideEffectTetris
+      # AsideEffectGameOfLife
+      # AsideEffectRandomWalk
+      # AsideEffectSnake
+      AsideEffectThreeBody
       # comment for not cool
       # AsideEffectPerlin
     ]
