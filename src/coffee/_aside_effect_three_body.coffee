@@ -7,43 +7,54 @@ G = 5e-2
 PI2 = Math.PI * 2
 ROOT2 = Math.sqrt 2
 ROOT3 = Math.sqrt 3
-DELTA = .001
+DELTA = .0002
 
 # draw circle functions
 DRAW_CIRCLE = (ctx) ->
   ctx.beginPath()
-  ctx.moveTo @pos.x, @pos.y
   ctx.arc @pos.x, @pos.y, @r, 0, PI2
   ctx.fill()
 
 DRAW_HALF_CIRCLE = (ctx) ->
   ctx.beginPath()
-  ctx.moveTo @pos.x, @pos.y
   ctx.arc @pos.x, @pos.y, @r, 0, PI2
   ctx.stroke()
   ctx.beginPath()
-  ctx.moveTo @pos.x, @pos.y
   ctx.arc @pos.x, @pos.y, @r, 0, Math.PI
   ctx.fill()
 
 DRAW_CIRCLE_WITH_RING = (ctx) ->
   ctx.beginPath()
-  ctx.moveTo @pos.x, @pos.y
   ctx.arc @pos.x, @pos.y, @r, 0, PI2
   ctx.fill()
   ctx.beginPath()
-  ctx.moveTo @pos.x, @pos.y
   ctx.arc @pos.x, @pos.y, @r * 1.5, 0, PI2
   ctx.stroke()
+
+DRAW_CIRCLE_WITH_THREE_CIRCLE_INSIDE = (ctx) ->
+  ctx.beginPath()
+  ctx.arc @pos.x, @pos.y, @r, 0, PI2
+  ctx.stroke()
+  ratio = 1 + 2 / ROOT3
+  sr = @r / ratio
+  ctx.beginPath()
+  ctx.arc @pos.x, @pos.y - sr * 2 / ROOT3, sr, 0, PI2
+  ctx.fill()
+  ctx.beginPath()
+  ctx.arc @pos.x - sr, @pos.y + sr / ROOT3, sr, 0, PI2
+  ctx.fill()
+  ctx.beginPath()
+  ctx.arc @pos.x + sr, @pos.y + sr / ROOT3, sr, 0, PI2
+  ctx.fill()
 
 DRAW_CIRCLE_WITH_FOUR_CIRCLE_INSIDE = (ctx) ->
   ctx.beginPath()
   ctx.moveTo @pos.x, @pos.y
   ctx.arc @pos.x, @pos.y, @r, 0, PI2
   ctx.stroke()
+  sr = @r / (1 + ROOT2)
   ctx.beginPath()
   ctx.moveTo @pos.x + @r / 2, @pos.y
-  sr = @r / (1 + ROOT2)
   ctx.arc @pos.x + @r - sr, @pos.y, sr, 0, PI2
   ctx.fill()
   ctx.beginPath()
@@ -84,24 +95,155 @@ class AsideEffectThreeBody extends AsideEffect
     @scenes = []
     @currentScene = 0
 
-    # Scene 1
+    # Scene
+    bodies = []
+    commonM = 2000
+    v1 = .0844451728
+    v2 = .2960600146
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2, @height / 2 + 120)
+      speed: new Vector2(-2 * v1, -2 * v2)
+      m: commonM
+      r: 4
+      draw: DRAW_CIRCLE_WITH_RING
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 - 100, @height / 2 + 120)
+      speed: new Vector2(v1, v2)
+      m: commonM
+      r: 4
+      draw: DRAW_CIRCLE
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 + 100, @height / 2 + 120)
+      speed: new Vector2(v1, v2)
+      m: commonM
+      r: 4
+      draw: DRAW_HALF_CIRCLE
+    }))
+    @scenes.push(new Scene({
+      bodies: bodies
+      width: @width
+      height: @height
+    }))
+
+    # Scene
+    commonM = 20000
     bodies = []
     bodies.push(new Body({
-      pos: new Vector2(@width / 2, @height / 2 - 200)
+      pos: new Vector2(@width / 2, @height / 2 + 260)
+      speed: new Vector2(1, 0)
+      m: commonM
+      draw: DRAW_CIRCLE_WITH_RING
+      r: 5
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 - 80 * ROOT3, @height / 2 + 20)
+      speed: new Vector2(-.5, ROOT3 / 2)
+      m: commonM
+      draw: DRAW_HALF_CIRCLE
+      r: 5
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 + 80 * ROOT3, @height / 2 + 20)
+      speed: new Vector2(-.5, -ROOT3 / 2)
+      m: commonM
+      r: 5
+    }))
+    @scenes.push(new Scene({
+      bodies: bodies
+      width: @width
+      height: @height
+    }))
+
+    # Scene
+    bodies = []
+    commonM = 2000
+    v1 = .3471168881
+    v2 = .5327249454
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2, @height / 2 + 120)
+      speed: new Vector2(-2 * v1, -2 * v2)
+      m: commonM
+      r: 4
+      ideal: true
+      draw: DRAW_CIRCLE_WITH_RING
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 - 100, @height / 2 + 120)
+      speed: new Vector2(v1, v2)
+      m: commonM
+      r: 4
+      ideal: true
+      draw: DRAW_CIRCLE
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 + 100, @height / 2 + 120)
+      speed: new Vector2(v1, v2)
+      m: commonM
+      r: 4
+      ideal: true
+      draw: DRAW_HALF_CIRCLE
+    }))
+    @scenes.push(new Scene({
+      bodies: bodies
+      width: @width
+      height: @height
+    }))
+
+    # Scene
+    bodies = []
+    commonM = 2000
+    v1 = .4644451728
+    v2 = .3960600146
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2, @height / 2 + 120)
+      speed: new Vector2(-2 * v1, -2 * v2)
+      m: commonM
+      r: 4
+      ideal: true
+      draw: DRAW_CIRCLE_WITH_RING
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 - 100, @height / 2 + 120)
+      speed: new Vector2(v1, v2)
+      m: commonM
+      r: 4
+      ideal: true
+      draw: DRAW_CIRCLE
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 + 100, @height / 2 + 120)
+      speed: new Vector2(v1, v2)
+      m: commonM
+      r: 4
+      ideal: true
+      draw: DRAW_HALF_CIRCLE
+    }))
+    @scenes.push(new Scene({
+      bodies: bodies
+      width: @width
+      height: @height
+    }))
+
+    # Scene
+    bodies = []
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2, @height / 2 - 80)
       speed: new Vector2(-2, 0)
       m: 10
       r: 4
       draw: DRAW_CIRCLE_WITH_RING
     }))
     bodies.push(new Body({
-      pos: new Vector2(@width / 2, @height / 2 - 100)
+      pos: new Vector2(@width / 2, @height / 2 + 20)
       speed: new Vector2(1, 0)
       m: 20000
       r: 20
       draw: DRAW_CIRCLE
     }))
     bodies.push(new Body({
-      pos: new Vector2(@width / 2, @height / 2 + 100)
+      pos: new Vector2(@width / 2, @height / 2 + 220)
       speed: new Vector2(-1.25, 0)
       m: 16000
       r: 12
@@ -113,61 +255,6 @@ class AsideEffectThreeBody extends AsideEffect
       height: @height
     }))
 
-    # Scene 2
-    bodies = []
-    bodies.push(new Body({
-      pos: new Vector2(@width / 2, @height / 2)
-      speed: new Vector2(0, 0)
-      m: 50000
-      r: 10
-      draw: DRAW_CIRCLE_WITH_FOUR_CIRCLE_INSIDE
-    }))
-    bodies.push(new Body({
-      pos: new Vector2(@width / 2, @height / 2 - 200)
-      speed: new Vector2(2, 0)
-      m: 10
-      r: 5
-    }))
-    bodies.push(new Body({
-      pos: new Vector2(@width / 2, @height / 2 + 200)
-      speed: new Vector2(-2, 0)
-      m: 10
-      r: 5
-    }))
-    @scenes.push(new Scene({
-      bodies: bodies
-      width: @width
-      height: @height
-    }))
-
-    # Scene 3
-    commonM = 20000
-    bodies = []
-    bodies.push(new Body({
-      pos: new Vector2(@width / 2, @height / 2 + 160)
-      speed: new Vector2(1, 0)
-      m: commonM
-      draw: DRAW_CIRCLE_WITH_RING
-      r: 5
-    }))
-    bodies.push(new Body({
-      pos: new Vector2(@width / 2 - 80 * ROOT3, @height / 2 - 80)
-      speed: new Vector2(-.5, ROOT3 / 2)
-      m: commonM
-      draw: DRAW_HALF_CIRCLE
-      r: 5
-    }))
-    bodies.push(new Body({
-      pos: new Vector2(@width / 2 + 80 * ROOT3, @height / 2 - 80)
-      speed: new Vector2(-.5, -ROOT3 / 2)
-      m: commonM
-      r: 5
-    }))
-    @scenes.push(new Scene({
-      bodies: bodies
-      width: @width
-      height: @height
-    }))
 
   tick: =>
     super
@@ -203,6 +290,7 @@ class Body
     @speed = option.speed || new Vector2(0, 0)
     @acc = option.acc || new Vector2(0, 0)
     @draw = option.draw || DRAW_CIRCLE.bind @
+    @ideal = option.ideal || false
     @prevpos = @pos
 
   drawBody: (ctx, fCtx) =>
@@ -225,7 +313,7 @@ class Scene
     @bodies = option.bodies || []
     @width = option.width || 100
     @height = option.height || 100
-    @updateRate = option.updateRate || 500
+    @updateRate = option.updateRate || 2000
 
   tick: (ctx, fCtx) =>
     @update()
@@ -253,7 +341,9 @@ class Scene
       @bodies.forEach (other) ->
         if body.id != other.id
           rd = other.pos.minus body.pos
-          dis = Math.max rd.magnitude, body.r + other.r
+          rSum = if body.ideal then 0 else body.r
+          rSum += if other.ideal then 0 else other.r
+          dis = Math.max rd.magnitude, rSum
           r2 = dis * dis
           body.acc = rd.std().times(other.m * G / r2).add(body.acc)
 
