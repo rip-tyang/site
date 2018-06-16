@@ -226,36 +226,6 @@ class AsideEffectThreeBody extends AsideEffect
       height: @height
     }))
 
-    # Scene
-    bodies = []
-    bodies.push(new Body({
-      pos: new Vector2(@width / 2, @height / 2 - 80)
-      speed: new Vector2(-2, 0)
-      m: 10
-      r: 4
-      draw: DRAW_CIRCLE_WITH_RING
-    }))
-    bodies.push(new Body({
-      pos: new Vector2(@width / 2, @height / 2 + 20)
-      speed: new Vector2(1, 0)
-      m: 20000
-      r: 20
-      draw: DRAW_CIRCLE
-    }))
-    bodies.push(new Body({
-      pos: new Vector2(@width / 2, @height / 2 + 220)
-      speed: new Vector2(-1.25, 0)
-      m: 16000
-      r: 12
-      draw: DRAW_HALF_CIRCLE
-    }))
-    @scenes.push(new Scene({
-      bodies: bodies
-      width: @width
-      height: @height
-    }))
-
-
   tick: =>
     super
     @ctx.clearRect 0, 0, @canvas.width, @canvas.height
