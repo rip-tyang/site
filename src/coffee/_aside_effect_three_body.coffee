@@ -296,20 +296,23 @@ class AsideEffectThreeBody extends AsideEffect
     # Scene
     bodies = []
     bodies.push(new Body({
-      pos: new Vector2(@width / 2 + .18228478, @height / 2 + 120 + 60.39611916)
-      m: 1600
-      r: 2
+      pos: new Vector2(@width / 2, @height / 2 + 120)
+      m: Math.random() * 2000 + 2000
+      speed: new Vector2(Math.random() * 2 - 1, Math.random() * 2 - 1)
+      r: 4
       draw: DRAW_CIRCLE_WITH_RING
     }))
     bodies.push(new Body({
       pos: new Vector2(@width / 2 - 100, @height / 2 + 120)
-      m: 2000
-      r: 3
+      m: Math.random() * 2000 + 2000
+      speed: new Vector2(Math.random() * 2 - 1, Math.random() * 2 - 1)
+      r: 4
     }))
     bodies.push(new Body({
       pos: new Vector2(@width / 2 + 100, @height / 2 + 120)
-      m: 1600
-      r: 2
+      m: Math.random() * 2000 + 2000
+      speed: new Vector2(Math.random() * 2 - 1, Math.random() * 2 - 1)
+      r: 4
       draw: DRAW_HALF_CIRCLE
     }))
     @scenes.push(new Scene({
