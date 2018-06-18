@@ -96,38 +96,6 @@ class AsideEffectThreeBody extends AsideEffect
     @currentScene = 0
 
     # Scene
-    bodies = []
-    commonM = 2000
-    v1 = .0844451728
-    v2 = .2960600146
-    bodies.push(new Body({
-      pos: new Vector2(@width / 2, @height / 2 + 120)
-      speed: new Vector2(-2 * v1, -2 * v2)
-      m: commonM
-      r: 4
-      draw: DRAW_CIRCLE_WITH_RING
-    }))
-    bodies.push(new Body({
-      pos: new Vector2(@width / 2 - 100, @height / 2 + 120)
-      speed: new Vector2(v1, v2)
-      m: commonM
-      r: 4
-      draw: DRAW_CIRCLE
-    }))
-    bodies.push(new Body({
-      pos: new Vector2(@width / 2 + 100, @height / 2 + 120)
-      speed: new Vector2(v1, v2)
-      m: commonM
-      r: 4
-      draw: DRAW_HALF_CIRCLE
-    }))
-    @scenes.push(new Scene({
-      bodies: bodies
-      width: @width
-      height: @height
-    }))
-
-    # Scene
     commonM = 20000
     bodies = []
     bodies.push(new Body({
@@ -216,6 +184,133 @@ class AsideEffectThreeBody extends AsideEffect
       pos: new Vector2(@width / 2 + 100, @height / 2 + 120)
       speed: new Vector2(v1, v2)
       m: commonM
+      r: 4
+      ideal: true
+      draw: DRAW_HALF_CIRCLE
+    }))
+    @scenes.push(new Scene({
+      bodies: bodies
+      width: @width
+      height: @height
+    }))
+
+    # Scene
+    bodies = []
+    v1 = .2869236336
+    v2 = .0791847624
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2, @height / 2 + 120)
+      speed: new Vector2(-4 * v1, -4 * v2)
+      m: 1000
+      r: 3
+      ideal: true
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 - 100, @height / 2 + 120)
+      speed: new Vector2(v1, v2)
+      m: 2000
+      r: 4
+      ideal: true
+      draw: DRAW_CIRCLE_WITH_RING
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 + 100, @height / 2 + 120)
+      speed: new Vector2(v1, v2)
+      m: 2000
+      r: 4
+      ideal: true
+      draw: DRAW_HALF_CIRCLE
+    }))
+    @scenes.push(new Scene({
+      bodies: bodies
+      width: @width
+      height: @height
+    }))
+
+    # Scene
+    bodies = []
+    v1 = .2374365149
+    v2 = .2536896353
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2, @height / 2 + 120)
+      speed: new Vector2(-4 * v1, -4 * v2)
+      m: 1000
+      r: 3
+      ideal: true
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 - 100, @height / 2 + 120)
+      speed: new Vector2(v1, v2)
+      m: 2000
+      r: 4
+      ideal: true
+      draw: DRAW_CIRCLE_WITH_RING
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 + 100, @height / 2 + 120)
+      speed: new Vector2(v1, v2)
+      m: 2000
+      r: 4
+      ideal: true
+      draw: DRAW_HALF_CIRCLE
+    }))
+    @scenes.push(new Scene({
+      bodies: bodies
+      width: @width
+      height: @height
+    }))
+
+    # Scene
+    bodies = []
+    v1 = .4227625247
+    v2 = .2533646387
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2, @height / 2 + 120)
+      speed: new Vector2(-8 / 3 * v1, -8 / 3 * v2)
+      m: 1500
+      r: 3
+      ideal: true
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 - 100, @height / 2 + 120)
+      speed: new Vector2(v1, v2)
+      m: 2000
+      r: 4
+      ideal: true
+      draw: DRAW_CIRCLE_WITH_RING
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 + 100, @height / 2 + 120)
+      speed: new Vector2(v1, v2)
+      m: 2000
+      r: 4
+      ideal: true
+      draw: DRAW_HALF_CIRCLE
+    }))
+    @scenes.push(new Scene({
+      bodies: bodies
+      width: @width
+      height: @height
+    }))
+
+    # Scene
+    bodies = []
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 + .18228478, @height / 2 + 120 + 60.39611916)
+      m: 1600
+      r: 4
+      ideal: true
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 - 100, @height / 2 + 120)
+      m: 2000
+      r: 4
+      ideal: true
+      draw: DRAW_CIRCLE_WITH_RING
+    }))
+    bodies.push(new Body({
+      pos: new Vector2(@width / 2 + 100, @height / 2 + 120)
+      m: 1600
       r: 4
       ideal: true
       draw: DRAW_HALF_CIRCLE

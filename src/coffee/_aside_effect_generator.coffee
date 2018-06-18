@@ -10,11 +10,11 @@ AsideEffectThreeBody = require './_aside_effect_three_body'
 class AsideEffectGenerator
   constructor: (option = {}) ->
     @effects = [
-      AsideEffectSnow
-      AsideEffectTetris
-      AsideEffectGameOfLife
-      AsideEffectRandomWalk
-      AsideEffectSnake
+      # AsideEffectSnow
+      # AsideEffectTetris
+      # AsideEffectGameOfLife
+      # AsideEffectRandomWalk
+      # AsideEffectSnake
       AsideEffectThreeBody
       # comment for not cool
       # AsideEffectPerlin
