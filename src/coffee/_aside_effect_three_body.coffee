@@ -298,21 +298,18 @@ class AsideEffectThreeBody extends AsideEffect
     bodies.push(new Body({
       pos: new Vector2(@width / 2 + .18228478, @height / 2 + 120 + 60.39611916)
       m: 1600
-      r: 4
-      ideal: true
+      r: 2
+      draw: DRAW_CIRCLE_WITH_RING
     }))
     bodies.push(new Body({
       pos: new Vector2(@width / 2 - 100, @height / 2 + 120)
       m: 2000
-      r: 4
-      ideal: true
-      draw: DRAW_CIRCLE_WITH_RING
+      r: 3
     }))
     bodies.push(new Body({
       pos: new Vector2(@width / 2 + 100, @height / 2 + 120)
       m: 1600
-      r: 4
-      ideal: true
+      r: 2
       draw: DRAW_HALF_CIRCLE
     }))
     @scenes.push(new Scene({
