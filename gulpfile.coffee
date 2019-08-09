@@ -4,7 +4,6 @@ path = require 'path'
 gulp = require 'gulp'
 $ = require('gulp-load-plugins')()
 del = require 'del'
-runSequence = require 'run-sequence'
 webpack = require 'webpack'
 WebpackDevServer = require 'webpack-dev-server'
 webpackConfig = require './webpack.config'
@@ -20,12 +19,22 @@ entry = fs.readdirSync path.join(paths.src, 'coffee')
   .map (e) -> e[0..-8]
 
 port = 5000
+
+debug_option =
+  build: 'debug'
+  port: port
+  entry: entry
+
+prod_option =
+  build: 'production'
+  port: port
+  entry: entry
+
 ############################################
 # dev
 ############################################
 
-
-gulp.task 'pug', ->
+exports.pug = task_pug = ->
   # uncache data.coffee from require cache
   delete require.cache[require.resolve("#{paths.src}/pug/data")]
 
@@ -36,20 +45,21 @@ gulp.task 'pug', ->
       pretty: true
     .pipe gulp.dest(paths.dist)
 
-gulp.task 'copy:assets', ->
+task_copy_assets = ->
   gulp.src "#{paths.src}/assets/**/*", { base: paths.src }
     .pipe gulp.dest(paths.dist)
 
-gulp.task 'copy:miscellaneous', ->
+task_copy_misc = ->
   gulp.src("#{paths.src}/miscellaneous/**/*",
     { base: "#{paths.src}/miscellaneous" })
     .pipe gulp.dest(paths.dist)
 
-gulp.task 'copy', ['copy:assets', 'copy:miscellaneous']
+exports.copy = task_copy = gulp.parallel(task_copy_assets,
+                                         task_copy_misc)
 
-gulp.task 'clean', del.bind(null, [paths.dist])
+exports.clean = task_clean = del.bind(null, [paths.dist])
 
-gulp.task 'server', ->
+task_server = ->
   config =
     contentBase: paths.dist
     proxy: require './proxy'
@@ -60,12 +70,7 @@ gulp.task 'server', ->
       hash: true
       chunks: false
 
-  option =
-    build: 'debug'
-    port: port
-    entry: entry
-
-  webpack_dev_runner = webpack webpackConfig(option)
+  webpack_dev_runner = webpack webpackConfig(debug_option)
   wds = new WebpackDevServer(webpack_dev_runner, config)
 
   # reload browser when changes detected
@@ -79,39 +84,50 @@ gulp.task 'server', ->
     http.get "http://localhost:#{port}/reload", ->
       $.util.log 'Reloading...'
 
-  gulp.watch ['src/pug/**/*'], ['pug', reload]
-  gulp.watch ['src/pug/data.coffee'], ['pug', reload]
-  gulp.watch ['src/assets/**/*'], ['copy:assets', reload]
-  gulp.watch ['src/miscellaneous/**'], ['copy:miscellaneous', reload]
+  gulp.watch ['src/pug/**/*'], gulp.series(task_pug, reload)
+  gulp.watch ['src/pug/data.coffee'], gulp.series(task_pug, reload)
+  gulp.watch ['src/assets/**/*'], gulp.series(task_copy_assets, reload)
+  gulp.watch ['src/miscellaneous/**'], gulp.series(task_copy_misc, reload)
 
-gulp.task 'build', ->
-  runSequence 'clean', ['pug', 'copy', 'webpack']
+task_webpack = (cb) ->
+  webpack webpackConfig(debug_option), (err, stats) ->
+    throw new $.util.PluginError('webpack', err) if err
+    $.util.log '[webpack_debug]', stats.toString({
+      colors: true
+      timings: true
+      assets: true
+      hash: true
+      chunks: false
+    })
+    cb()
 
-gulp.task 'serve', ->
-  runSequence 'clean', ['pug', 'copy', 'server']
+exports.build = gulp.series(task_clean,
+                            gulp.parallel(task_pug,
+                                          task_copy,
+                                          task_webpack))
 
-############################################
-# test
-############################################
+exports.serve = gulp.series(task_clean,
+                            gulp.parallel(task_pug,
+                                          task_copy,
+                                          task_server))
 
-gulp.task 'test', ->
+# ############################################
+# # test
+# ############################################
+
+exports.test = task_test = ->
   gulp.src 'src/coffee/test/*', { read: false }
     .pipe $.mocha({
       reporter: 'nyan'
       compilers: 'coffee:coffee-script/register'
     })
 
-############################################
-# dist
-############################################
+# ############################################
+# # dist
+# ############################################
 
-gulp.task 'dist:webpack', (cb) ->
-  option =
-    build: 'production'
-    port: port
-    entry: entry
-
-  webpack webpackConfig(option), (err, stats) ->
+task_prod_webpack = (cb) ->
+  webpack webpackConfig(prod_option), (err, stats) ->
     throw new $.util.PluginError('webpack', err) if err
     $.util.log '[webpack]', stats.toString({
       colors: true
@@ -122,7 +138,7 @@ gulp.task 'dist:webpack', (cb) ->
     })
     cb()
 
-gulp.task 'dist:pug', ->
+task_prod_pug = ->
   pug_data = require "#{paths.src}/pug/data"
   manifest_data = require "#{paths.dist}/manifest.json"
 
@@ -135,20 +151,11 @@ gulp.task 'dist:pug', ->
       locals: pug_data
     .pipe gulp.dest(paths.dist)
 
-gulp.task 'dist:copy:assets', ->
-  gulp.src "#{paths.src}/assets/**/*", { base: paths.src }
-    .pipe gulp.dest(paths.dist)
+exports['prod:build'] =
+task_prod_build = gulp.series(task_test,
+                              task_clean,
+                              gulp.parallel(task_prod_webpack, task_copy),
+                              task_prod_pug)
 
-gulp.task 'dist:copy:miscellaneous', ->
-  gulp.src("#{paths.src}/miscellaneous/**/*",
-    { base: "#{paths.src}/miscellaneous" })
-    .pipe gulp.dest(paths.dist)
-
-gulp.task 'dist:copy', ['dist:copy:assets', 'dist:copy:miscellaneous']
-
-gulp.task 'dist:build', ->
-  runSequence 'test', 'clean', ['dist:webpack', 'dist:copy'], 'dist:pug'
-
-gulp.task 'dist', ['dist:build']
-
-gulp.task 'default', ['dist:build']
+exports.default =
+exports.dist = task_prod_build

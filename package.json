@@ -22,7 +22,7 @@
     "del": "^2.2.2",
     "domready": "^1.0.8",
     "file-loader": "^0.11.1",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-changed": "^3.0.0",
     "gulp-load-plugins": "^1.5.0",
     "gulp-plumber": "^1.1.0",
