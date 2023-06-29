@@ -16,13 +16,13 @@
     "mocha": "^3.3.0"
   },
   "dependencies": {
-    "coffee-loader": "^0.7.3",
+    "coffee-loader": "^4.0.0",
     "coffee-script": "^1.12.5",
-    "css-loader": "^0.28.0",
+    "css-loader": "^6.7.3",
     "debug": "^2.6.6",
     "del": "^2.2.2",
     "domready": "^1.0.8",
-    "file-loader": "^0.11.1",
+    "file-loader": "^6.2.0",
     "gulp": "^4.0.0",
     "gulp-changed": "^3.0.0",
     "gulp-load-plugins": "^1.5.0",
@@ -34,11 +34,11 @@
     "pug": "^2.0.0-beta6",
     "require-dir": "^0.3.1",
     "run-sequence": "^1.2.2",
-    "style-loader": "^0.16.1",
+    "style-loader": "^3.3.1",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1",
-    "url-loader": "^0.5.8",
-    "webpack": "^2.4.1",
+    "stylus-loader": "^7.1.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.75.0",
     "webpack-dev-server": "^2.4.5",
     "webpack-manifest-plugin": "^1.1.0"
   }
