@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "deploy": "gulp dist && ssh site 'mv /usr/share/nginx/html/projects /tmp/' && ssh site 'rm -r /usr/share/nginx/html/ && mkdir /usr/share/nginx/html' && cd dist && scp -r * site:/usr/share/nginx/html/ && ssh site 'mv /tmp/projects /usr/share/nginx/html/'"
+    "deploy": "npx gulp dist && ssh site 'mv /usr/share/nginx/html/projects /tmp/' && ssh site 'rm -r /usr/share/nginx/html/ && mkdir /usr/share/nginx/html' && cd dist && scp -r * site:/usr/share/nginx/html/ && ssh site 'mv /tmp/projects /usr/share/nginx/html/'",
+    "build": "npx gulp dist"
   },
   "author": "Thomas Yang <jscnm1993@gmail.com>",
   "license": "MIT",

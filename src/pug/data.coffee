@@ -1,14 +1,8 @@
 exports = module.exports =
   title: 'Thomas Yang'
-  subtitle: 'Feel. Experience. Truth.'
+  subtitle: 'Things are clickable.'
   description: [
-    'I am a developer and I love design.'
-    'I am curious and I love challenges.'
-    'I draw on screen.'
-    'I spot values from data.'
-    'I make websites that inform and enchant.'
-    'I build programs to avoid repeated works.'
-    'And I am good at these.'
+    ''
   ]
   copyright: 'Made with ♥ by ©Thomas Yang'
   social:
@@ -41,6 +35,12 @@ exports = module.exports =
       link_class: 'email'
       icon_class: 'fa-paper-plane'
   projects:
+    lph:
+      title: 'Let\'s Play Hoops'
+      description: 'Web app to organize local basketball events and host basketball medias.'
+      img: 'letsplayhoops'
+      link: 'https://www.letsplayhoops.com'
+      year: '2022'
     iCode:
       title: 'iCode'
       description: 'Minimalist, punctuation mark only poster
