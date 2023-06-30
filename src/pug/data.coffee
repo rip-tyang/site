@@ -7,7 +7,7 @@ exports = module.exports =
   copyright: 'Made with ♥ by ©Thomas Yang'
   social:
     github:
-      link: 'https://github.com/Hacker-YHJ'
+      link: 'https://github.com/rip-tyang'
       link_class: 'github'
       icon_class: 'fa-github'
     stackoverflow:

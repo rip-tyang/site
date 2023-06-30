@@ -49,12 +49,17 @@ task_copy_assets = ->
   gulp.src "#{paths.src}/assets/**/*", { base: paths.src }
     .pipe gulp.dest(paths.dist)
 
+task_copy_projects = ->
+  gulp.src "./projects/**/*", { base: './' }
+    .pipe gulp.dest(paths.dist)
+
 task_copy_misc = ->
   gulp.src("#{paths.src}/miscellaneous/**/*",
     { base: "#{paths.src}/miscellaneous" })
     .pipe gulp.dest(paths.dist)
 
 exports.copy = task_copy = gulp.parallel(task_copy_assets,
+                                         task_copy_projects,
                                          task_copy_misc)
 
 exports.clean = task_clean = del.bind(null, [paths.dist])
