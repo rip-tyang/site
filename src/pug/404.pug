@@ -1,0 +1,19 @@
+
+extends template/_default.pug
+include template/_mixins.pug
+
+block append css
+block append hjs
+  +js('404.js')
+block contents
+    h1 Here goes nothing
+    div.Canvas404#canvas
+        - var rowN = 0;
+        while rowN < 40
+            - var colN = 0;
+            div.Row404(row=rowN)
+                while colN < 160
+                    input(type='checkbox', row=rowN, col=colN)
+                    - colN++
+            - rowN++
+    p#copyright= copyright

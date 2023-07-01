@@ -112,9 +112,8 @@ exports.build = gulp.series(task_clean,
                                           task_webpack))
 
 exports.serve = gulp.series(task_clean,
-                            gulp.parallel(task_pug,
-                                          task_copy,
-                                          task_server))
+                            gulp.parallel(task_pug, task_copy),
+                            task_server)
 
 # ############################################
 # # test

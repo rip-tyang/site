@@ -73,7 +73,7 @@ exports = module.exports =
       (beautiful photos, floating descriptions, etc).
       '''
       img: 'wyhmwyac'
-      link: '/projects/wyvmwyac'
+      link: '/404'
       year: '2016'
     HCIProjectPage:
       title: 'HCI Project Page'
@@ -97,7 +97,7 @@ exports = module.exports =
       description: '''An online tournament hosting website.
       '''
       img: 'contestify'
-      link: 'http://contestify.heroku.com/'
+      link: '/404'
       year: '2016'
     paceGame:
       title: 'PaceGame'
@@ -105,7 +105,7 @@ exports = module.exports =
       hosting offline boardgame.
       '''
       img: 'pace_game'
-      link: 'http://pacegames.herokuapp.com/'
+      link: '/404'
       year: '2016'
     keyboardVis:
       title: 'Keyboard Vis'
@@ -113,14 +113,14 @@ exports = module.exports =
       intensity of any text file.
       '''
       img: 'key_vis'
-      link: '/projects/keyboard-stroke'
+      link: '/404'
       year: '2016'
     minesweeper:
       title: 'Minesweeper'
       description: '''Classic minesweeper game.
       '''
       img: 'minesweeper'
-      link: '/projects/mines'
+      link: '/404'
       year: '2014'
     MigrantVis:
       title: 'Migrant Vis'
@@ -129,7 +129,7 @@ exports = module.exports =
       Technology (VAST) Challenge 2008.
       '''
       img: 'migrant_vis'
-      link: '/projects/vis-3'
+      link: '/404'
       year: '2013'
     AirlineVis:
       title: 'Airline Vis'
@@ -137,5 +137,5 @@ exports = module.exports =
       airline routes between different places.
       '''
       img: 'air_vis'
-      link: '/projects/vis-2'
+      link: '/404'
       year: '2013'
