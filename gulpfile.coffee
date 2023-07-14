@@ -18,7 +18,7 @@ entry = fs.readdirSync path.join(paths.src, 'coffee')
   .filter (e) -> !(/^_/.test(e))
   .map (e) -> e[0..-8]
 
-port = 5000
+port = 5123
 
 debug_option =
   build: 'debug'
@@ -82,7 +82,7 @@ task_server = ->
   wds.app.get '/reload', (req, res) ->
     wds.sockWrite wds.sockets, 'ok'
     res.sendStatus 200
-  wds.listen 5000, 'localhost', (err) ->
+  wds.listen port, 'localhost', (err) ->
     throw new $.util.PluginError('webpack-dev-server', err) if err
 
   reload = ->
