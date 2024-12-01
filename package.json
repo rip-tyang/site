@@ -18,7 +18,7 @@
   "dependencies": {
     "coffee-loader": "^0.7.3",
     "coffee-script": "^1.12.5",
-    "css-loader": "^0.28.0",
+    "css-loader": "^6.8.1",
     "debug": "^2.6.6",
     "del": "^2.2.2",
     "domready": "^1.0.8",
