@@ -35,6 +35,13 @@ exports = module.exports =
       link_class: 'email'
       icon_class: 'fa-paper-plane'
   projects:
+    DAI:
+      title: 'Daily AI Literature'
+      description: 'One AI generated literature a day!'
+      img: 'dai'
+      link: 'https://www.daily-ai-literature.xyz'
+      year: '2025'
+
     lph:
       title: 'Let\'s Play Hoops'
       description: 'Web app to organize local basketball events and host basketball medias.'
