@@ -35,6 +35,12 @@ exports = module.exports =
       link_class: 'email'
       icon_class: 'fa-paper-plane'
   projects:
+    HASH:
+      title: 'Hash Collision Probabilities'
+      description: 'Know the probability of collision when hasing your value!'
+      img: 'hash'
+      link: 'https://www.hashcollisionprobabilities.com'
+      year: '2026'      
     DAI:
       title: 'Daily AI Literature'
       description: 'One AI generated literature a day!'
